@@ -23,9 +23,6 @@ url: "https://0xc0decafe.com"
 # Favicon
 favicon: images/favicon.png
 
-# Google Analytics id, e.g. "UA-NNNNNNNN-N"
-google_analytics: ""
-
 # Site navigation - each item must have a title and a url.
 navigation:
   - text: Home
