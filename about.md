@@ -2,7 +2,6 @@
 layout: page
 title: 'About me'
 date: '2020-12-22T09:31:44+00:00'
-
 ---
 
 <figure class="wp-block-image size-large is-resized">![](https://0xc0decafe.com/wp-content/uploads/2020/12/DCitINpI_400x400.jpg)</figure>Hi there, I am Thomas and I work in cyber security.

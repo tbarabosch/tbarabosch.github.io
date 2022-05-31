@@ -28,7 +28,7 @@ navigation:
   - text: Home
     url: /
   - text: About
-    url: /about/
+    url: /about.html
 
 # Colors
 accent_color: '#2d72d9'
