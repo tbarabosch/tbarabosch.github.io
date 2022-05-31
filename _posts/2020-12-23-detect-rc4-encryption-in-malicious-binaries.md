@@ -4,13 +4,6 @@ date: '2020-12-23T17:00:00+00:00'
 author: tbarabosch
 layout: post
 feature_image: /wp-content/uploads/2020/12/detect_mag_glass-1200x800.jpg
-categories:
-    - 'Malware Analysis'
-tags:
-    - capa
-    - cryptography
-    - RC4
-    - yara
 ---
 
 [RC4](https://en.wikipedia.org/wiki/RC4) (also known as *ARC4*) is a simple stream cipher. It was designed in the late 1980s and its internals became known to the public in the mid-1990s. While it is a very simple and fast crypto algorithm, security researchers have discovered multiple flaws in it throughout the years. Today, it is just another broken stream cipher.

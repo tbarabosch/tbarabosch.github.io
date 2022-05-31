@@ -4,15 +4,6 @@ date: '2021-01-07T17:25:06+00:00'
 author: tbarabosch
 layout: post
 feature_image: /wp-content/uploads/2021/01/fedora.jpg
-categories:
-    - Tools
-tags:
-    - Bindiff
-    - Diaphora
-    - Fedora
-    - Google
-    - 'IDA Pro'
-    - Zynamics
 ---
 
 **Update 2022-01-03**: I updated this blog post to work with `Fedora 35`, `IDA Pro 7.7`, and `BinDiff 7.1`.

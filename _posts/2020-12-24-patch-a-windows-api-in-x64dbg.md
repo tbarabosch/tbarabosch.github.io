@@ -4,13 +4,6 @@ date: '2020-12-24T12:00:00+00:00'
 author: tbarabosch
 layout: post
 feature_image: /wp-content/uploads/2020/12/surveillance_cams-scaled-e1608651625550-1200x785.jpg
-categories:
-    - 'Malware Analysis'
-tags:
-    - 'malware analysis'
-    - Python
-    - win32
-    - x64dbg
 ---
 
 Some months ago, I analyzed a banking Trojan that employed a chain of injections. First, it hollowed an instance of *svchost.exe*. From there, it injected its code into several processes (especially browsers). My goal was to analyze the network protocol. Unfortunately, all processes could communicate with the CC and there was a mutual exclusion scheme that ensured only one network communicator at a time. This resulted in my process never contacting the CC and in me not seeing the network protocol.

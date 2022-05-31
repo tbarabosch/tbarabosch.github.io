@@ -5,12 +5,6 @@ date: '2020-12-23T11:52:54+00:00'
 author: tbarabosch
 layout: post
 feature_image: /wp-content/uploads/2021/01/red_panic-1200x800.jpg
-categories:
-    - 'OS Internals'
-tags:
-    - 'bug hunting'
-    - FreeBSD
-    - kernel
 ---
 
 Throughout the last year’s I found numerous [(security) bugs](https://freshbsd.org/search?q=Barabosch&sort=commit_date) in the BSDs (*FreeBSD*, *OpenBSD*, *NetBSD*). I had a great time researching those kernels. The community is very technically sophisticated and very supportive. Not to forget the great read [“The Design and Implementation of the FreeBSD® Operating System”](https://www.oreilly.com/library/view/the-design-and/9780133761825/) that accompanied my adventures over there. I can recommend this book to everyone working in system security!

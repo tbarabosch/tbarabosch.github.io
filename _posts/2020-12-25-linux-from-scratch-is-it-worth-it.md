@@ -4,11 +4,6 @@ date: '2020-12-25T16:30:11+00:00'
 author: tbarabosch
 layout: post
 feature_image: /wp-content/uploads/2021/01/linux_penguin-1200x766.jpg
-categories:
-    - 'OS Internals'
-tags:
-    - LFS
-    - linux
 ---
 
 One thing on my ever-growing ToDo list was to build my own Linux system since I stumbled upon [Linux from Scratch](http://www.linuxfromscratch.org) (LFS) a couple of years ago. LFS is an online book that guides you through the whole process of building your own minimal Linux system. It consists of several phases: initially, you create partitions for your new system and download all the packages you need to build it. Then, you add an initial user LFS and set up a temporary system with a clean toolchain (assembler, compiler, linker) as well as other system tools. Next, you chroot into your temporary system, create essential files and folders, mount virtual filesystems like */dev* and */sys* and start to compile essential packages with your new toolchain. Finally, you install boot scripts, compile the Linux kernel, install Grub, and reboot. And wait, don’t forget to pray before booting into your system!

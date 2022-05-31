@@ -4,18 +4,6 @@ date: '2021-03-16T16:42:31+00:00'
 author: tbarabosch
 layout: post
 feature_image: /wp-content/uploads/2021/03/teaser_apihashing-scaled.jpg
-categories:
-    - 'Malware Analysis'
-    - Tools
-tags:
-    - 'API hashing'
-    - Buer
-    - Malpedia
-    - 'Panda Banker'
-    - PlugX
-    - PoisonIvy
-    - VMZeus
-    - yara
 ---
 
 Malware utilizes obfuscation to complicate its analysis. There is one obfuscation technique that targets specifically static analysis: API hashing. In a nutshell, malware uses hashes of API names (e.g. `0x0688eae1`) instead of plain strings (e.g. `kernel32!Sleep`) to obfuscate the API functionality it relies on. This is typically a pretty nasty obfuscation technique since it requires malware analysts to resolve this API hashing before they can conduct a meaningful analysis. There are many advanced malware families that utilize API hashing including [Buer](https://www.proofpoint.com/us/threat-insight/post/buer-new-loader-emerges-underground-marketplace), [PoisonIvy](https://www.fireeye.com/blog/threat-research/2012/11/precalculated-string-hashes-reverse-engineering-shellcode.html), [PlugX](https://blogs.jpcert.or.jp/en/2017/02/plugx-poison-iv-919a.html) and [UrlZone](https://twitter.com/VK_Intel/status/981326743486185472?s=20).
