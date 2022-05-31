@@ -25,7 +25,7 @@ The default way to log in to your WordPress site is using a username and a passw
 
 **A word of caution**: even though you use two-factor authentication for WordPress, you should not forget to **use strong passwords**. There are many online (e.g. [LastPass](https://www.lastpass.com/password-manager)) and offline (e.g. [KeePassXC](https://keepassxc.org/)) tools to generate and manage your passwords in a secure fashion.
 
-## <span class="ez-toc-section" id="How_to_setup_two-factor_authentication_for_WordPress_with_Two-Factor"></span>How to setup two-factor authentication for WordPress with Two-Factor?<span class="ez-toc-section-end"></span>
+## How to setup two-factor authentication for WordPress with Two-Factor?
 
 In the following, I’ll show you how to set up two-factor authentication for WordPress with the plugin [Two-Factor](https://en-gb.wordpress.org/plugins/two-factor/). This plugin is open source and [developed on Github](https://github.com/wordpress/two-factor/). This means that there are many eyes looking at its source code, auditing it, and searching as well as fixing possible vulnerabilities in it.
 
@@ -38,7 +38,7 @@ Two-Factor offers you several options to implement two-factor authentication for
 
 While the plugin offers several options, this article describes how to set up two-factor authentication with Time-Based One-Time Passwords (TOTP) using Google Authenticator as the primary second factor and backup codes as “last resort”, e.g. in case you lose your mobile phone.
 
-### <span class="ez-toc-section" id="What_you_need_to_setup_two-factor_authentication_for_WordPress"></span>What you need to setup two-factor authentication for WordPress?<span class="ez-toc-section-end"></span>
+### What you need to setup two-factor authentication for WordPress?
 
 Before we can start, please ensure that you have the following things ready:
 
@@ -46,19 +46,19 @@ Before we can start, please ensure that you have the following things ready:
 - a recent (Android) mobile phone with the [Google Authenticator app](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB&gl=US)
 - optional: pen and paper
 
-### <span class="ez-toc-section" id="Two-Factor_installation"></span>Two-Factor installation<span class="ez-toc-section-end"></span>
+### Two-Factor installation
 
 First, we install the WordPress plugin [Two-Factor](https://en-gb.wordpress.org/plugins/two-factor/). Head over to *Plugins* → *Add New* and search for Two-Factor.
 
 <figure class="wp-block-image size-large">![Two-Factor lets you setup two factor authen](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-install.png)<figcaption>The WordPress plugin Two-Factor enables two-factor authentication for WordPress </figcaption></figure>Hit the *Install* button to install the plugin and then the *Activate* button to activate it. If the installation was successful, then you should see the additional option (Two-Factor Options) under *Users* → *Your Profile*.
 
-### <span class="ez-toc-section" id="Google_Authenticator_installation"></span>Google Authenticator installation<span class="ez-toc-section-end"></span>
+### Google Authenticator installation
 
 Before you can configure Two-Factor and integrate it with Google Authenticator, you’ll have to install Google Authenticator on your mobile phone. Open the Play Store app on your Android mobile phone, search for [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB&gl=US), and install it.
 
 <figure class="wp-block-image size-large">![](https://0xc0decafe.com/wp-content/uploads/2021/01/image-1.png)<figcaption>Google Authenticator in Google Play</figcaption></figure>Open the Google Authenticator app and tie it to your Google account, if needed. That’s it.
 
-### <span class="ez-toc-section" id="Two-Factor_configuration_and_Google_Authenticator_integration"></span>Two-Factor configuration and Google Authenticator integration<span class="ez-toc-section-end"></span>
+### Two-Factor configuration and Google Authenticator integration
 
 Now with both Two-Factor and Google Authenticator installed, you’ll configure Two-Factor to use *Time Based One-Time Passwords* (TOTP) with Google Authenticator. Head over to *Users* → *Your Profile* and scroll down to *Two-Factor Options*. Here you need to enable *Time Based One-Time Password* (TOTP) by checking the checkbox. Furthermore, set the radio button *Primary* since it will be your primary second factor in the future.
 

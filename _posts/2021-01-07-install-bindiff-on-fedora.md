@@ -31,16 +31,14 @@ First, we get the latest `.deb` package from [Zynamics’ download page](https:/
 
 The following command converts the `.deb` package to a `.rpm` package:
 
-```
-<pre class="wp-block-code">```bash
+```bash
 alien -v -k --to-rpm bindiff_7_amd64.deb
 ```
-```
+
 
 This is the output that I get on my system:
 
-```
-<pre class="wp-block-code">```bash
+```bash
 Warning: alien is not running as root!
 Warning: Ownerships of files in the generated packages will probably be wrong.
 	dpkg-deb --info 'bindiff_7_amd64.deb' control 2>/dev/null
@@ -60,19 +58,16 @@ Warning: Use the --scripts parameter to include the scripts.
 	cd bindiff-7; rpmbuild --buildroot='~/ida_bins/bindiff-7' -bb --target x86_64 'bindiff-7-1.spec' 2>&1
 bindiff-7-1.x86_64.rpm generated
 ```
-```
+
 
 We’re not yet there. If you try to install it with `dnf` right now, you will get an error.
 
-```
-<pre class="wp-block-code">```bash
+```bash
 dnf install ./bindiff-7-1.x86_64.rpm
 Error: 
  Problem: conflicting requests
   - nothing provides libbinaryninjacore.so.1()(64bit) needed by bindiff-7-1.x86_64
 (try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages)
-
-```
 ```
 
 Seems that support for `BinaryNinja` was added, which we as `IDA Pro` users do not need. We have to rebuild the archive with `rpmrebuild`. It’s man page gives the following description:
@@ -83,16 +78,13 @@ Seems that support for `BinaryNinja` was added, which we as `IDA Pro` users do n
 
 Run `rpmrebuild` as follows:
 
-```
-<pre class="wp-block-code">```bash
+```bash
 rpmrebuild -pe bindiff-7-1.x86_64.rpm
-```
 ```
 
 This command will drop you in your default text editor. Here, you have to locate the following entries and delete them:
 
-```
-<pre class="wp-block-code">```bash
+```bash
 Requires:      libbinaryninjacore.so.1()(64bit)
 %dir %attr(0755, root, root) "/opt/bindiff/plugins/binaryninja"
 %attr(0644, root, root) "/opt/bindiff/plugins/binaryninja/README"
@@ -103,14 +95,13 @@ Requires:      libbinaryninjacore.so.1()(64bit)
 %dir %attr(0755, root, root) "/usr/bin"
 %dir %attr(0755, root, root) "/usr/lib"
 ```
-```
+
 
 Exit the editor and answer the question `Do you want to continue? (y/N)` with yes. The fixed archive will be in `~/rpmbuild/RPMS/x86_64/bindiff-7-1.x86_64.rpm`.
 
 Now, we can proceed to install `Bindiff 7.1` with `dnf`:
 
-```
-<pre class="wp-block-code">```bash
+```bash
 dnf install ./bindiff-7-1.x86_64.rpm
 Dependencies resolved.
 
@@ -140,7 +131,6 @@ Installed:
 
 Complete!
 
-```
 ```
 
 ## Install the Bindiff plugin in IDA Pro 7.7

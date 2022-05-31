@@ -26,8 +26,7 @@ The loader is quite simple, no rocket science at all. Have a quick look at [the 
 First, it loads a file containing the shellcode to memory. Then, it places some code after the shellcode that directs the control flow back to the loader.  
 More precisely, a function that cleans up everything and gracefully exits the loader. The next listing shows how to place a *mov rax, VALUE; call rax* sequence after the shellcode.
 
-```
-<pre class="wp-block-code">```c
+```c
 const char* MOV_RAX = "\x48\xb8";
 const char* CALL_RAX = "\xff\xD0";
  
@@ -39,7 +38,6 @@ void writeTrampoline(long file_size){
      memcpy((shellcode_buffer+file_size+2+sizeof(void*)), CALL_RAX, 2);
 }
 ```
-```
 
 Note that this might not always be possible, e.g. in case the shellcode just calls the exit syscall. Care has to be taken with memory permissions.  
 If you allocate memory with malloc then this memory has Read-Write permissions. Therefore, the loader requests memory with *mmap (PROT\_READ|PROT\_WRITE)* and then sets the permissions with *mprotect (PROT\_READ|PROT\_EXEC)*. After having loaded the code to memory, the loader calls the code. It just casts the pointer that points to the shellcode to a function *((void(*)())\*.
@@ -48,12 +46,10 @@ If you allocate memory with malloc then this memory has Read-Write permissions. 
 
 So far, I have analyzed x86 and x64 and I have also written x86 assembly. But this time is the first time that I write x64 assembly. A quick and painless introduction to writing x64 assembly on macOS [here](http://www.idryman.org/blog/2014/12/02/writing-64-bit-assembly-on-mac-os-x/). I prepared two payloads. The first just exits the process immediately. Let’s have a look at the code snippet:
 
-```
-<pre class="wp-block-code">```c
+```c
 xor %rbx, %rbx
 movl $0x2000001, %eax           # exit 0
 syscall
-```
 ```
 
 For exiting immediately, it uses the *exit* syscall. On x64, syscalls are initiated with the [corresponding keyword](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man2/syscall.2.html).  
@@ -62,8 +58,7 @@ Since the above program is written in assembly, we pass the arguments in the reg
 
 For more information on the syscall calling conventions refer to [this document](http://people.freebsd.org/~obrien/amd64-elf-abi.pdf) (Chapter A.2.1). Back to the example, first we set *rbx* to zero (result of the *exit* syscall) and we move the value *0x2000001* (*exit* being the [first syscall](http://www.opensource.apple.com/source/xnu/xnu-1504.3.12/bsd/kern/syscalls.master)) to *rax*. And finally, we call into the kernel with syscall. The second payload prints “hello world” to *STDOUT*. Let’s have a look at the code:
 
-```
-<pre class="wp-block-code">```c
+```c
 xor %rbx, %rbx                 # push the zero terminating C string to the stack
 pushq %rbx
 movq $0x0a21646c72, %rax
@@ -75,7 +70,6 @@ movl $1, %edi                   # 1 == STDOUT file descriptor
 leaq (%rsp), %rsi               # string to print
 movq $14, %rdx                  # size of string
 syscall
-```
 ```
 
 At first glance, it looks much more complicated than the first payload. However, there are basically just two things happening.  
@@ -91,8 +85,7 @@ For implementing it, I had to toy around with *Xcode*, *llvm/clang*, *as*, *lldb
 
 Let’s execute the loader with the two payloads. First, let’s execute it with the exit payload:
 
-```
-<pre class="wp-block-code">```bash
+```bash
 $ ./loader shellcodes/exit.bin
  Opening shellcodes/exit.bin
  Trying to read 9 bytes.
@@ -102,14 +95,12 @@ $ ./loader shellcodes/exit.bin
  Changing protection to RX.
  Loaded shell code to 0x1423000. Calling in…
 ```
-```
 
 But did it really work? Well, we can’t tell from this output. So we’ve to look into the inside of our process. There are a couple of tools for this job. We could check if everything works by using *dtrace* and truss. A valuable source for quickly writing *dtrace* one-liners is [Brendan Gregg’s blog](http://www.brendangregg.com/DTrace/dtrace_oneliners.txt).
 
 Ok, let’s execute our loader one more time but this time in conjunction with *dtrace*:
 
 ```
-<pre class="wp-block-code">```
 $ ./loader shellcodes/helloworld.bin
  Opening shellcodes/helloworld.bin
  Trying to read 49 bytes.
@@ -121,7 +112,6 @@ $ ./loader shellcodes/helloworld.bin
  Hello world!
  Executed shellcode successfully
  Freed shellcode buffer. Exiting.
-```
 ```
 
 This time the shellcode did not exit the loader. Therefore, our trampoline directed the control flow to the clean up function that successfully freed the buffer and exited the loader. The code is hosted as usual on [github](https://github.com/tbarabosch/MacRE/tree/master/x64-shellcode-loader).

@@ -21,7 +21,7 @@ I followed [Linux from Scratch 8.0](http://www.linuxfromscratch.org/lfs/view/sta
 
 What is really needed to end up with a bash shell? Which package depends on which one? What are all these libraries in my *libs* directories good for? There are many questions you could pose here. LFS makes you realize what it takes to build a minimal Linux system. For instance, it made me realize what forms *binutils*, *coreutils* and *util-linux*. Tools that I use on a daily basis, I took them for granted but never knew where they came from.
 
-## <span class="ez-toc-section" id="Learning_by_Doing"></span>Learning by Doing<span class="ez-toc-section-end"></span>
+## Learning by Doing
 
 LFS is Learning by doing, no beating around the bush here. You build a Linux system from scratch with your bare hands! After theory comes implementation. The stuff you learn here should be applicable to a wide range of Linux-related problems. Be it building your own cross-compiling toolchain as you actually do in LFS, be it building your custom Linux system for an embedded platform.
 
@@ -30,7 +30,7 @@ Furthermore, for those that would like to get into OS development, Linux from Sc
 However, you won’t code anything. For instance, the LFS guys provide you with a set of init scripts so that you don’t need to write custom ones. They serve as a fully-working template: study them and extend them, if needed.  
 But IMHO it would be too much to extend these scripts in a first LFS iteration. A rough understanding of the boot process is sufficient.
 
-## <span class="ez-toc-section" id="Take_your_time_-_It_is_well_spent_and_worth_it"></span>Take your time – It is well spent and worth it!<span class="ez-toc-section-end"></span>
+## Take your time – It is well spent and worth it!
 
 Take your time! I repeat slowly: take your time! I guess many just rush through the chapters, blindly executing commands, and end up with a working Linux system, without ever having understood what has happened. If you do this, it just boils to many *./configure &amp;&amp; make &amp;&amp; make install* calls. And actually there are tools to [automate the whole LFS process](http://www.linuxfromscratch.org/alfs/).
 
@@ -38,19 +38,17 @@ Linux from Scratch should be rather seen as a marathon than as a quick sprint. T
 
 Doing this, for example, made me realize what kind of a monster [gcc](1https://en.wikipedia.org/wiki/GNU_Compiler_Collection) really is. … It made me think about the pros and cons of gcc and why llvm is a brilliant compiler. So I continued to read up more on the [pros and cons](https://clang.llvm.org/comparison.html) of clang/llvm and gcc. I knew that llvm is the default compiler on macOS, where I already enjoy it. However, the fact that [FreeBSD](https://www.freebsd.org/) and [Sony’s PS4 system software](http://llvm.org/devmtg/2013-11/slides/Robinson-PS4Toolchain.pdf) also use clang/llvm was new to me. Actually, there is a [project](https://github.com/ramosian-glider/clang-kernel-build) that provides patches for the Linux kernel in order to make it compilable with clang. As you can see, you can start with one thing and end up on the PS4. Nevertheless, it is very educational and many new ideas will come to your mind.
 
-## <span class="ez-toc-section" id="Final_thoughts_on_Linux_from_Scratch"></span>Final thoughts on Linux from Scratch<span class="ez-toc-section-end"></span>
+## Final thoughts on Linux from Scratch
 
 First, of it all, it is a nice feeling to boot into your own Linux system, built with your bare hands. You end up with run level 3, a simple bash shell, nothing fancy at all. You see the cursor blinking and think: “Puh, I did not mess anything up”, since there are so many pitfalls. Then, you relax and toy around with your system. Totally worth it!
 
 Of course, I did register my Linux from Scratch system at the [lfscounter](http://www.linuxfromscratch.org/cgi-bin/lfscounter.php):
 
 ```
-<pre class="wp-block-code">```
 You have successfully registered!
 ID: 26656
 Name: Thomas Barabosch
 First LFS Version: 8.0
-```
 ```
 
 Even though 26656 seems to be a huge number, it isn’t if you take into account that LFS will turn 20 next year. On the other side, not everybody registers his system.

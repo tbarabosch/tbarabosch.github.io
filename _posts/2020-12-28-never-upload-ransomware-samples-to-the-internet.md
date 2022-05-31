@@ -93,8 +93,7 @@ But you may ask: how do analysts find my sample in the endless stream of files u
 
 If you know exactly what you are looking then it is quite easy to find the needle in the haystack. This means once you have analyzed one sample of a certain ransomware family, written a YARA rule for it, then you will likely detect it in the future again. Actually, you do not have to write many rules on your own because there are plenty on [Github](https://github.com/advanced-threat-research/Yara-Rules/tree/master/ransomware). For instance, the following is a [YARA rule](https://github.com/advanced-threat-research/Yara-Rules/blob/master/ransomware/RANSOM_Ryuk.yar) for the ransomware family [Ryuk](https://malpedia.caad.fkie.fraunhofer.de/details/win.ryuk):
 
-```
-<pre class="wp-block-code">```c
+```c
 rule Ransom_Ryuk_sept2020 {                 
    meta:       
       description = "Detecting latest Ryuk samples"         
@@ -138,7 +137,6 @@ rule Ransom_Ryuk_sept2020 {
       ( 1 of ($x*) and 5 of them ) and                 
       all of ($seq*)) or ( all of them )       
 }
-```
 ```
 
 This rule comprises several strings and a condition that is checked against each file. The condition matches, roughly speaking, Windows binaries that are less than 400 kilobytes in size and comprise a certain number of the aforementioned strings.

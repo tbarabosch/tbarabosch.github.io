@@ -18,7 +18,6 @@ The *[Binary Analysis Platform](https://github.com/BinaryAnalysisPlatform/bap)* 
 For example, the following is the IR emitted for a simple function that calls malloc, checks the return value and frees the malloc’d area again. As you can see, IRs are a double sided sword. On the one hand, they are simpler than the assemblies you may encounter since they usually comprise less instuction types. Furthermore, they are usually side effect free, when compared, e.g., to x86 assembly (think about the side effects of the `add` instruction). On the other hand, they bloat the code because assembly instructions are split into several IR instructions and the side effects are now obvious.
 
 ```
-<pre class="wp-block-code">```
  00000139: sub if_statement()
  0000010b: 
  0000010c: v943 := SP
@@ -58,7 +57,6 @@ For example, the following is the IR emitted for a simple function that calls ma
  00000136: R11 := mem[v839, el]:u32
  00000137: SP := SP + 8
  00000138: goto mem[v839 + 4, el]:u32
-```
 ```
 
 When I analyzed BAP’s IR in the terminal, this always led to anti-patterns like `bap PATH_TO_PROGRAM -d | less`. My eyes got quickly overwhelmed since there was so much data and no syntax highlighting. I greped around in the code but it did not feel right. Since I am an Emacs user, I wrote a major mode called *bap-mode* that allows to inspect BAP’s IR in Emacs. The following screenshot shows how it looks like.

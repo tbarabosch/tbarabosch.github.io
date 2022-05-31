@@ -25,8 +25,7 @@ In contrast to other ciphers, *RC4* does not rely on any constants that make it 
 
 While explaining *RC4* is out of scope of this blog post ([Wikipedia](https://en.wikipedia.org/wiki/RC4) does a great job!), one of the most interesting parts of the algorithm is *Key-Scheduling Algorithm* (KSA). In a nutshell, it initializes an internal array based on the provided key that is later utilized by another algorithm to encrypt / decrypt. In pseudo code *KSA* looks like this (taken from [Wikipedia](https://en.wikipedia.org/wiki/RC4)):
 
-```
-<pre class="wp-block-code">```c
+```c
 <strong>for</strong> i <strong>from</strong> 0 <strong>to</strong> 255     
     S[i] := i 
 <strong>endfor</strong> 
@@ -35,7 +34,6 @@ j := 0
     j := (j + S[i] + key[i <a href="https://en.wikipedia.org/wiki/Modulo_operation">mod</a> keylength]) mod 256     
     swap values of S[i] and S[j] 
 <strong>endfor</strong>
-```
 ```
 
 The internal array S contains all possible byte values from `0x00` to `0xFF`. It is permuted in the *KSA*. This usually compiles down to something like the following:
@@ -46,8 +44,7 @@ The internal array S contains all possible byte values from `0x00` to `0xFF`. It
 
 These two `for` loops in the *KSA* are something where we could detect the presence of *RC4* in the binary. But mind possible false positives! For years, I utilized a simple *yara* rule to detect this stream cipher.
 
-```
-<pre class="wp-block-code">```c
+```c
 rule rc4_ksa
  {
      meta:
@@ -62,7 +59,6 @@ rule rc4_ksa
          any of them
  }
 ```
-```
 
 As you can see, this rule targets exactly the `cmp` instructions found in the *KSA*. While there may be better ways to do this, this is still a very fast approximation.
 
@@ -70,8 +66,7 @@ As you can see, this rule targets exactly the `cmp` instructions found in the *K
 
 Nowadays, we have tools like *capa* that do a better job. But how does *capa* does it? I’ve promised to tell you: on one side, *capa* detects if a binary is linked against [OpenSSL](https://github.com/fireeye/capa-rules/blob/1ff994f7916d66e39b4b5b8dbb310d0e0b051f7f/linking/static/openssl/linked-against-openssl.yml) or imports [WinCrypt](https://github.com/fireeye/capa-rules/blob/7c59ad39d138467fe67ab79532714b8fa7efede0/data-manipulation/encryption/rc4/encrypt-data-using-rc4-via-winapi.yml) functions. This is trivial as you can see in the rule [linked-against-openssl.yml](https://github.com/fireeye/capa-rules/blob/1ff994f7916d66e39b4b5b8dbb310d0e0b051f7f/linking/static/openssl/linked-against-openssl.yml), which performs simple string matching:
 
-```
-<pre class="wp-block-code">```yaml
+```yaml
 rule:              
   meta:            
     name: linked against OpenSSL           
@@ -86,12 +81,10 @@ rule:
       - string: AES for x86_64, CRYPTOGAMS by <appro@openssl.org>          
       - string: DSA-SHA1-old
 ```
-```
 
 On the other side, *capa* detects the [KSA](https://github.com/fireeye/capa-rules/blob/7c59ad39d138467fe67ab79532714b8fa7efede0/data-manipulation/encryption/rc4/encrypt-data-using-rc4-ksa.yml) and [PRGA](https://github.com/fireeye/capa-rules/blob/7c59ad39d138467fe67ab79532714b8fa7efede0/data-manipulation/encryption/rc4/encrypt-data-using-rc4-prga.yml) algorithms of RC4 based on the assembly. This is more interesting since *capa* takes the structure of the binary into account. The rule [encrypt-data-using-rc4-ksa.yml](https://github.com/fireeye/capa-rules/blob/7c59ad39d138467fe67ab79532714b8fa7efede0/data-manipulation/encryption/rc4/encrypt-data-using-rc4-ksa.yml) detects the *KSA* as follows:
 
-```
-<pre class="wp-block-code">```yaml
+```yaml
 rule:                  
   meta:                  
     name: encrypt data using RC4 KSA              
@@ -139,7 +132,6 @@ rule:
           - mnemonic: add        
         - number: 0x4040404
 ```
-```
 
 *capa* detects *RC4* in two ways. The first way consists of three parts (lines 20-29).
 
@@ -149,8 +141,7 @@ rule:
 
 The second way detects optimizations where instead of bytes DWORDs are written by the *KSA* (lines 38-46). For instance, the password cracker John optimizes the K*S*A like this (see [opencl\_rc4.h](https://github.com/openwall/john/blob/b81ed703ceb7ca62df50c2fa0d4ea366ef713a4a/run/opencl/opencl_rc4.h)). It comprises an initialized array of 64 DWORDs:
 
-```
-<pre class="wp-block-code">```c
+```c
 #ifdef RC4_IV32       
 __constant uint rc4_iv[64] = { 0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c,       
                                0x13121110, 0x17161514, 0x1b1a1918, 0x1f1e1d1c,       
@@ -169,7 +160,6 @@ __constant uint rc4_iv[64] = { 0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c,
                                0xe3e2e1e0, 0xe7e6e5e4, 0xebeae9e8, 0xefeeedec,       
                                0xf3f2f1f0, 0xf7f6f5f4, 0xfbfaf9f8, 0xfffefdfc };        
 #endif
-```
 ```
 
 Now we can understand where the constants `0xFFFEFDFC` and `0x03020100` come from. Such an optimized version of *RC4* was actually utilized in the [original XBOX bootloader](https://mborgerson.com/deconstructing-the-xbox-boot-rom/) (there we can also see the utilization of the DWORD `0x4040404`).

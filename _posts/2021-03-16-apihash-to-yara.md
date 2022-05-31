@@ -28,13 +28,11 @@ In API hashing, API names are not stored in plain text but rather their hashes a
 
 A common algorithm that you’ll encounter is [CRC32](https://en.wikipedia.org/wiki/Cyclic_redundancy_check). The following Python snippet shows how we can compute the CRC32 hash of the API name `Sleep`:
 
-```
-<pre class="wp-block-code">```python
+```python
 >>> import zlib
 >>> h = zlib.crc32(b'Sleep')
 >>> hex(h)
  '0xcef2eda8'         
-```
 ```
 
 Note that we do not have to come up with our own implementations for the many API hashing algorithms that exist in malware since there is already an implementation of many in [make\_sc\_hash\_db from flare-ida](https://github.com/fireeye/flare-ida/blob/master/shellcode_hashes/make_sc_hash_db.py), which we’ll use later.
@@ -55,8 +53,7 @@ There are already two API lists included in the `data` directory of the project.
 
 There are two parameters that help you to tweak the detection performance. First, there is the parameter `--yara_condition_match_threshold` that defines how many API hashes have to be matched in a binary. The default value is `10` API hashes, which is just an educated guess. The value `5` API hashes yielded to many false positives. The second parameter that you could tweak is `--yara_condition_filesize_threshold` that ensures that only binaries with less than `n` kilobytes are considered. This is another way to reduce false positives. Feel free to adjust these parameters to your needs. In the following, I’ll list all command line options of `apihash_to_yara.py` for your reference:
 
-```
-<pre class="wp-block-code">```bash
+```bash
 usage: apihash_to_yara.py [-h] [--yara_condition_match_threshold YARA_CONDITION_MATCH_THRESHOLD] [--yara_condition_filesize_threshold YARA_CONDITION_FILESIZE_THRESHOLD] path_api_names output
  positional arguments:
    path_api_names        Path to list of API names
@@ -68,12 +65,10 @@ usage: apihash_to_yara.py [-h] [--yara_condition_match_threshold YARA_CONDITION_
    --yara_condition_filesize_threshold YARA_CONDITION_FILESIZE_THRESHOLD
                          Filesize threshold of required matches in YARA condition
 ```
-```
 
 The output of `apihash_to_yara.py` looks similar to the following:
 
-```
-<pre class="wp-block-code">```c
+```c
 rule api_hash_ror7AddHash32 {
      meta:
          author = "Thomas Barabosch"
@@ -101,7 +96,6 @@ rule api_hash_ror7AddHash32 {
      condition:
          10 of them and filesize < 1024KB
  }
-```
 ```
 
 There are two precompiled sets of YARA rules in the [repository](https://github.com/tbarabosch/apihash_to_yara). First, `top100_apis_malpedia.yar` (based on the Malpedia API names) and `custom_apis.yar.gz` (based on `custom_apis.txt`, gzipped due to size restrictions).

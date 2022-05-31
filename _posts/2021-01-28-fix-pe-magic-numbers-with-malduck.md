@@ -28,8 +28,7 @@ In the following, I assume that you’ve got a basic understanding of the PE for
 
 So, fixing this kind of corrupted PE header is straightforward. First, we have to restore the magic number `MZ` at offset `0x0`. Second, we have to determine the offset to the PE header. The DOS header holds this offset in its field `e_lfanew` (see next code block with DOS header for reference). Therefore, we have to read the value of `e_lfanew` from the DOS header. `e_lfanew` resides at offset `0x3c`. Third, we have to restore the PE header magic number `PE\x00\x00` at the offset pointed to by `e_lfanew`. Finally, we should validate, if the file is now a valid PE file.
 
-```
-<pre class="wp-block-code" title="_IMAGE_DOS_HEADER structure (winnt.h)">```c
+```c
 typedef struct _IMAGE_DOS_HEADER {                
     WORD  e_magic;      /* 00: MZ Header signature */       
     WORD  e_cblp;       /* 02: Bytes on last page of file */       
@@ -51,7 +50,6 @@ typedef struct _IMAGE_DOS_HEADER {
     WORD  e_res2[10];   /* 28: Reserved words */        
     DWORD e_lfanew;     /* 3c: Offset to extended header */       
 } IMAGE_DOS_HEADER, *PIMAGE_DOS_HEADER;
-```
 ```
 
 Note that if you encounter a memory dump that starts with around 1000 / 0x400 zero bytes, followed by properly aligned code, then you are likely out of luck. What you are looking at is likely a completely overwritten PE header. Here I’ve encountered two scenarios throughout the years. First, the malware unpacks a perfectly fine PE file and overwrites the PE header, for instance, before injecting it into another process. If this is the case then go back to debugging and dump the PE file before the header is overwritten.
@@ -112,8 +110,7 @@ This section puts it all together: our theoretical knowledge about the PE format
 
 First, it loads the dump into a buffer `data` and opens it with `malduck.procmempe` (alias of `malduck.procmem.procmempe.ProcessMemoryPE`) in line 11. The method `is_valid` checks if a `ProcessMemoryPE` object is a valid PE file (line 13). Next, it patches the `MZ` magic number with the method `patchp` (line 17) and reads the DOS header field `e_lfanew` with the method `uint32p`. Again, `e_lfanew` resides at offset `0x3C`. Afterwards, it patches the `PE\x00\x00` magic number with the method `patchp` (line 24). Finally, it validates the PE file with the method `is_valid` (line 26). If it is valid, then it writes all bytes of the `ProcessMemoryPE` object to a file (line 29).
 
-```
-<pre class="wp-block-code" title="fix_pe_magic_numbers.py">```python
+```python
 import sys
 import malduck
 
@@ -152,12 +149,10 @@ def main(argv):
 if <strong>name</strong> == '<strong>main</strong>':
     main(sys.argv)
 ```
-```
 
 Let’s see how it works with our broken memory dump from the beginning:
 
-```
-<pre class="wp-block-code">```bash
+```bash
 > file memdump.bin
 memdump.bin: data
 > python fix_pe_magic_numbers.py memdump.bin
@@ -166,7 +161,6 @@ memdump.bin: data
  Done.
 > file memdump_fixed_header.bin
 memdump_fixed_header.bin: PE32+ executable (console) x86-64, for MS Windows
-```
 ```
 
 et voilà! The script fixed the memory dump as we can see in the following screenshot:
