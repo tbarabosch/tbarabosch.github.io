@@ -4,13 +4,8 @@ date: '2020-12-22T13:01:12+00:00'
 author: tbarabosch
 layout: post
 feature_image: /wp-content/uploads/2020/12/black_keyboard-1200x675.jpg
-categories:
-    - Tools
 tags:
-    - BAP
-    - 'Emacs Lisp'
-    - Firmware
-    - 'Intermediate Representation'
+    - Tools
 ---
 
 The *[Binary Analysis Platform](https://github.com/BinaryAnalysisPlatform/bap)* (BAP) is a framework for automated binary code analysis. I utilize BAP quite a lot to implement cross-architecture analyses in the realm of firmware (e.g. ARM, PPC, Mips, …). Owed to the fact that BAP lifts assembly code to an intermediate representation (IR), you can (almost) write architecture-agnostic binary analyses. Before I implement an analysis I inspect the IR that is emitted by BAP for a certain piece of code. You can instrument BAP to lift a program to its IR by calling `bap PATH_TO_PROGRAM -d`.

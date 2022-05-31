@@ -4,13 +4,6 @@ date: '2020-12-22T09:58:07+00:00'
 author: tbarabosch
 layout: post
 feature_image: /wp-content/uploads/2020/12/shell_beach-1200x800.jpg
-categories:
-    - 'OS Internals'
-tags:
-    - macOS
-    - radare2
-    - shellcode
-    - 'x64 assembly'
 ---
 
 Learning by doing always works quite well. Getting to know the low-level programming tool chain is a vital for understanding the low-level details of the OS in general. So I thought writing some shellcode in x64 assembly and loading it with a simple loader written in C would be a good starting point for becoming acquainted with the basic programming tools on macOS. Just to name a few: IDE (*Xcode*), Compiler (*llvm/clang*) and (dis)assembler (*radare2*). Also, this would be the first encounter with the development documentation provided by Apple.
