@@ -3,7 +3,7 @@ title: 'Never upload ransomware samples to the Internet'
 date: '2020-12-28T22:51:09+00:00'
 author: tbarabosch
 layout: post
-image: /wp-content/uploads/2021/01/stop_sign-950x633.jpg
+feature_image: /wp-content/uploads/2021/01/stop_sign-950x633.jpg
 categories:
     - 'Cyber Threat Intelligence'
 tags:
@@ -21,6 +21,8 @@ tags:
 ---
 
 Ransomware is our contemporary plague. It is a thriving business that attracts more and more cybercriminals every month. New ransomware gangs [sprout like mushrooms](https://www.zdnet.com/article/the-ransomware-landscape-is-more-crowded-than-you-think/). These self-proclaimed “security teams” test the security of many small to large enterprises. But their unsolicited penetration tests are not that cheap. What they leave behind is pure mayhem and a huge bill for the victims. Furthermore, some attacks are really disgusting since ransomware gangs have targeted non-profit organizations, schools, and even hospitals on various occasions.
+
+<!--more-->
 
 There are hundreds of articles on the Internet about ransomware. For instance, the [No More Ransom](https://www.nomoreransom.org/) project educates on ransomware and offers help for victims. There are technical approaches to stop ransomware. Of course, the cyber security industry offers many products to protect against or mitigate ransomware. There are also community approaches like [Raccine](https://github.com/Neo23x0/Raccine) that help to stop ransomware.
 

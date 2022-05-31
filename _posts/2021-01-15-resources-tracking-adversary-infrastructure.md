@@ -3,7 +3,7 @@ title: 'Where to start tracking adversary infrastructure?'
 date: '2021-01-15T22:18:33+00:00'
 author: tbarabosch
 layout: post
-image: /wp-content/uploads/2021/01/tracking_infrastructure.jpg
+feature_image: /wp-content/uploads/2021/01/tracking_infrastructure.jpg
 categories:
     - 'Cyber Threat Intelligence'
 tags:
@@ -28,6 +28,8 @@ tags:
 **Last update: 2020-01-19**
 
 Adversaries require infrastructure to support their operations and to ultimately achieve their goals like intelligence collection. Therefore, infrastructure is one of the four core features of the famous [Diamond Model of Intrusion Analysis](https://www.activeresponse.org/wp-content/uploads/2013/07/diamond.pdf). The proactive detection of adversary infrastructure can help cyber threat intelligence (CTI) teams detect this infrastructure even before the adversary has utilized it.
+
+<!--more-->
 
 The quintessence here is that we are all lazy humans with our personal preferences and tendencies. Therefore, operational security (OpSec) is sometimes neglected for greater comfort. Tracking adversary infrastructure is based on the idea that we take data from past intrusions, identify patterns, which we then search for in the future. This initial data from past intrusions may be primary source data from incident response engagements or secondary source data from CTI blogs. Today, there are numerous sources that we can leverage to detect future adversary infrastructure: either we rely on third-party services like [Shodan](https://www.shodan.io/) or [Censys](https://censys.io/), to name a few, or we can run our own scanning infrastructure using, for instance, [MASSCAN](https://github.com/robertdavidgraham/masscan).
 

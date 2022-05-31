@@ -3,7 +3,7 @@ title: 'Learn to quickly detect RC4 encryption in (malicious) binaries'
 date: '2020-12-23T17:00:00+00:00'
 author: tbarabosch
 layout: post
-image: /wp-content/uploads/2020/12/detect_mag_glass-1200x800.jpg
+feature_image: /wp-content/uploads/2020/12/detect_mag_glass-1200x800.jpg
 categories:
     - 'Malware Analysis'
 tags:
@@ -16,6 +16,8 @@ tags:
 [RC4](https://en.wikipedia.org/wiki/RC4) (also known as *ARC4*) is a simple stream cipher. It was designed in the late 1980s and its internals became known to the public in the mid-1990s. While it is a very simple and fast crypto algorithm, security researchers have discovered multiple flaws in it throughout the years. Today, it is just another broken stream cipher.
 
 However, it is still used by software systems in the wild. Many malware families use it for encryption or better said: just for obfuscation purposes. Due to its simplicity and speed, malware authors embed it directly in their source code or statically link it into their binaries. For instance, *ZLoader* utilizes it to decrypt its configuration and *Smokeloader* encrypts its network traffic with this stream cipher.
+
+<!--more-->
 
 Even though they could utilize one of the crypto APIs offered by Windows like the [WinCrypt\*](https://docs.microsoft.com/en-us/windows/win32/api/wincrypt/nf-wincrypt-cryptencrypt) functions, malware authors likely prefer this way as another way to ensure malware analysts’ job security.
 

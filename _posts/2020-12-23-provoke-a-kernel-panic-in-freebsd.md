@@ -4,7 +4,7 @@ title: 'Provoke a kernel panic in FreeBSD'
 date: '2020-12-23T11:52:54+00:00'
 author: tbarabosch
 layout: post
-image: /wp-content/uploads/2021/01/red_panic-1200x800.jpg
+feature_image: /wp-content/uploads/2021/01/red_panic-1200x800.jpg
 categories:
     - 'OS Internals'
 tags:
@@ -14,6 +14,8 @@ tags:
 ---
 
 Throughout the last year’s I found numerous [(security) bugs](https://freshbsd.org/search?q=Barabosch&sort=commit_date) in the BSDs (*FreeBSD*, *OpenBSD*, *NetBSD*). I had a great time researching those kernels. The community is very technically sophisticated and very supportive. Not to forget the great read [“The Design and Implementation of the FreeBSD® Operating System”](https://www.oreilly.com/library/view/the-design-and/9780133761825/) that accompanied my adventures over there. I can recommend this book to everyone working in system security!
+
+<!--more-->
 
 If you dive into BSD research you will probably encounter a point where you will need to write some kernel code. Patching the kernel directly is a great way to do this and there are many great guides out there on how to patch and compile a BSD kernel. Another way is to write kernel modules and to dynamically load them into the kernel space.
 

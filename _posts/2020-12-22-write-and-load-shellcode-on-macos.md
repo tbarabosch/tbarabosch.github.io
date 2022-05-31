@@ -3,7 +3,7 @@ title: 'How to write and load shellcode on macOS'
 date: '2020-12-22T09:58:07+00:00'
 author: tbarabosch
 layout: post
-image: /wp-content/uploads/2020/12/shell_beach-1200x800.jpg
+feature_image: /wp-content/uploads/2020/12/shell_beach-1200x800.jpg
 categories:
     - 'OS Internals'
 tags:
@@ -13,11 +13,11 @@ tags:
     - 'x64 assembly'
 ---
 
-Learning by doing always works quite well. Getting to know the low-level programming tool chain is a vital for understanding the low-level details of the OS in general.
-
-So I thought writing some shellcode in x64 assembly and loading it with a simple loader written in C would be a good starting point for becoming acquainted with the basic programming tools on macOS. Just to name a few: IDE (*Xcode*), Compiler (*llvm/clang*) and (dis)assembler (*radare2*). Also, this would be the first encounter with the development documentation provided by Apple.
+Learning by doing always works quite well. Getting to know the low-level programming tool chain is a vital for understanding the low-level details of the OS in general. So I thought writing some shellcode in x64 assembly and loading it with a simple loader written in C would be a good starting point for becoming acquainted with the basic programming tools on macOS. Just to name a few: IDE (*Xcode*), Compiler (*llvm/clang*) and (dis)assembler (*radare2*). Also, this would be the first encounter with the development documentation provided by Apple.
 
 This blog post shows you how to write and load shellcode on macOS. It seems that there is not that much on x64 assembly on the Internet. Sometimes it can be a little bit tricky when coming from x86 assembly. However, the easiest way is just throwing a binary in a disassembler and see how the compiler translated the code.
+
+<!--more-->
 
 ## The Loader
 

@@ -3,7 +3,7 @@ title: 'The easy way to two-factor authentication for WordPress with Two-Factor 
 date: '2021-01-18T19:00:00+00:00'
 author: tbarabosch
 layout: post
-image: /wp-content/uploads/2021/07/2fa_lock.jpg
+feature_image: /wp-content/uploads/2021/07/2fa_lock.jpg
 categories:
     - 'Web Security'
 tags:
@@ -18,6 +18,8 @@ tags:
 ---
 
 WordPress is the most popular content management system (CMS). Therefore, it is also a very popular target for hackers. The default WordPress login requires a username and password combination. If hackers obtain your login credentials, there is no second line of defense and your WordPress site is theirs. [Two-factor authentication ](https://www.nist.gov/itl/applied-cybersecurity/tig/back-basics-multi-factor-authentication)(or sometimes multi-factor authentication) adds this second line of defense to your WordPress site. Every time you log in to your WordPress site, it’ll ask you for your username and password plus a second factor, e.g. a one-time password. This blog post shows you how to set up two-factor authentication for WordPress. I’ll use the WordPress plugin [Two-Factor](https://en-gb.wordpress.org/plugins/two-factor/) to set up two-factor authentication with [Google Authenticator](https://www.google.com/landing/2step/).
+
+<!--more-->
 
 The default way to log in to your WordPress site is using a username and a password. If a hacker obtains them, then they can easily login into your site. For instance, Hackers may obtain your login credentials via [WordPress password bruteforcing](https://wordpress.org/support/article/brute-force-attacks/) or they may obtain them directly from your computer (e.g. via a Trojan horse). Therefore, I’ll recommend always use the second line of defense.
 

@@ -3,7 +3,7 @@ title: 'Install Bindiff on Fedora'
 date: '2021-01-07T17:25:06+00:00'
 author: tbarabosch
 layout: post
-image: /wp-content/uploads/2021/01/fedora.jpg
+feature_image: /wp-content/uploads/2021/01/fedora.jpg
 categories:
     - Tools
 tags:
@@ -17,7 +17,9 @@ tags:
 
 **Update 2022-01-03**: I updated this blog post to work with `Fedora 35`, `IDA Pro 7.7`, and `BinDiff 7.1`.
 
-[BinDiff](https://www.zynamics.com/bindiff.html) is a tool to diff to binary executables and finds differences and similarities, respectively. Originally, [Zynamics](https://www.zynamics.com/index.html) developed BinDiff but a couple of years ago it was bought by Google. Even though there are alternatives like [Diaphora](https://github.com/joxeankoret/diaphora), I still prefer `BinDiff`. It is the tool I utilize when analyzing a new version of a malware family. `BinDiff` saves me a lot of time since it detects most of the functionality in the new binary and lets me transfer annotations. Unfortunately, there are only `.deb` packages (Debian / Ubuntu) for Linux. Therefore, Fedora users must rebuild the `.deb` package to a `.rpm` package in order to install `BinDiff` on Fedora
+[BinDiff](https://www.zynamics.com/bindiff.html) is a tool to diff to binary executables and finds differences and similarities, respectively. Originally, [Zynamics](https://www.zynamics.com/index.html) developed BinDiff but a couple of years ago it was bought by Google. Even though there are alternatives like [Diaphora](https://github.com/joxeankoret/diaphora), I still prefer `BinDiff`. It is the tool I utilize when analyzing a new version of a malware family. `BinDiff` saves me a lot of time since it detects most of the functionality in the new binary and lets me transfer annotations. Unfortunately, there are only `.deb` packages (Debian / Ubuntu) for Linux. Therefore, Fedora users must rebuild the `.deb` package to a `.rpm` package in order to install `BinDiff` on Fedora.
+
+<!--more-->
 
  I know that there is an [article by 0x90](https://www.0x90.se/install-bindiff-in-fedora/) on how to install `BinDiff` on Fedora. However, it does not work out of the box anymore. Furthermore, the article is not reachable (as of time of writing). Therefore, I’ve decided to write a quick tip on how to install `BinDiff` on Fedora. The following was tested with `BinDiff 7.1` and `IDA Pro 7.7` on Fedora 35.
 
