@@ -1,27 +1,8 @@
 ---
-id: 376
 title: 'Where to start tracking adversary infrastructure?'
 date: '2021-01-15T22:18:33+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=376'
-permalink: /resources-tracking-adversary-infrastructure/
-rank_math_seo_score:
-    - '77'
-rank_math_primary_category:
-    - '83'
-rank_math_focus_keyword:
-    - 'tracking adversary infrastructure'
-rank_math_description:
-    - 'This blog post provides a curated list of resources about tracking adversary infrastructure. It is the perfect starting point for every CTI analyst.'
-rank_math_internal_links_processed:
-    - '1'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
 image: /wp-content/uploads/2021/01/tracking_infrastructure.jpg
 categories:
     - 'Cyber Threat Intelligence'
@@ -53,18 +34,6 @@ The quintessence here is that we are all lazy humans with our personal preferenc
 This blog post lists curated resources for tracking adversary infrastructure. The first section *Infrastructure tracking basics* lists introductory resources to get started. The next section *Examples of infrastructure tracking* comprises a list of read-worthy resources that showcase how to use the techniques described in the previous section. The third section *Infrastructure tracking automation* gives an overview of resources for those who wish to automate parts of the tracking process. Finally, I’ll present a list of (open source) tools and online services that are essential for this endeavor.
 
 **Note**: This blog post should be considered a living document. I am planning to add more and more resources in the weeks.
-
-<div class="ez-toc-v2_0_23 counter-hierarchy counter-decimal ez-toc-white" id="ez-toc-container"><div class="ez-toc-title-container">Table of Contents
-
-<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle" style="display: none;"></a></span></div><nav>- [Infrastructure tracking basics](https://0xc0decafe.com/resources-tracking-adversary-infrastructure/#Infrastructure_tracking_basics "Infrastructure tracking basics")
-- [Examples of infrastructure tracking](https://0xc0decafe.com/resources-tracking-adversary-infrastructure/#Examples_of_infrastructure_tracking "Examples of infrastructure tracking")
-- [Infrastructure tracking automation](https://0xc0decafe.com/resources-tracking-adversary-infrastructure/#Infrastructure_tracking_automation "Infrastructure tracking automation")
-- [Tools](https://0xc0decafe.com/resources-tracking-adversary-infrastructure/#Tools "Tools")
-- [Online services](https://0xc0decafe.com/resources-tracking-adversary-infrastructure/#Online_services "Online services")
-    - [Search engines](https://0xc0decafe.com/resources-tracking-adversary-infrastructure/#Search_engines "Search engines")
-    - [Passive Databases](https://0xc0decafe.com/resources-tracking-adversary-infrastructure/#Passive_Databases "Passive Databases")
-
-</nav></div>## <span class="ez-toc-section" id="Infrastructure_tracking_basics"></span>Infrastructure tracking basics<span class="ez-toc-section-end"></span>
 
 - [Advanced Persistent Infrastructure Tracking](https://censys.io/advanced-persistent-infrastructure-tracking/) by [Nils Kuhnert](https://twitter.com/0x3c7) @ [Censys Blog](https://censys.io/resources/): This should be the first introductory article you read before you start tracking adversary infrastructure. It gives you the background on **why** this actually works, e.g. different teams with different skillsets set up the infrastructure and operate it. Using the online service Censys as an example, it shows how to use HTTP headers to track CobaltStrike infrastructure in general and certificate data to track APT29’s infrastructure. The blog post concludes with a bunch of useful tips for beginners.
 - [Analyzing Network Infrastructure as Composite Objects](https://www.domaintools.com/resources/blog/analyzing-network-infrastructure-as-composite-objects) by [Joe Slowik](https://twitter.com/jfslowik) / [Domains Tools Blog](https://www.domaintools.com/resources/blog/): Good introductory post on malicious network infrastructure, mostly focusing on domain names, IP addresses, and SSL/TLS certificates. It encourages analysts not to treat these types of IoCs as atomic objects but rather as composite objects. CTI analysts should see the identification of new IoCs as an intermediate objective and leverage them for their long-term objective of understanding an adversary’s behavior and tendencies.

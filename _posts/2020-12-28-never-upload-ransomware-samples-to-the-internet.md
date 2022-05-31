@@ -1,27 +1,8 @@
 ---
-id: 192
 title: 'Never upload ransomware samples to the Internet'
 date: '2020-12-28T22:51:09+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=192'
-permalink: /never-upload-ransomware-samples-to-the-internet/
-rank_math_internal_links_processed:
-    - '1'
-rank_math_seo_score:
-    - '82'
-rank_math_primary_category:
-    - '71'
-rank_math_focus_keyword:
-    - 'upload ransomware sample'
-rank_math_description:
-    - 'This post explains what information a ransomware sample contains, why you should never upload ransomware samples to the Internet, and what actually happens if you upload them after all.'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
 image: /wp-content/uploads/2021/01/stop_sign-950x633.jpg
 categories:
     - 'Cyber Threat Intelligence'

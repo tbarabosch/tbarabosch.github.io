@@ -1,27 +1,8 @@
 ---
-id: 32
 title: 'How to write and load shellcode on macOS'
 date: '2020-12-22T09:58:07+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=32'
-permalink: /write-and-load-shellcode-on-macos/
-rank_math_seo_score:
-    - '68'
-rank_math_focus_keyword:
-    - 'shellcode on macOS'
-rank_math_description:
-    - 'Learn how to write and load shellcode on macOS. We will write our own shellcode loader to load some generated x64 shellcode.'
-rank_math_internal_links_processed:
-    - '1'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
-rank_math_primary_category:
-    - '15'
 image: /wp-content/uploads/2020/12/shell_beach-1200x800.jpg
 categories:
     - 'OS Internals'

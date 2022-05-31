@@ -1,27 +1,8 @@
 ---
-id: 65
 title: 'Linux from Scratch &#8211; Is it worth it?'
 date: '2020-12-25T16:30:11+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=65'
-permalink: /linux-from-scratch-is-it-worth-it/
-rank_math_internal_links_processed:
-    - '1'
-rank_math_seo_score:
-    - '76'
-rank_math_focus_keyword:
-    - 'linux from scratch,worth it'
-rank_math_description:
-    - 'Building your own Linux system with Linux from Scratch (LFS) is an interesting but complicated endeavor. Read why LFS is really worth your time!'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
-rank_math_primary_category:
-    - '15'
 image: /wp-content/uploads/2021/01/linux_penguin-1200x766.jpg
 categories:
     - 'OS Internals'
@@ -37,15 +18,6 @@ The book’s chapters are well-structured. They present you command lines comman
 Based on a such minimal system, further guides can be followed to get something more usable. These guides include [Beyond Linux From Scratch](http://www.linuxfromscratch.org/blfs/), which also introduces security measures to the system, and [Cross Linux From Scratch](http://www.linuxfromscratch.org/alfs/), which teaches how to cross-compile and how to build multilib environments.
 
 I followed [Linux from Scratch 8.0](http://www.linuxfromscratch.org/lfs/view/stable/), which is the latest stable version. You will build a Linux system based on the Linux Kernel in version 4.9.9. There are three major points, making LFS a great project for a couple of evenings, which I discuss in the following. Finally, I wrap up my lines of thoughts in a quick conclusion.
-
-<div class="ez-toc-v2_0_23 counter-hierarchy counter-decimal ez-toc-white" id="ez-toc-container"><div class="ez-toc-title-container">Table of Contents
-
-<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle" style="display: none;"></a></span></div><nav>- [Realize what it takes to build a Linux system](https://0xc0decafe.com/linux-from-scratch-is-it-worth-it/#Realize_what_it_takes_to_build_a_Linux_system "Realize what it takes to build a Linux system")
-- [Learning by Doing](https://0xc0decafe.com/linux-from-scratch-is-it-worth-it/#Learning_by_Doing "Learning by Doing")
-- [Take your time – It is well spent and worth it!](https://0xc0decafe.com/linux-from-scratch-is-it-worth-it/#Take_your_time_-_It_is_well_spent_and_worth_it "Take your time – It is well spent and worth it!")
-- [Final thoughts on Linux from Scratch](https://0xc0decafe.com/linux-from-scratch-is-it-worth-it/#Final_thoughts_on_Linux_from_Scratch "Final thoughts on Linux from Scratch")
-
-</nav></div>## <span class="ez-toc-section" id="Realize_what_it_takes_to_build_a_Linux_system"></span>Realize what it takes to build a Linux system<span class="ez-toc-section-end"></span>
 
 What is really needed to end up with a bash shell? Which package depends on which one? What are all these libraries in my *libs* directories good for? There are many questions you could pose here. LFS makes you realize what it takes to build a minimal Linux system. For instance, it made me realize what forms *binutils*, *coreutils* and *util-linux*. Tools that I use on a daily basis, I took them for granted but never knew where they came from.
 

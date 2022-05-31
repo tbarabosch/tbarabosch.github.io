@@ -1,27 +1,8 @@
 ---
-id: 124
 title: 'Learn to quickly detect RC4 encryption in (malicious) binaries'
 date: '2020-12-23T17:00:00+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=124'
-permalink: /detect-rc4-encryption-in-malicious-binaries/
-rank_math_seo_score:
-    - '77'
-rank_math_focus_keyword:
-    - 'detect rc4 encryption'
-rank_math_internal_links_processed:
-    - '1'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
-rank_math_description:
-    - 'This blog post discusses how to detect RC4 encryption with you bare eyes and how you can leverage additional tools like capa or yara for its detection.'
-rank_math_primary_category:
-    - '20'
 image: /wp-content/uploads/2020/12/detect_mag_glass-1200x800.jpg
 categories:
     - 'Malware Analysis'

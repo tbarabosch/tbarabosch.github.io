@@ -1,29 +1,8 @@
 ---
-id: 337
 title: 'Install Bindiff on Fedora'
 date: '2021-01-07T17:25:06+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=337'
-permalink: /install-bindiff-on-fedora/
-rank_math_primary_category:
-    - '80'
-rank_math_seo_score:
-    - '71'
-rank_math_internal_links_processed:
-    - '1'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
-rank_math_focus_keyword:
-    - 'install bindiff on fedora'
-rank_math_description:
-    - 'This blog post explains how to install BinDiff on Fedora and add Bindiff''s plugins to IDA Pro. '
-yarpp_meta:
-    - 'a:1:{s:27:"yarpp_display_for_this_post";i:1;}'
 image: /wp-content/uploads/2021/01/fedora.jpg
 categories:
     - Tools

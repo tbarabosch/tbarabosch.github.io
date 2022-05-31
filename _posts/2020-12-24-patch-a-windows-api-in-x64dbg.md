@@ -1,27 +1,8 @@
 ---
-id: 39
 title: 'How to patch a Windows API in x64dbg'
 date: '2020-12-24T12:00:00+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=39'
-permalink: /patch-a-windows-api-in-x64dbg/
-rank_math_internal_links_processed:
-    - '1'
-rank_math_primary_category:
-    - '20'
-rank_math_seo_score:
-    - '67'
-rank_math_focus_keyword:
-    - 'patch a windows api in x64dbg'
-rank_math_description:
-    - 'This article explains how to patch a Windows API in the x64dbg debugger via x64dbgpy and shortcuts.'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
 image: /wp-content/uploads/2020/12/surveillance_cams-scaled-e1608651625550-1200x785.jpg
 categories:
     - 'Malware Analysis'

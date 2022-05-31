@@ -1,27 +1,8 @@
 ---
-id: 657
 title: 'Learn how to fix PE magic numbers with Malduck'
 date: '2021-01-28T07:00:00+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=657'
-permalink: /fix-pe-magic-numbers-with-malduck/
-rank_math_seo_score:
-    - '90'
-rank_math_internal_links_processed:
-    - '1'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
-rank_math_primary_category:
-    - '20'
-rank_math_focus_keyword:
-    - 'fix PE magic numbers'
-rank_math_description:
-    - 'Malware often corrupts the PE header to thwart analysis. This post gives you an introduction to Malduck and shows how to fix PE magic numbers (MZ + PE) with it.'
 image: /wp-content/uploads/2021/01/teaser_overwritten_magic_pe.jpg
 categories:
     - 'Malware Analysis'
@@ -36,17 +17,6 @@ tags:
 Malware often corrupts the Portable Executable (PE) header to hinder its analysis. By overwriting parts of the PE header, malware evades simple memory dumpers and thwarts proper loading by analysis tools. If we’re lucky then malware only overwrites the magic numbers of the PE header (`MZ` and `PE`) and leaves the rest of the header intact. We can fix such corrupted PE headers with ease. All we need is a little bit of knowledge about the PE format and the right tool to manipulate memory dumps.
 
 First, we’ll learn how to identify such corrupted PE headers quickly with a hexeditor. Next, we’ll see how to manipulate memory dumps with [Malduck](https://malduck.readthedocs.io/en/latest/). This section gives you a head start on how to use this great Python module effectively. Finally, we are putting it all together and write a script to fix PE magic numbers of a corrupted PE header.
-
-<div class="ez-toc-v2_0_23 counter-hierarchy counter-decimal ez-toc-white" id="ez-toc-container"><div class="ez-toc-title-container">Table of Contents
-
-<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle" style="display: none;"></a></span></div><nav>- [Identifying overwritten magic numbers](https://0xc0decafe.com/fix-pe-magic-numbers-with-malduck/#Identifying_overwritten_magic_numbers "Identifying overwritten magic numbers")
-- [Manipulating memory dumps with Malduck](https://0xc0decafe.com/fix-pe-magic-numbers-with-malduck/#Manipulating_memory_dumps_with_Malduck "Manipulating memory dumps with Malduck")
-    - [Open a memory dump with Malduck](https://0xc0decafe.com/fix-pe-magic-numbers-with-malduck/#Open_a_memory_dump_with_Malduck "Open a memory dump with Malduck")
-    - [Read ProcessMemoryPE](https://0xc0decafe.com/fix-pe-magic-numbers-with-malduck/#Read_ProcessMemoryPE "Read ProcessMemoryPE")
-    - [Write ProcessMemoryPE](https://0xc0decafe.com/fix-pe-magic-numbers-with-malduck/#Write_ProcessMemoryPE "Write ProcessMemoryPE")
-- [Putting it all together: fix PE magic numbers with Malduck](https://0xc0decafe.com/fix-pe-magic-numbers-with-malduck/#Putting_it_all_together_fix_PE_magic_numbers_with_Malduck "Putting it all together: fix PE magic numbers with Malduck")
-
-</nav></div>## <span class="ez-toc-section" id="Identifying_overwritten_magic_numbers"></span>Identifying overwritten magic numbers<span class="ez-toc-section-end"></span>
 
 In the following, I assume that you’ve got a basic understanding of the PE format. If not, I can recommend the article on [osdev.org](https://wiki.osdev.org/PE) (check the overview graphic of the PE format) as an introduction.
 

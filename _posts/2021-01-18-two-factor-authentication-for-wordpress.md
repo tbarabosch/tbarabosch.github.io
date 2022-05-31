@@ -1,27 +1,8 @@
 ---
-id: 479
 title: 'The easy way to two-factor authentication for WordPress with Two-Factor and Google Authenticator'
 date: '2021-01-18T19:00:00+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=479'
-permalink: /two-factor-authentication-for-wordpress/
-rank_math_seo_score:
-    - '86'
-rank_math_focus_keyword:
-    - 'two-factor authentication for WordPress'
-rank_math_primary_category:
-    - '104'
-rank_math_internal_links_processed:
-    - '1'
-rank_math_description:
-    - 'This blog post explains why you need two-factor authentication for WordPress and how to set it up with the official plugin Two-Factor and Google Authenticator.'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
 image: /wp-content/uploads/2021/07/2fa_lock.jpg
 categories:
     - 'Web Security'
@@ -37,19 +18,6 @@ tags:
 ---
 
 WordPress is the most popular content management system (CMS). Therefore, it is also a very popular target for hackers. The default WordPress login requires a username and password combination. If hackers obtain your login credentials, there is no second line of defense and your WordPress site is theirs. [Two-factor authentication ](https://www.nist.gov/itl/applied-cybersecurity/tig/back-basics-multi-factor-authentication)(or sometimes multi-factor authentication) adds this second line of defense to your WordPress site. Every time you log in to your WordPress site, it’ll ask you for your username and password plus a second factor, e.g. a one-time password. This blog post shows you how to set up two-factor authentication for WordPress. I’ll use the WordPress plugin [Two-Factor](https://en-gb.wordpress.org/plugins/two-factor/) to set up two-factor authentication with [Google Authenticator](https://www.google.com/landing/2step/).
-
-<div class="ez-toc-v2_0_23 counter-hierarchy counter-decimal ez-toc-white" id="ez-toc-container"><div class="ez-toc-title-container">Table of Contents
-
-<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle" style="display: none;"></a></span></div><nav>- [Why do I need two-factor authentication for WordPress?](https://0xc0decafe.com/two-factor-authentication-for-wordpress/#Why_do_I_need_two-factor_authentication_for_WordPress "Why do I need two-factor authentication for WordPress?")
-- [How to setup two-factor authentication for WordPress with Two-Factor?](https://0xc0decafe.com/two-factor-authentication-for-wordpress/#How_to_setup_two-factor_authentication_for_WordPress_with_Two-Factor "How to setup two-factor authentication for WordPress with Two-Factor?")
-    - [What you need to setup two-factor authentication for WordPress?](https://0xc0decafe.com/two-factor-authentication-for-wordpress/#What_you_need_to_setup_two-factor_authentication_for_WordPress "What you need to setup two-factor authentication for WordPress?")
-    - [Two-Factor installation](https://0xc0decafe.com/two-factor-authentication-for-wordpress/#Two-Factor_installation "Two-Factor installation")
-    - [Google Authenticator installation](https://0xc0decafe.com/two-factor-authentication-for-wordpress/#Google_Authenticator_installation "Google Authenticator installation")
-    - [Two-Factor configuration and Google Authenticator integration](https://0xc0decafe.com/two-factor-authentication-for-wordpress/#Two-Factor_configuration_and_Google_Authenticator_integration "Two-Factor configuration and Google Authenticator integration")
-    - [Backup Verification Codes](https://0xc0decafe.com/two-factor-authentication-for-wordpress/#Backup_Verification_Codes "Backup Verification Codes")
-    - [WordPress login with Two-Factor enabled](https://0xc0decafe.com/two-factor-authentication-for-wordpress/#WordPress_login_with_Two-Factor_enabled "WordPress login with Two-Factor enabled")
-
-</nav></div>## <span class="ez-toc-section" id="Why_do_I_need_two-factor_authentication_for_WordPress"></span>Why do I need two-factor authentication for WordPress?<span class="ez-toc-section-end"></span>
 
 The default way to log in to your WordPress site is using a username and a password. If a hacker obtains them, then they can easily login into your site. For instance, Hackers may obtain your login credentials via [WordPress password bruteforcing](https://wordpress.org/support/article/brute-force-attacks/) or they may obtain them directly from your computer (e.g. via a Trojan horse). Therefore, I’ll recommend always use the second line of defense.
 

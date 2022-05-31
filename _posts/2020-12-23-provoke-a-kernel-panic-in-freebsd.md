@@ -4,24 +4,6 @@ title: 'Provoke a kernel panic in FreeBSD'
 date: '2020-12-23T11:52:54+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=62'
-permalink: /provoke-a-kernel-panic-in-freebsd/
-rank_math_internal_links_processed:
-    - '1'
-rank_math_seo_score:
-    - '71'
-rank_math_focus_keyword:
-    - 'provoke a kernel panic'
-rank_math_description:
-    - 'This blog post shows you how to write a FreeBSD module to provoke a kernel panic.'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
-rank_math_primary_category:
-    - '15'
 image: /wp-content/uploads/2021/01/red_panic-1200x800.jpg
 categories:
     - 'OS Internals'

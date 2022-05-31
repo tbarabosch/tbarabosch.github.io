@@ -1,27 +1,8 @@
 ---
-id: 68
 title: 'bap-mode: Emacs ❤️ BAP'
 date: '2020-12-22T13:01:12+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=68'
-permalink: /bap-mode-emacs-loves-bap/
-rank_math_internal_links_processed:
-    - '1'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
-rank_math_seo_score:
-    - '71'
-rank_math_focus_keyword:
-    - bap-mode
-rank_math_description:
-    - 'bap-mode is an Emacs mode that integrates the Binary Analysis Platform (BAP). It includes syntax highlighting and invocation of BAP from Emacs.'
-rank_math_primary_category:
-    - '80'
 image: /wp-content/uploads/2020/12/black_keyboard-1200x675.jpg
 categories:
     - Tools

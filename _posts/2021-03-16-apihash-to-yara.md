@@ -1,27 +1,8 @@
 ---
-id: 784
 title: 'Detect API hashing with YARA'
 date: '2021-03-16T16:42:31+00:00'
 author: tbarabosch
 layout: post
-guid: 'https://0xc0decafe.com/?p=784'
-permalink: /apihash-to-yara/
-rank_math_seo_score:
-    - '83'
-rank_math_internal_links_processed:
-    - '1'
-site-sidebar-layout:
-    - default
-site-content-layout:
-    - default
-theme-transparent-header-meta:
-    - default
-rank_math_focus_keyword:
-    - 'api hashing'
-rank_math_primary_category:
-    - '20'
-rank_math_description:
-    - 'Learn how to detect API hashing in malware fast and without too many false positives using YARA.'
 image: /wp-content/uploads/2021/03/teaser_apihashing-scaled.jpg
 categories:
     - 'Malware Analysis'
@@ -40,15 +21,6 @@ tags:
 Malware utilizes obfuscation to complicate its analysis. There is one obfuscation technique that targets specifically static analysis: API hashing. In a nutshell, malware uses hashes of API names (e.g. `0x0688eae1`) instead of plain strings (e.g. `kernel32!Sleep`) to obfuscate the API functionality it relies on. This is typically a pretty nasty obfuscation technique since it requires malware analysts to resolve this API hashing before they can conduct a meaningful analysis. There are many advanced malware families that utilize API hashing including [Buer](https://www.proofpoint.com/us/threat-insight/post/buer-new-loader-emerges-underground-marketplace), [PoisonIvy](https://www.fireeye.com/blog/threat-research/2012/11/precalculated-string-hashes-reverse-engineering-shellcode.html), [PlugX](https://blogs.jpcert.or.jp/en/2017/02/plugx-poison-iv-919a.html) and [UrlZone](https://twitter.com/VK_Intel/status/981326743486185472?s=20).
 
 As a first step in the triage phase, it nice to have a first pointer whether or not a malware family could use API hashing and if so which algorithm it uses to hash API names. Therefore, I wrote a tiny project called `apihash_to_yara.py` that generates YARA rules to detect this behavior fast and without too many false positives. The source code is on [Github](https://github.com/tbarabosch/apihash_to_yara) where you’ll also find two sets of precompiled YARA rules.
-
-<div class="ez-toc-v2_0_23 counter-hierarchy counter-decimal ez-toc-white" id="ez-toc-container"><div class="ez-toc-title-container">Table of Contents
-
-<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle" style="display: none;"></a></span></div><nav>- [What is API hashing?](https://0xc0decafe.com/apihash-to-yara/#What_is_API_hashing "What is API hashing?")
-- [What’s the main idea?](https://0xc0decafe.com/apihash-to-yara/#Whats_the_main_idea "What’s the main idea?")
-- [Does it work? – A very unscientific evaluation](https://0xc0decafe.com/apihash-to-yara/#Does_it_work_-_A_very_unscientific_evaluation "Does it work? – A very unscientific evaluation")
-- [Conclusion](https://0xc0decafe.com/apihash-to-yara/#Conclusion "Conclusion")
-
-</nav></div>## <span class="ez-toc-section" id="What_is_API_hashing"></span>What is API hashing?<span class="ez-toc-section-end"></span>
 
 API hashing is an obfuscation technique that you’ll typically encounter in advanced malware. Normally, the names of APIs are stored in plain text in a binary (e.g. as part of the Import Table of the PE header). Remember that strings and APIs are very important corner stones in the reverse engineering puzzle. Hence, malware authors try to obfuscate them so that malware analysts have to significantly invest more time.
 
