@@ -41,13 +41,17 @@ Before we can start, please ensure that you have the following things ready:
 
 First, we install the WordPress plugin [Two-Factor](https://en-gb.wordpress.org/plugins/two-factor/). Head over to *Plugins* → *Add New* and search for Two-Factor.
 
-<figure class="wp-block-image size-large">![Two-Factor lets you setup two factor authen](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-install.png)<figcaption>The WordPress plugin Two-Factor enables two-factor authentication for WordPress </figcaption></figure>Hit the *Install* button to install the plugin and then the *Activate* button to activate it. If the installation was successful, then you should see the additional option (Two-Factor Options) under *Users* → *Your Profile*.
+![Two-Factor lets you setup two factor authen](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-install.png)
+
+Hit the *Install* button to install the plugin and then the *Activate* button to activate it. If the installation was successful, then you should see the additional option (Two-Factor Options) under *Users* → *Your Profile*.
 
 ### Google Authenticator installation
 
 Before you can configure Two-Factor and integrate it with Google Authenticator, you’ll have to install Google Authenticator on your mobile phone. Open the Play Store app on your Android mobile phone, search for [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB&gl=US), and install it.
 
-<figure class="wp-block-image size-large">![](https://0xc0decafe.com/wp-content/uploads/2021/01/image-1.png)<figcaption>Google Authenticator in Google Play</figcaption></figure>Open the Google Authenticator app and tie it to your Google account, if needed. That’s it.
+![](https://0xc0decafe.com/wp-content/uploads/2021/01/image-1.png)
+
+Open the Google Authenticator app and tie it to your Google account, if needed. That’s it.
 
 ### Two-Factor configuration and Google Authenticator integration
 
@@ -55,18 +59,22 @@ Now with both Two-Factor and Google Authenticator installed, you’ll configure 
 
 There will be a QR code that you have to scan with your Google Authenticator app (see next Screenshot). Open the Google Authenticator app and click the big plus (+) in the right bottom of the app to add your site. Scan the QR code and Google Authenticator will show you a new entry for your WordPress site with your username. To complete the integration, type in one six digit one-time pin from Google Authenticator in WordPress, and hit the *Submit* button.
 
-<figure class="wp-block-image size-large">![](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-user-1-1024x655.png)<figcaption>Users settings allows activation of two-factor authentication</figcaption></figure>### <span class="ez-toc-section" id="Backup_Verification_Codes"></span>Backup Verification Codes<span class="ez-toc-section-end"></span>
+![](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-user-1-1024x655.png)
 
 It’s always advisable to have a backup plan. For example, in case you lose your mobile phone or access to your Google account, you won’t be able to log in to your WordPress site. Therefore, you should use *Backup Verification Codes* as a backup plan. These are ten pin codes that you can use instead of your primary second factor, which is Google Authenticator.
 
 Enable *Backup Verification Codes (Single Use)* as well but do not click the *Primary* radio button as shown in the next screenshot.
 
-<figure class="wp-block-image size-large is-resized">![](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-user-filled-out-1024x524.png)<figcaption>Two-factor authentication with primary Time-Based One-Time Password (TOTP) and activated Backup Verification Codes (Single Use) </figcaption></figure>You’ll see ten Backup Verification Codes similar to the next screenshot. Either you use your pen and paper and write them down or you download them and store them on your computer. The most secure way is to write them down on paper. Because if somebody gets access to your computer (e.g. via a Trojan horse) later on, they won’t find these codes on your computer. Therefore, they won’t be able to circumvent the two-factor authentication.
+![](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-user-filled-out-1024x524.png)
 
-<figure class="wp-block-image size-large">![](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-verification-codes.png)<figcaption>10 Backup Verification Codes generated and ready for download</figcaption></figure>### <span class="ez-toc-section" id="WordPress_login_with_Two-Factor_enabled"></span>WordPress login with Two-Factor enabled<span class="ez-toc-section-end"></span>
+You’ll see ten Backup Verification Codes similar to the next screenshot. Either you use your pen and paper and write them down or you download them and store them on your computer. The most secure way is to write them down on paper. Because if somebody gets access to your computer (e.g. via a Trojan horse) later on, they won’t find these codes on your computer. Therefore, they won’t be able to circumvent the two-factor authentication.
+
+![](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-verification-codes.png)
 
 Now, you’re ready to test Two-Factor. Log out from your WordPress site and log in again. First, you’ll be asked for your default login credentials: username and password. But once you’ve entered them, you are now presented a new view similar to the following:
 
-<figure class="wp-block-image size-large">![](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-live.png)<figcaption>WordPress login asks for Authentication Code from Google Authenticator</figcaption></figure>This is the Two-Factor view that asks for your second factor. Pick up your Android mobile phone, open the Google Authenticator app, and get your authentication code (six digits). Be quick when typing them in because they’re only valid for a small amount of time. In the background, Two-Factor will talk to Google and verify the authentication code you’ve just typed in. If everything works out, then you’ll be logged in to your WordPress site as usual.
+![](https://0xc0decafe.com/wp-content/uploads/2021/01/two-factor-live.png)
+
+This is the Two-Factor view that asks for your second factor. Pick up your Android mobile phone, open the Google Authenticator app, and get your authentication code (six digits). Be quick when typing them in because they’re only valid for a small amount of time. In the background, Two-Factor will talk to Google and verify the authentication code you’ve just typed in. If everything works out, then you’ll be logged in to your WordPress site as usual.
 
 Perfect, you’ve just set up two-factor authentication for WordPress with Two-Factor and Google Authenticator!

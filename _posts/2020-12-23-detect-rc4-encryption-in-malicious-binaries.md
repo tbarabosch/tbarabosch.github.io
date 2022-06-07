@@ -21,19 +21,21 @@ In contrast to other ciphers, *RC4* does not rely on any constants that make it 
 While explaining *RC4* is out of scope of this blog post ([Wikipedia](https://en.wikipedia.org/wiki/RC4) does a great job!), one of the most interesting parts of the algorithm is *Key-Scheduling Algorithm* (KSA). In a nutshell, it initializes an internal array based on the provided key that is later utilized by another algorithm to encrypt / decrypt. In pseudo code *KSA* looks like this (taken from [Wikipedia](https://en.wikipedia.org/wiki/RC4)):
 
 ```c
-<strong>for</strong> i <strong>from</strong> 0 <strong>to</strong> 255     
-    S[i] := i 
-<strong>endfor</strong> 
-j := 0 
-<strong>for</strong> i <strong>from</strong> 0 <strong>to</strong> 255     
-    j := (j + S[i] + key[i <a href="https://en.wikipedia.org/wiki/Modulo_operation">mod</a> keylength]) mod 256     
+for  i from 0 to 255
+    S[i] := i 
+endfor 
+j := 0 
+for i from 0 to 255
+    j := (j + S[i] + key[i mod keylength]) mod 256
     swap values of S[i] and S[j] 
-<strong>endfor</strong>
+endfor
 ```
 
 The internal array S contains all possible byte values from `0x00` to `0xFF`. It is permuted in the *KSA*. This usually compiles down to something like the following:
 
-<figure class="wp-block-image size-large">![This IDA Pro screenshot shows us how to detect RC4 encryption in binaries.](https://0xc0decafe.com/wp-content/uploads/2020/12/rc4_ida.png)</figure>The first and second blocks are the actual *KSA*. Note the two `cmp` instructions (`cmp eax, 100h` and `cmp r9d, 100h`). These are part of the two `for` loops are seen in the pseudo-code (lines 1 and 5). The third block is the *Pseudo-random generation algorithm* (*PRGA*) used to encrypt/decrypt the plain/ciphertext. I won’t go much more into the details of the *PRGA*, please refer to the great [Wikipedia article on RC4](https://en.wikipedia.org/wiki/RC4).
+![This IDA Pro screenshot shows us how to detect RC4 encryption in binaries.](https://0xc0decafe.com/wp-content/uploads/2020/12/rc4_ida.png)
+
+The first and second blocks are the actual *KSA*. Note the two `cmp` instructions (`cmp eax, 100h` and `cmp r9d, 100h`). These are part of the two `for` loops are seen in the pseudo-code (lines 1 and 5). The third block is the *Pseudo-random generation algorithm* (*PRGA*) used to encrypt/decrypt the plain/ciphertext. I won’t go much more into the details of the *PRGA*, please refer to the great [Wikipedia article on RC4](https://en.wikipedia.org/wiki/RC4).
 
 ## Detect RC4 encryption with yara
 
@@ -91,7 +93,7 @@ rule:
     mbc:            
       - Cryptography::Encrypt Data::RC4 [C0027.009]        
       - Cryptography::Encryption Key::RC4 KSA [C0028.002]         
-    examples:         
+    examples:
       - 34404A3FB9804977C6AB86CB991FB130:0x403D40           
       - C805528F6844D7CAF5793C025B56F67D:0x4067AE           
       - 9324D1A8AE37A36AE560C37448C9705A:0x404950            

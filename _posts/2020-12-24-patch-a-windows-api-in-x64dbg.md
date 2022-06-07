@@ -15,7 +15,7 @@ My quick hack was to prevent others instances to communicate via the network by 
 Most of the time I utilize [x64dbg](http://x64dbg.com/), an open source debugger. Since a couple of months [python bindings exist](https://github.com/x64dbg/x64dbgpy). They work fine, though there is no documentation. The following gist does the trick: patching ZwOpenProcess to always return zero. This should yield no more code injections in many malware families. Furthmore, you can use it as a blue print for patching other APIs in *x64dbg*.
 
 ```python
-<strong>from x64dbgpy.pluginsdk import *       
+from x64dbgpy.pluginsdk import *       
                          
 def patchZwOpenProcess():       
     # This function patches the function ZwOpenProcess in such way that the XXX fails to open and infect more processes       
@@ -30,15 +30,7 @@ def patchZwOpenProcess():
 def main():       
     patchZwOpenProcess()       
                 
-main()</strong>
+main()
 ```
 
 The gist just assembles some shellcode (*mov eax, 0; jmp TO\_RETURN*) to force the API to return zero, resolves the target API with *RemoteGetProcAddress* and overwrites the original code of the api with *memory.Write*. As I said, there is no documentation of *x64dbgpy*. You can refer to [this folder of x64dbgpy’s repo](https://github.com/x64dbg/x64dbgpy/tree/v25/swig/x64dbgpy/pluginsdk/_scriptapi).
-
-Another quick way to do this is without Python was decribed in this Tweet:
-
-<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">> Alternative x64dbg command (you can also bind it to a hotkey or execute on debug init): mov ntdll:NtOpenProcess, #31C0C21000#
-> 
-> — x64dbg (@x64dbg) [January 10, 2017](https://twitter.com/x64dbg/status/818902513244143617?ref_src=twsrc%5Etfw)
-
-<script async="" charset="utf-8" src="https://platform.twitter.com/widgets.js"></script></div></figure>

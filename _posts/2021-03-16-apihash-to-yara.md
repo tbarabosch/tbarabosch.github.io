@@ -31,9 +31,11 @@ To detect this behavior fast with YARA, we’ll do not have to know how the reso
 
 There are two ways how malware stores these hashes. Both ways correspond to one way how they are resolved. The first way is to resolve the API hashes during the initialization of the malware. Therefore, the malware comprises an array of API hashes and resolves one after another on startup. For instance, this is what the malware PoisonIvy does. The following screenshot shows the API hash array found in its binary. I’ve marked the hash `0xBA36C10A`, which corresponds to the API function `Kernel32!Sleep`.
 
-<figure class="wp-block-image size-large">![](https://0xc0decafe.com/wp-content/uploads/2021/03/apihashing_poison_ivy_table.png)<figcaption>Table of API hashes in PoisonIvy dump, hash of Kernel32!Sleep (0xBA36C10A) marked in blue</figcaption></figure>The second way is to resolve the API hashes just in time. This means that every time the malware calls an API function, it first resolves the hash. The following screenshot of the malware family VMZeus depicts this behavior. The function `resolve_api_hashing` takes among other parameters an API hash as input. It resolves the API hash and returns the address to the API in the register `eax`. This is subsequently called (`call eax`).
+![](https://0xc0decafe.com/wp-content/uploads/2021/03/apihashing_poison_ivy_table.png)
 
-<figure class="wp-block-image size-large">![API hashing in VMZeus sample: red boxes contain API hashes, the hash 0xCEF2EDA8 is the CRC32 hash of Sleep](https://0xc0decafe.com/wp-content/uploads/2021/03/apihashing_vmzeus_crc32.png)<figcaption>API hashing in VMZeus sample: red boxes contain API hashes, the hash 0xCEF2EDA8 is the CRC32 hash of Sleep</figcaption></figure>## <span class="ez-toc-section" id="Whats_the_main_idea"></span>What’s the main idea?<span class="ez-toc-section-end"></span>
+The second way is to resolve the API hashes just in time. This means that every time the malware calls an API function, it first resolves the hash. The following screenshot of the malware family VMZeus depicts this behavior. The function `resolve_api_hashing` takes among other parameters an API hash as input. It resolves the API hash and returns the address to the API in the register `eax`. This is subsequently called (`call eax`).
+
+![API hashing in VMZeus sample: red boxes contain API hashes, the hash 0xCEF2EDA8 is the CRC32 hash of Sleep](https://0xc0decafe.com/wp-content/uploads/2021/03/apihashing_vmzeus_crc32.png)
 
 The main idea is to generate one YARA rule for several API hashes that are generated with API hashing algorithm. I didn’t want to reinvent the wheel and therefore I adjusted the API hashing algorithms found in [make\_sc\_hash\_db from flare-ida](https://github.com/fireeye/flare-ida/blob/master/shellcode_hashes/make_sc_hash_db.py). [This project ](https://www.fireeye.com/blog/threat-research/2012/11/precalculated-string-hashes-reverse-engineering-shellcode.html)comprises more than a dozen API hashing algorithms.
 
@@ -90,7 +92,7 @@ rule api_hash_ror7AddHash32 {
 
 There are two precompiled sets of YARA rules in the [repository](https://github.com/tbarabosch/apihash_to_yara). First, `top100_apis_malpedia.yar` (based on the Malpedia API names) and `custom_apis.yar.gz` (based on `custom_apis.txt`, gzipped due to size restrictions).
 
-## <span class="ez-toc-section" id="Does_it_work_-_A_very_unscientific_evaluation"></span>Does it work? – A very unscientific evaluation<span class="ez-toc-section-end"></span>
+## Does it work? – A very unscientific evaluation
 
 No real scientific evaluation here, just some random case studies. I ran `top100_apis_malpedia.yar` on Malpedia. I had more than 450 matches but this included different versions of a malware family. From 68 families I had at least one match. Throughout the years I’ve analyzed some of these families and remember them to use API hashing (not exactly the algorithm but the fact that they do). While this is a very weak confirmation that `apihash_to_yara.py` works, I had a look at a handful samples.
 
@@ -102,7 +104,7 @@ I’ll refrain from posting the list of matches due to the TLP:AMBER nature of s
 
 Furthermore, I scheduled a Retrohunt on VirusTotal’s Goodware corpus. Actually, I scheduled two Retrohunts since the maximal size is 1MB per rule set. The `top100_apis_malpedia.yar` has a filesize of 1.3MB. Therefore, I split the rule set accordingly. In total, there were `7` false positives, all of them matched the rule `sll1AddHash32`. In environments where you can not tolerate false positives, you should turn off this rule.
 
-<figure class="wp-block-image size-large">![VirusTotal Retrohunt on Goodware corpus with top100_apis_malpedia.yar](https://0xc0decafe.com/wp-content/uploads/2021/03/vt_retrohunt_api_hashing-1024x115.png)<figcaption>VirusTotal Retrohunt on Goodware corpus with top100\_apis\_malpedia.yar</figcaption></figure>## <span class="ez-toc-section" id="Conclusion"></span>Conclusion<span class="ez-toc-section-end"></span>
+![VirusTotal Retrohunt on Goodware corpus with top100_apis_malpedia.yar](https://0xc0decafe.com/wp-content/uploads/2021/03/vt_retrohunt_api_hashing-1024x115.png)
 
 Let me quickly conclude what we’ve presented in this blog post. This blog post presented `apihashing_to_yara.py`, a tiny project to generate YARA rules to detect API hashing in malware fast and without too many false positives. The project can be[ found on Github](https://github.com/tbarabosch/apihash_to_yara). There are also two precompiled YARA rules already included. Shout out to the giants on whose shoulders I stand: [make\_sc\_hash\_db from flare-ida](https://github.com/fireeye/flare-ida/blob/master/shellcode_hashes/make_sc_hash_db.py) and [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
 

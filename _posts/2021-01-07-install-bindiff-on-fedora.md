@@ -132,4 +132,6 @@ Your `Bindiff` installation will be at `/opt/bindiff`. To use `Bindiff` from `ID
 
 The next time you start IDA Pro 7.7, it should have loaded the BinExport and BinDiff plugins. Just press `ctrl + 6` to open the BinDiff plugin.
 
-<figure class="wp-block-image size-large">![Screenshot shows how to install BinDiff on Fedora.](https://0xc0decafe.com/wp-content/uploads/2021/01/bindiff_on_fedora.png)<figcaption>Bindiff plugin in IDA Pro 7.7 on Fedora 35</figcaption></figure>Happy diffing 🙂
+![Screenshot shows how to install BinDiff on Fedora.](https://0xc0decafe.com/wp-content/uploads/2021/01/bindiff_on_fedora.png)
+
+Happy diffing 🙂
