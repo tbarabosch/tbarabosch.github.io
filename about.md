@@ -4,7 +4,9 @@ title: 'About me'
 date: '2020-12-22T09:31:44+00:00'
 ---
 
-<figure class="wp-block-image size-large is-resized">![](https://0xc0decafe.com/wp-content/uploads/2020/12/DCitINpI_400x400.jpg)</figure>Hi there, I am Thomas and I work in cyber security.
+![](https://0xc0decafe.com/wp-content/uploads/2020/12/DCitINpI_400x400.jpg)
+
+Hi there, I am Thomas and I work in cyber security.
 
 I am interested in many things related to cyber security: reverse engineering, malware analysis, programming, and bug hunting just to name a few. I published a [bunch of scientifc papers](https://scholar.google.de/citations?user=j8Q30qUAAAAJ&hl=en), I spoke at [several conferences](https://net.cs.uni-bonn.de/wg/cs/staff/alumni/thomas-barabosch/), I am the original author of [cwe\_checker](https://github.com/fkie-cad/cwe_checker), reported a plethora of bugs to several organizations/projects (e.g [CVE-2018-3005](https://www.oracle.com/security-alerts/cpujul2018.html), [CVE-2018-17155](https://www.freebsd.org/security/advisories/FreeBSD-EN-18:12.mem.asc), or [NetBSD-SA2019-001](http://ftp.netbsd.org/pub/NetBSD/security/advisories/NetBSD-SA2019-001.txt.asc)), and since many years I serve on the programme committee of [Botconf](https://www.botconf.eu/). Furthermore, I am a cooperate blogger at [Telekom.com](https://www.telekom.com/en/blog/592636-592636), where I write about the research that I do during my day job.
 
