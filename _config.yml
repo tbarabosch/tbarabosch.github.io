@@ -60,6 +60,7 @@ sass:
 
 # Files used for local development, but not published by GitHub Pages.
 exclude:
+  - AGENTS.md
   - Containerfile
   - Gemfile
   - Gemfile.lock

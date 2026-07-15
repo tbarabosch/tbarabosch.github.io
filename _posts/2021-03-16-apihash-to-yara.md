@@ -3,7 +3,7 @@ title: 'Detect API hashing with YARA'
 date: '2021-03-16T16:42:31+00:00'
 author: tbarabosch
 layout: post
-feature_image: /wp-content/uploads/2021/03/teaser_apihashing-scaled.jpg
+feature_image: /assets/images/posts/apihash-to-yara/teaser_apihashing.jpg
 ---
 
 Malware utilizes obfuscation to complicate its analysis. There is one obfuscation technique that targets specifically static analysis: API hashing. In a nutshell, malware uses hashes of API names (e.g. `0x0688eae1`) instead of plain strings (e.g. `kernel32!Sleep`) to obfuscate the API functionality it relies on. This is typically a pretty nasty obfuscation technique since it requires malware analysts to resolve this API hashing before they can conduct a meaningful analysis. There are many advanced malware families that utilize API hashing including [Buer](https://www.proofpoint.com/us/threat-insight/post/buer-new-loader-emerges-underground-marketplace), [PoisonIvy](https://www.fireeye.com/blog/threat-research/2012/11/precalculated-string-hashes-reverse-engineering-shellcode.html), [PlugX](https://blogs.jpcert.or.jp/en/2017/02/plugx-poison-iv-919a.html) and [UrlZone](https://twitter.com/VK_Intel/status/981326743486185472?s=20).
@@ -31,11 +31,11 @@ To detect this behavior fast with YARA, we do not have to know how the resolving
 
 There are two ways how malware stores these hashes. Both ways correspond to one way how they are resolved. The first way is to resolve the API hashes during the initialization of the malware. Therefore, the malware comprises an array of API hashes and resolves one after another on startup. For instance, this is what the malware PoisonIvy does. The following screenshot shows the API hash array found in its binary. I’ve marked the hash `0xBA36C10A`, which corresponds to the API function `Kernel32!Sleep`.
 
-![](/wp-content/uploads/2021/03/apihashing_poison_ivy_table.png)
+![](/assets/images/posts/apihash-to-yara/apihashing_poison_ivy_table.png)
 
 The second way is to resolve the API hashes just in time. This means that every time the malware calls an API function, it first resolves the hash. The following screenshot of the malware family VMZeus depicts this behavior. The function `resolve_api_hashing` takes among other parameters an API hash as input. It resolves the API hash and returns the address to the API in the register `eax`. This is subsequently called (`call eax`).
 
-![API hashing in VMZeus sample: red boxes contain API hashes, the hash 0xCEF2EDA8 is the CRC32 hash of Sleep](/wp-content/uploads/2021/03/apihashing_vmzeus_crc32.png)
+![API hashing in VMZeus sample: red boxes contain API hashes, the hash 0xCEF2EDA8 is the CRC32 hash of Sleep](/assets/images/posts/apihash-to-yara/apihashing_vmzeus_crc32.png)
 
 The main idea is to generate one YARA rule for several API hashes that are generated with API hashing algorithm. I didn’t want to reinvent the wheel and therefore I adjusted the API hashing algorithms found in [make\_sc\_hash\_db from flare-ida](https://github.com/fireeye/flare-ida/blob/master/shellcode_hashes/make_sc_hash_db.py). [This project ](https://www.fireeye.com/blog/threat-research/2012/11/precalculated-string-hashes-reverse-engineering-shellcode.html)comprises more than a dozen API hashing algorithms.
 
@@ -104,7 +104,7 @@ I’ll refrain from posting the list of matches due to the TLP:AMBER nature of s
 
 Furthermore, I scheduled a Retrohunt on VirusTotal’s Goodware corpus. Actually, I scheduled two Retrohunts since the maximal size is 1MB per rule set. The `top100_apis_malpedia.yar` has a filesize of 1.3MB. Therefore, I split the rule set accordingly. In total, there were `7` false positives, all of them matched the rule `sll1AddHash32`. In environments where you can not tolerate false positives, you should turn off this rule.
 
-![VirusTotal Retrohunt on Goodware corpus with top100_apis_malpedia.yar](/wp-content/uploads/2021/03/vt_retrohunt_api_hashing-1024x115.png)
+![VirusTotal Retrohunt on Goodware corpus with top100_apis_malpedia.yar](/assets/images/posts/apihash-to-yara/vt_retrohunt_api_hashing.png)
 
 Let me quickly conclude what we’ve presented in this blog post. This blog post presented `apihashing_to_yara.py`, a tiny project to generate YARA rules to detect API hashing in malware fast and without too many false positives. The project can be [found on GitHub](https://github.com/tbarabosch/apihash_to_yara). There are also two precompiled YARA rules already included. Shout out to the giants on whose shoulders I stand: [make\_sc\_hash\_db from flare-ida](https://github.com/fireeye/flare-ida/blob/master/shellcode_hashes/make_sc_hash_db.py) and [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
 

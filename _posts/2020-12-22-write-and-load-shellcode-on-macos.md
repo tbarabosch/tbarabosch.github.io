@@ -3,7 +3,7 @@ title: 'How to write and load shellcode on macOS'
 date: '2020-12-22T09:58:07+00:00'
 author: tbarabosch
 layout: post
-feature_image: /wp-content/uploads/2020/12/shell_beach-1200x800.jpg
+feature_image: /assets/images/posts/write-and-load-shellcode-on-macos/shell_beach.jpg
 ---
 
 > **Reviewed July 2026:** This post is kept as a historical low-level programming note. Modern macOS toolchains and execution protections may require adjustments.

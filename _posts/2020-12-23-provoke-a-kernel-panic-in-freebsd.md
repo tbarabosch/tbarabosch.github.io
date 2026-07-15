@@ -4,7 +4,7 @@ title: 'Provoke a kernel panic in FreeBSD'
 date: '2020-12-23T11:52:54+00:00'
 author: tbarabosch
 layout: post
-feature_image: /wp-content/uploads/2021/01/red_panic-1200x800.jpg
+feature_image: /assets/images/posts/provoke-a-kernel-panic-in-freebsd/red_panic.jpg
 ---
 
 Throughout the last year’s I found numerous [(security) bugs](https://freshbsd.org/search?q=Barabosch&sort=commit_date) in the BSDs (*FreeBSD*, *OpenBSD*, *NetBSD*). I had a great time researching those kernels. The community is very technically sophisticated and very supportive. Not to forget the great read [“The Design and Implementation of the FreeBSD® Operating System”](https://www.oreilly.com/library/view/the-design-and/9780133761825/) that accompanied my adventures over there. I can recommend this book to everyone working in system security!

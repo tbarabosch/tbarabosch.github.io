@@ -3,7 +3,7 @@ title: 'Where to start tracking adversary infrastructure?'
 date: '2021-01-15T22:18:33+00:00'
 author: tbarabosch
 layout: post
-feature_image: /wp-content/uploads/2021/01/tracking_infrastructure.jpg
+feature_image: /assets/images/posts/resources-tracking-adversary-infrastructure/tracking_infrastructure.jpg
 ---
 
 > **Reviewed July 2026:** This resource list is kept for historical and conceptual value. Individual services, links, and company names may have changed since publication.

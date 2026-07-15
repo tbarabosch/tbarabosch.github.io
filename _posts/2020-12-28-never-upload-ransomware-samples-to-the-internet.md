@@ -3,7 +3,7 @@ title: 'Never upload ransomware samples to the Internet'
 date: '2020-12-28T22:51:09+00:00'
 author: tbarabosch
 layout: post
-feature_image: /wp-content/uploads/2021/01/stop_sign-950x633.jpg
+feature_image: /assets/images/posts/never-upload-ransomware-samples-to-the-internet/stop_sign.jpg
 ---
 
 Ransomware is our contemporary plague. It is a thriving business that attracts more and more cybercriminals every month. New ransomware gangs [sprout like mushrooms](https://www.zdnet.com/article/the-ransomware-landscape-is-more-crowded-than-you-think/). These self-proclaimed “security teams” test the security of many small to large enterprises. But their unsolicited penetration tests are not that cheap. What they leave behind is pure mayhem and a huge bill for the victims. Furthermore, some attacks are really disgusting since ransomware gangs have targeted non-profit organizations, schools, and even hospitals on various occasions.
@@ -41,7 +41,7 @@ These ransomware samples are often compiled for the victim at hand. They are the
 
 The following ransom note that I’ve extracted from a ransomware sample uploaded to the Internet illustrates my point:
 
-![](/wp-content/uploads/2020/12/ransom_note_example.png)
+![](/assets/images/posts/never-upload-ransomware-samples-to-the-internet/ransom_note_example.png)
 
 *Example ransom note containing a lot of information about the victim.*
 
@@ -133,7 +133,7 @@ This rule comprises several strings and a condition that is checked against each
 
 Let’s say you uploaded a ransomware sample to VirusTotal, which belongs to one of the heavily tracked ransomware families then there are likely several YARA rules going off, and researchers notified. Notifications are either seen in the [VirusTotal WebGUI](https://support.virustotal.com/hc/en-us/articles/360001315437-Livehunt#h_cfdf3cbc-ec4f-4076-82bf-f3a0dadf6da8) or via email notification as shown in the following screenshot.
 
-![VT notification received due to upload ransomware sample](/wp-content/uploads/2020/12/vt_hunting_ransomware.png)
+![VT notification received due to upload ransomware sample](/assets/images/posts/never-upload-ransomware-samples-to-the-internet/vt_hunting_ransomware.png)
 
 *Sample notification received for a ransomware sample.*
 

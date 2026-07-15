@@ -3,7 +3,7 @@ title: 'Learn to quickly detect RC4 encryption in (malicious) binaries'
 date: '2020-12-23T17:00:00+00:00'
 author: tbarabosch
 layout: post
-feature_image: /wp-content/uploads/2020/12/detect_mag_glass-1200x800.jpg
+feature_image: /assets/images/posts/detect-rc4-encryption-in-malicious-binaries/detect_mag_glass.jpg
 ---
 
 [RC4](https://en.wikipedia.org/wiki/RC4) (also known as *ARC4*) is a simple stream cipher. It was designed in the late 1980s and its internals became known to the public in the mid-1990s. While it is a very simple and fast crypto algorithm, security researchers have discovered multiple flaws in it throughout the years. Today, it is just another broken stream cipher.
@@ -33,7 +33,7 @@ endfor
 
 The internal array S contains all possible byte values from `0x00` to `0xFF`. It is permuted in the *KSA*. This usually compiles down to something like the following:
 
-![This IDA Pro screenshot shows us how to detect RC4 encryption in binaries.](/wp-content/uploads/2020/12/rc4_ida.png)
+![This IDA Pro screenshot shows us how to detect RC4 encryption in binaries.](/assets/images/posts/detect-rc4-encryption-in-malicious-binaries/rc4_ida.png)
 
 The first and second blocks are the actual *KSA*. Note the two `cmp` instructions (`cmp eax, 100h` and `cmp r9d, 100h`). These are part of the two `for` loops are seen in the pseudo-code (lines 1 and 5). The third block is the *Pseudo-random generation algorithm* (*PRGA*) used to encrypt/decrypt the plain/ciphertext. I won’t go much more into the details of the *PRGA*, please refer to the great [Wikipedia article on RC4](https://en.wikipedia.org/wiki/RC4).
 

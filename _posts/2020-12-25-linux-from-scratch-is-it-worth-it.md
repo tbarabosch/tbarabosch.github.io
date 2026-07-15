@@ -3,7 +3,7 @@ title: 'Linux from Scratch - Is it worth it?'
 date: '2020-12-25T16:30:11+00:00'
 author: tbarabosch
 layout: post
-feature_image: /wp-content/uploads/2021/01/linux_penguin-1200x766.jpg
+feature_image: /assets/images/posts/linux-from-scratch-is-it-worth-it/linux_penguin.jpg
 ---
 
 > **Reviewed July 2026:** This post is kept as a historical reflection on Linux from Scratch 8.0. Version-specific links and package versions may no longer match the current LFS book.
