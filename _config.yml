@@ -29,23 +29,14 @@ navigation:
     url: /
   - text: About
     url: /about/
-
-# Colors
-accent_color: '#9D00FF'
+  - text: Tags
+    url: /tags/
+  - text: RSS
+    url: /feed.xml
 
 # Site footer
 footer:
   content: "&copy; 2026 Thomas Barabosch"
-  has_social: true
-
-# Plugins
-plugins:
-  - jekyll-paginate
-
-# http://jekyllrb.com/docs/pagination/
-paginate: 3
-paginate_path: '/page:num/'
-
 
 # Permalinks
 permalink: /:title/

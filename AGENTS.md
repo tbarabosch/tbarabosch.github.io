@@ -23,10 +23,17 @@
 ## Site Structure
 - `_posts/` contains blog posts.
 - `_layouts/` and `_includes/` contain Liquid templates.
-- `_sass/` and `assets/css/style.scss` contain styling.
-- `assets/js/` contains site JavaScript.
-- `_data/` contains author and social metadata.
+- `_sass/_bsd-manpage.scss` and `assets/css/style.scss` contain styling.
+- The site should not need JavaScript or icon fonts for layout, navigation, or social links.
+- `_data/social.json` contains offsite link metadata.
 - Post images belong in `assets/images/posts/<post-slug>/`.
+
+## Design Style
+- Preserve the Unix/BSD manpage hybrid style: content density, readable line length, and clear section hierarchy matter more than decorative UI.
+- Use monochrome styling by default. Do not add accent-color themes, gradients, cards, rounded decorative surfaces, or hero imagery.
+- Use ASCII-inspired structure only: section labels, aligned metadata, and simple rules. Do not ship fragile ASCII box art in responsive UI.
+- Keep typography hybrid: readable serif body text with monospace chrome, metadata, headings, and code.
+- Avoid new frontend dependencies, remote fonts, remote scripts, icon fonts, or JavaScript for basic navigation.
 
 ## Media Rules
 - Do not add or reintroduce `wp-content/` paths.

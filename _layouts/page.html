@@ -2,18 +2,17 @@
 layout: default
 ---
 
-<main class="main-content fadeInDown delay_075s">
+<main class="main-content">
   <article class="post">
     <header class="post-header">
-      <h1 class="post-title">{{page.title}}</h1>
-      {% if page.feature_image and page.feature_image != "" %}
-      <figure class="post-thumbnail image-card width-wide">
-        <img src="{{ page.feature_image | relative_url }}" alt="{{ page.title }}">
-      </figure><!-- .post-thumbnail -->
-      {% endif %}
+      <p class="manual-label">NAME</p>
+      <h1 class="post-title">{{ page.title }}</h1>
     </header><!-- .post-header -->
-    <div class="post-content">
-      {{content}}
-    </div><!-- .post-content -->
+    <section class="manual-section">
+      <h2 class="manual-label">ABOUT</h2>
+      <div class="post-content">
+        {{content}}
+      </div><!-- .post-content -->
+    </section>
   </article><!-- .post -->
 </main><!-- .site-main -->

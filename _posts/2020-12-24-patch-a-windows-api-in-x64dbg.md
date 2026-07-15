@@ -3,7 +3,6 @@ title: 'How to patch a Windows API in x64dbg'
 date: '2020-12-24T12:00:00+00:00'
 author: tbarabosch
 layout: post
-feature_image: /assets/images/posts/patch-a-windows-api-in-x64dbg/surveillance_cams.jpg
 ---
 
 > **Reviewed July 2026:** This post is kept as a historical debugging note. The x64dbg and Python plugin APIs may have changed since publication.
