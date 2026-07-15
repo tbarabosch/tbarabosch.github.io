@@ -1,6 +1,7 @@
 ---
 title: 'How to write and load shellcode on macOS'
 date: '2020-12-22T09:58:07+00:00'
+tags: [shellcode, macos, reverse-engineering, systems]
 author: tbarabosch
 layout: post
 ---

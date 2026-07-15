@@ -1,6 +1,7 @@
 ---
 title: 'Linux from Scratch - Is it worth it?'
 date: '2020-12-25T16:30:11+00:00'
+tags: [linux, systems, operating-systems, learning]
 author: tbarabosch
 layout: post
 ---

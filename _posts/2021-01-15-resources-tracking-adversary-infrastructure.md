@@ -1,6 +1,7 @@
 ---
 title: 'Where to start tracking adversary infrastructure?'
 date: '2021-01-15T22:18:33+00:00'
+tags: [threat-intelligence, infrastructure-tracking, osint, cti]
 author: tbarabosch
 layout: post
 ---
