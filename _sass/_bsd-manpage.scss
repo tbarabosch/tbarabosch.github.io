@@ -357,30 +357,20 @@ figcaption {
   margin: 0 0 0.45rem;
 }
 
-.article-row.has-tags {
-  grid-template-columns: 10ch minmax(0, 1fr) minmax(10rem, auto);
-}
-
 .article-list.compact .article-row {
   grid-template-columns: 10ch minmax(0, 1fr);
 }
 
 .article-date,
-.article-tags,
 .archive-top-link {
   color: $muted;
   font-size: 0.82rem;
-}
-
-.article-tags {
-  text-align: right;
 }
 
 .article-title {
   min-width: 0;
 }
 
-.article-tags a,
 .tag-index a {
   color: $muted;
   text-decoration: none;
@@ -470,13 +460,8 @@ figcaption {
   }
 
   .article-row,
-  .article-row.has-tags,
   .article-list.compact .article-row {
     grid-template-columns: 1fr;
     margin-bottom: 0.9rem;
-  }
-
-  .article-tags {
-    text-align: left;
   }
 }
