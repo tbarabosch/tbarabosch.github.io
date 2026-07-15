@@ -6,6 +6,8 @@ layout: post
 feature_image: /wp-content/uploads/2020/12/shell_beach-1200x800.jpg
 ---
 
+> **Reviewed July 2026:** This post is kept as a historical low-level programming note. Modern macOS toolchains and execution protections may require adjustments.
+
 Learning by doing always works quite well. Getting to know the low-level programming tool chain is a vital for understanding the low-level details of the OS in general. So I thought writing some shellcode in x64 assembly and loading it with a simple loader written in C would be a good starting point for becoming acquainted with the basic programming tools on macOS. Just to name a few: IDE (*Xcode*), Compiler (*llvm/clang*) and (dis)assembler (*radare2*). Also, this would be the first encounter with the development documentation provided by Apple.
 
 This blog post shows you how to write and load shellcode on macOS. It seems that there is not that much on x64 assembly on the Internet. Sometimes it can be a little bit tricky when coming from x86 assembly. However, the easiest way is just throwing a binary in a disassembler and see how the compiler translated the code.
@@ -24,10 +26,10 @@ const char* MOV_RAX = "\x48\xb8";
 const char* CALL_RAX = "\xff\xD0";
  
 void writeTrampoline(long file_size){
-     void (<em>p)(void) = exitGracefully;     </em>
-     <em>printf("Writing trampoline to clean up function @%p after shellcode\n", p);     </em>
-     <em>memcpy((shellcode_buffer+file_size), MOV_RAX, 2);     </em>
-     <em>memcpy((shellcode_buffer+file_size+2), &p, sizeof(void</em>));
+     void (*p)(void) = exitGracefully;
+     printf("Writing trampoline to clean up function @%p after shellcode\n", p);
+     memcpy((shellcode_buffer+file_size), MOV_RAX, 2);
+     memcpy((shellcode_buffer+file_size+2), &p, sizeof(void*));
      memcpy((shellcode_buffer+file_size+2+sizeof(void*)), CALL_RAX, 2);
 }
 ```

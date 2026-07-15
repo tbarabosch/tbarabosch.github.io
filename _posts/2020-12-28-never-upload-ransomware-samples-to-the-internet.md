@@ -41,9 +41,11 @@ These ransomware samples are often compiled for the victim at hand. They are the
 
 The following ransom note that I’ve extracted from a ransomware sample uploaded to the Internet illustrates my point:
 
-![](https://0xc0decafe.com/wp-content/uploads/2020/12/ransom_note_example.png)
+![](/wp-content/uploads/2020/12/ransom_note_example.png)
 
-Example ransom note containing a lot of information about the victim</figcaption></figure>Needless to say that this information should not turn up on the Internet. I know that some will argue that this information will be public soon anyway if the victim does not pay the ransom. Because modern ransomware gangs use the [double extortion tactic](https://www.infosecurity-magazine.com/blogs/double-extortion-ransomware/). In a nutshell, before deploying the ransomware, these gangs steal (sometimes) terabytes of data from a network and threaten to publish this information on the Darknet or sell/auction it off.
+*Example ransom note containing a lot of information about the victim.*
+
+Needless to say that this information should not turn up on the Internet. I know that some will argue that this information will be public soon anyway if the victim does not pay the ransom. Because modern ransomware gangs use the [double extortion tactic](https://www.infosecurity-magazine.com/blogs/double-extortion-ransomware/). In a nutshell, before deploying the ransomware, these gangs steal (sometimes) terabytes of data from a network and threaten to publish this information on the Darknet or sell/auction it off.
 
 By the way, paying the ransom is something that is [never recommended](https://www.nomoreransom.org/en/ransomware-qa.html). Above all, because this proves to cybercriminals that this is an effective way of making money. Furthermore, this may have severe consequences for a business, if it pays cybercriminals residing somewhere in an embargoed region.
 
@@ -79,7 +81,7 @@ So, you’ve been warned a lot!
 
 But you may ask: how do analysts find my sample in the endless stream of files uploaded to VirusTotal? This is where [LiveHunt](https://support.virustotal.com/hc/en-us/articles/360001315437-Livehunt) comes into play. This is a service that is offered to customers and researchers to hook into the never-ending stream of files uploaded. Each file is checked against custom signatures ([YARA](http://virustotal.github.io/yara/) rules). Furthermore, these samples are shared with AV companies who will likely have other ways to find the needle in the haystack.
 
-If you know exactly what you are looking then it is quite easy to find the needle in the haystack. This means once you have analyzed one sample of a certain ransomware family, written a YARA rule for it, then you will likely detect it in the future again. Actually, you do not have to write many rules on your own because there are plenty on [Github](https://github.com/advanced-threat-research/Yara-Rules/tree/master/ransomware). For instance, the following is a [YARA rule](https://github.com/advanced-threat-research/Yara-Rules/blob/master/ransomware/RANSOM_Ryuk.yar) for the ransomware family [Ryuk](https://malpedia.caad.fkie.fraunhofer.de/details/win.ryuk):
+If you know exactly what you are looking then it is quite easy to find the needle in the haystack. This means once you have analyzed one sample of a certain ransomware family, written a YARA rule for it, then you will likely detect it in the future again. Actually, you do not have to write many rules on your own because there are plenty on [GitHub](https://github.com/advanced-threat-research/Yara-Rules/tree/master/ransomware). For instance, the following is a [YARA rule](https://github.com/advanced-threat-research/Yara-Rules/blob/master/ransomware/RANSOM_Ryuk.yar) for the ransomware family [Ryuk](https://malpedia.caad.fkie.fraunhofer.de/details/win.ryuk):
 
 ```c
 rule Ransom_Ryuk_sept2020 {                 
@@ -131,8 +133,10 @@ This rule comprises several strings and a condition that is checked against each
 
 Let’s say you uploaded a ransomware sample to VirusTotal, which belongs to one of the heavily tracked ransomware families then there are likely several YARA rules going off, and researchers notified. Notifications are either seen in the [VirusTotal WebGUI](https://support.virustotal.com/hc/en-us/articles/360001315437-Livehunt#h_cfdf3cbc-ec4f-4076-82bf-f3a0dadf6da8) or via email notification as shown in the following screenshot.
 
-!<figure class="wp-block-image size-large is-resized">![VT notification received due to upload ransomware sample ](https://0xc0decafe.com/wp-content/uploads/2020/12/vt_hunting_ransomware.png)
+![VT notification received due to upload ransomware sample](/wp-content/uploads/2020/12/vt_hunting_ransomware.png)
 
-Sample notification received for a ransomware sample</figcaption></figure>Now even further meta information is attached to the ransomware sample. For instance, the country from where the sample was uploaded, which might be used to track down the exact location of the victim if it is a branch of an enterprise operating in many countries.
+*Sample notification received for a ransomware sample.*
+
+Now even further meta information is attached to the ransomware sample. For instance, the country from where the sample was uploaded, which might be used to track down the exact location of the victim if it is a branch of an enterprise operating in many countries.
 
 And finally, at some point, you will contract an incident responder because it is very likely that your in-house capabilities won’t be enough. If you tell them that you’ve just uploaded the sample to some online service, chances are that they will not be amused. I’ve never come along an incident responder that was happy when their client uploaded a ransomware sample to the Internet…

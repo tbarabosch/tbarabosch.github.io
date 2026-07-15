@@ -9,16 +9,16 @@
 lang: en-US
 
 # Site title
-title: "0xC0DECAFE.com"
+title: "Thomas Barabosch"
 
 # A description of your site for meta tag, search engine results.
-description: "From l0w to h1gh level - full stack cyber!"
+description: "Systems security, reverse engineering, malware analysis, and threat research."
 
 # The subpath of your site, e.g. /blog, for generating urls.
 baseurl: ""
 
 # The base hostname & protocol of your site for where absolute urls are needed.
-url: "https://0xc0decafe.com"
+url: "https://tbarabosch.github.io"
 
 # Favicon
 favicon: images/favicon.png
@@ -28,14 +28,14 @@ navigation:
   - text: Home
     url: /
   - text: About
-    url: /about.html
+    url: /about/
 
 # Colors
 accent_color: '#9D00FF'
 
 # Site footer
 footer:
-  content: "&copy; 2022 Thomas Barabosch"
+  content: "&copy; 2026 Thomas Barabosch"
   has_social: true
 
 # Plugins
@@ -48,7 +48,7 @@ paginate_path: '/page:num/'
 
 
 # Permalinks
-permalink: /:title
+permalink: /:title/
 
 # Conversion
 markdown: kramdown
@@ -57,3 +57,11 @@ markdown: kramdown
 sass:
   sass_dir: _sass
   style: compressed
+
+# Files used for local development, but not published by GitHub Pages.
+exclude:
+  - Containerfile
+  - Gemfile
+  - Gemfile.lock
+  - scripts/
+  - vendor/

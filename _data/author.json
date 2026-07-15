@@ -1,7 +1,7 @@
 {
   "name": "Thomas Barabosch",
   "bio": "Thomas holds a PhD in computer science. He is passionately engaged in malware analysis, threat actor tracking, and bug hunting. Throughout the last years he has found numerous vulnerabilities in low-level software and participated in several botnet take-downs. In his blogs he tells techies and non-techies stories about his adventures in binary code wonderland.",
-  "url": "https://0xc0decafe.com/",
+  "url": "https://github.com/tbarabosch",
   "location": "Germany",
-  "image": "images/author.jpg"
+  "image": "/images/author.jpg"
 }

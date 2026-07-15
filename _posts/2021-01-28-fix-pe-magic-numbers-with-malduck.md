@@ -14,13 +14,13 @@ First, we’ll learn how to identify such corrupted PE headers quickly with a he
 
 In the following, I assume that you’ve got a basic understanding of the PE format. If not, I can recommend the article on [osdev.org](https://wiki.osdev.org/PE) (check the overview graphic of the PE format) as an introduction.
 
- There are two magic numbers in the PE header that are frequently overwritten by malware. First, the magic number of the DOS header (`_IMAGE_DOS_HEADER`), which is a two-byte or WORD constant (`MZ`). Second, the magic number of the PE header, which is a four-byte or DWORD constant (`PE\x00\x00`). This is illustrated in the following screenshot of a PE file opened in a hexeditor. Both magic numbers are colored in orange. The `MZ` magic is at offset `0x0` and the `PE\x00\x00` is at offset `0x80`.
+There are two magic numbers in the PE header that are frequently overwritten by malware. First, the magic number of the DOS header (`_IMAGE_DOS_HEADER`), which is a two-byte or WORD constant (`MZ`). Second, the magic number of the PE header, which is a four-byte or DWORD constant (`PE\x00\x00`). This is illustrated in the following screenshot of a PE file opened in a hexeditor. Both magic numbers are colored in orange. The `MZ` magic is at offset `0x0` and the `PE\x00\x00` is at offset `0x80`.
 
-![Regular PE header with magic numbers (MZ + PE) highlighted.](https://0xc0decafe.com/wp-content/uploads/2021/01/magic_numbers_pe_color.png)
+![Regular PE header with magic numbers (MZ + PE) highlighted.](/wp-content/uploads/2021/01/magic_numbers_pe_color.png)
 
 Now that we’ve seen a perfectly fine PE header, let’s see how a slightly corrupted PE header looks like. The next screenshot shows a PE header with both (principal) magic numbers overwritten.
 
-![PE header with overwritten magic numbers.](https://0xc0decafe.com/wp-content/uploads/2021/01/overwritten_magic_numbers_pe-1.png)
+![PE header with overwritten magic numbers.](/wp-content/uploads/2021/01/overwritten_magic_numbers_pe-1.png)
 
 We can still identify that this is likely a PE file since the famous string `This program cannot be run in DOS mode` is still there. But we are missing these two magic numbers, which in turn hinders many analysis tools to properly load and analyze such a binary.
 
@@ -56,7 +56,7 @@ Second, the malware unpacks a PE file with an already corrupted PE header. In th
 
 ## Manipulating memory dumps with Malduck
 
-[Malduck](https://malduck.readthedocs.io/en/latest/) is a Python module that helps writing malware analysis scripts quickly. It is developed and maintained by [CERT.pl](https://www.cert.pl/). [Malduck’s documentation](https://malduck.readthedocs.io/en/latest/) is very decent. It is my default go-to tool to write malware analysis scripts (e.g. [for aPLib decompression](https://0xc0decafe.com/malware-analysts-guide-to-aplib-decompression/)).
+[Malduck](https://malduck.readthedocs.io/en/latest/) is a Python module that helps writing malware analysis scripts quickly. It is developed and maintained by [CERT.pl](https://www.cert.pl/). [Malduck’s documentation](https://malduck.readthedocs.io/en/latest/) is very decent. It is my default go-to tool to write malware analysis scripts (e.g. [for aPLib decompression](/malware-analysts-guide-to-aplib-decompression/)).
 
 ### Open a memory dump with Malduck
 
@@ -100,7 +100,7 @@ Note that there is always a physical (`p`) and virtual (`v`) version. Internally
 
 ### Write ProcessMemoryPE
 
-The support for writing `ProcessMemory` instances is rudimentary when compared with the reading support. There are just two functions to know: `patchp` and `patchv`. Both accept a raw `offset` / virtual `addr` and a bytes `buf`. That’s it, pretty straight forward!
+The support for writing `ProcessMemory` instances is rudimentary when compared with the reading support. There are just two functions to know: `patchp` and `patchv`. Both accept a raw `offset` / virtual `addr` and a bytes `buf`. That’s it, pretty straightforward!
 
 ## Putting it all together: fix PE magic numbers with Malduck
 
@@ -163,6 +163,6 @@ memdump_fixed_header.bin: PE32+ executable (console) x86-64, for MS Windows
 
 et voilà! The script fixed the memory dump as we can see in the following screenshot:
 
-![Fix PE magic numbers with malduck.](https://0xc0decafe.com/wp-content/uploads/2021/01/fixed_pe.png)
+![Fix PE magic numbers with malduck.](/wp-content/uploads/2021/01/fixed_pe.png)
 
 Both magic numbers are located at their correct offsets: the magic number of the DOS header `MZ` resides at offset zero and the magic number of the File header resides at offset 0x80 (as indicated by `e_lfanew`). Now you can load the PE file with other analysis tools and continue your analysis.
