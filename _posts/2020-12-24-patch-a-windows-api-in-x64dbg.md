@@ -1,7 +1,6 @@
 ---
 title: 'How to patch a Windows API in x64dbg'
 date: '2020-12-24T12:00:00+00:00'
-tags: [malware-analysis, debugging, reverse-engineering, windows]
 author: tbarabosch
 layout: post
 ---

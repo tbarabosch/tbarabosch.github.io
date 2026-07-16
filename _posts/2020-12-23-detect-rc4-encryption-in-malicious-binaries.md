@@ -1,7 +1,6 @@
 ---
 title: 'Learn to quickly detect RC4 encryption in (malicious) binaries'
 date: '2020-12-23T17:00:00+00:00'
-tags: [malware-analysis, reverse-engineering, encryption, yara]
 author: tbarabosch
 layout: post
 ---

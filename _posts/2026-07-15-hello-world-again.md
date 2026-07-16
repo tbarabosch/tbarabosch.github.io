@@ -1,7 +1,6 @@
 ---
 title: 'Hello, world, again'
 date: '2026-07-15T00:00:00+02:00'
-tags: [blog, about]
 author: tbarabosch
 layout: post
 ---

@@ -1,7 +1,6 @@
 ---
 title: 'Detect API hashing with YARA'
 date: '2021-03-16T16:42:31+00:00'
-tags: [malware-analysis, api-hashing, yara, reverse-engineering]
 author: tbarabosch
 layout: post
 ---

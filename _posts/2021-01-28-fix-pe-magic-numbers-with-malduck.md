@@ -1,7 +1,6 @@
 ---
 title: 'Learn how to fix PE magic numbers with Malduck'
 date: '2021-01-28T07:00:00+00:00'
-tags: [malware-analysis, pe-files, memory-forensics, tooling]
 author: tbarabosch
 layout: post
 ---

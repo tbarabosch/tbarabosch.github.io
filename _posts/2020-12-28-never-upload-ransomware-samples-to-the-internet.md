@@ -1,7 +1,6 @@
 ---
 title: 'Never upload ransomware samples to the Internet'
 date: '2020-12-28T22:51:09+00:00'
-tags: [ransomware, malware-analysis, incident-response, opsec]
 author: tbarabosch
 layout: post
 ---
