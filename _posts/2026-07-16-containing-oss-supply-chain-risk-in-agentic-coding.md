@@ -1,5 +1,5 @@
 ---
-title: 'Minimize OSS supply-chain risk when coding with agents'
+title: 'How I contain OSS supply-chain risk with Apple Containers'
 date: '2026-07-16T12:00:00+02:00'
 author: tbarabosch
 layout: post
