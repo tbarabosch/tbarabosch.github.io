@@ -12,7 +12,7 @@ lang: en-US
 title: "Thomas Barabosch"
 
 # A description of your site for meta tag, search engine results.
-description: "Systems security, reverse engineering, malware analysis, and threat research."
+description: "Systems security, reverse engineering, threat research, incident response, cloud security, and AI-enabled tooling."
 
 # The subpath of your site, e.g. /blog, for generating urls.
 baseurl: ""
