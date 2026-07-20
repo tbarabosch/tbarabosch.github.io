@@ -18,7 +18,7 @@ description: "Systems security, reverse engineering, threat research, incident r
 baseurl: ""
 
 # The base hostname & protocol of your site for where absolute urls are needed.
-url: "https://tbarabosch.github.io"
+url: "https://tbarabosch.com"
 
 # Favicon
 favicon: images/favicon.png
