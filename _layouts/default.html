@@ -8,8 +8,14 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html', '' | absolute_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }} Feed"
     href="{{ '/feed.xml' | absolute_url }}">
+  {% if site.favicon_png and site.favicon_png != "" %}
+  <link rel="icon" href="{{ site.favicon_png | relative_url }}" type="image/png" sizes="32x32">
+  {% endif %}
   {% if site.favicon and site.favicon != "" %}
-  <link rel="shortcut icon" href="{{ site.favicon | relative_url }}" type="image/png" />
+  <link rel="icon" href="{{ site.favicon | relative_url }}" type="image/svg+xml" sizes="any">
+  {% endif %}
+  {% if site.apple_touch_icon and site.apple_touch_icon != "" %}
+  <link rel="apple-touch-icon" href="{{ site.apple_touch_icon | relative_url }}" sizes="180x180">
   {% endif %}
   <!-- Styles -->
   <link href="{{ '/assets/css/style.css' | relative_url }}" rel="stylesheet">

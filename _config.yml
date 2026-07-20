@@ -20,8 +20,10 @@ baseurl: ""
 # The base hostname & protocol of your site for where absolute urls are needed.
 url: "https://tbarabosch.com"
 
-# Favicon
-favicon: images/favicon.png
+# Favicons
+favicon: images/favicon.svg
+favicon_png: images/favicon-32x32.png
+apple_touch_icon: images/apple-touch-icon.png
 
 # Site navigation - each item must have a title and a url.
 navigation:
