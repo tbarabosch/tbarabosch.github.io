@@ -15,33 +15,33 @@ If you dive into BSD research you will probably encounter a point where you will
 I encountered the use case where I had to deliberately crash the operating system. So I wrote a small kernel module to provoke a kernel panic. This module tries to write to offset `0x0` of the address space. Since this is forbidden to counter the exploitation of NULL pointers, this will immediately crash the operating system. The full source code and a simple make file [can be found at github](https://gist.github.com/tbarabosch/bb25c3497bec2413724b010a360e82a3).
 
 ```c
-#include <sys/param.h>               
-#include <sys/module.h>              
-#include <sys/kernel.h>           
-#include <sys/systm.h>       
-                         
-static int       
-panic_modevent(module_t mod __unused, int event, void* arg __unused){            
-        int error = 0;       
-      
-        switch(event){           
-            case MOD_LOAD:       
-                uprintf("Goodbye!\n");       
-                memset(NULL, 0x42, 1000);       
-                break;       
-            default:       
-                error = EOPNOTSUPP;       
-                break;       
-        }       
-  
-        return (error);       
-}       
-                       
-static moduledata_t panic_mod = {           
-        "panic",           
-        panic_modevent,         
-        NULL            
-};       
-                     
+#include <sys/param.h>
+#include <sys/module.h>
+#include <sys/kernel.h>
+#include <sys/systm.h>
+
+static int
+panic_modevent(module_t mod __unused, int event, void* arg __unused){
+        int error = 0;
+
+        switch(event){
+            case MOD_LOAD:
+                uprintf("Goodbye!\n");
+                memset(NULL, 0x42, 1000);
+                break;
+            default:
+                error = EOPNOTSUPP;
+                break;
+        }
+
+        return (error);
+}
+
+static moduledata_t panic_mod = {
+        "panic",
+        panic_modevent,
+        NULL
+};
+
 DECLARE_MODULE(panic, panic_mod, SI_SUB_DRIVERS, SI_ORDER_MIDDLE);
 ```

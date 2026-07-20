@@ -19,16 +19,17 @@ In contrast to other ciphers, *RC4* does not rely on any constants that make it 
 
 While explaining *RC4* is out of scope of this blog post ([Wikipedia](https://en.wikipedia.org/wiki/RC4) does a great job!), one of the most interesting parts of the algorithm is *Key-Scheduling Algorithm* (KSA). In a nutshell, it initializes an internal array based on the provided key that is later utilized by another algorithm to encrypt / decrypt. In pseudo code *KSA* looks like this (taken from [Wikipedia](https://en.wikipedia.org/wiki/RC4)):
 
-```c
+```text
 for  i from 0 to 255
-    S[i] := i 
-endfor 
-j := 0 
+    S[i] := i
+endfor
+j := 0
 for i from 0 to 255
     j := (j + S[i] + key[i mod keylength]) mod 256
-    swap values of S[i] and S[j] 
+    swap values of S[i] and S[j]
 endfor
 ```
+{: data-language="PSEUDOCODE" }
 
 The internal array S contains all possible byte values from `0x00` to `0xFF`. It is permuted in the *KSA*. This usually compiles down to something like the following:
 
@@ -55,6 +56,7 @@ rule rc4_ksa
          any of them
  }
 ```
+{: data-language="YARA" }
 
 As you can see, this rule targets exactly the `cmp` instructions found in the *KSA*. While there may be better ways to do this, this is still a very fast approximation.
 
@@ -63,69 +65,69 @@ As you can see, this rule targets exactly the `cmp` instructions found in the *K
 Nowadays, we have tools like *capa* that do a better job. But how does *capa* does it? I’ve promised to tell you: on one side, *capa* detects if a binary is linked against [OpenSSL](https://github.com/fireeye/capa-rules/blob/1ff994f7916d66e39b4b5b8dbb310d0e0b051f7f/linking/static/openssl/linked-against-openssl.yml) or imports [WinCrypt](https://github.com/fireeye/capa-rules/blob/7c59ad39d138467fe67ab79532714b8fa7efede0/data-manipulation/encryption/rc4/encrypt-data-using-rc4-via-winapi.yml) functions. This is trivial as you can see in the rule [linked-against-openssl.yml](https://github.com/fireeye/capa-rules/blob/1ff994f7916d66e39b4b5b8dbb310d0e0b051f7f/linking/static/openssl/linked-against-openssl.yml), which performs simple string matching:
 
 ```yaml
-rule:              
-  meta:            
-    name: linked against OpenSSL           
-    namespace: linking/static/openssl         
-    author: william.ballenthin@fireeye.com        
-    scope: file       
-    examples:         
-      - 6cc148363200798a12091b97a17181a1        
-  features:       
-    - or:       
-      - string: RC4 for x86_64, CRYPTOGAMS by <appro@openssl.org>         
-      - string: AES for x86_64, CRYPTOGAMS by <appro@openssl.org>          
+rule:
+  meta:
+    name: linked against OpenSSL
+    namespace: linking/static/openssl
+    author: william.ballenthin@fireeye.com
+    scope: file
+    examples:
+      - 6cc148363200798a12091b97a17181a1
+  features:
+    - or:
+      - string: RC4 for x86_64, CRYPTOGAMS by <appro@openssl.org>
+      - string: AES for x86_64, CRYPTOGAMS by <appro@openssl.org>
       - string: DSA-SHA1-old
 ```
 
 On the other side, *capa* detects the [KSA](https://github.com/fireeye/capa-rules/blob/7c59ad39d138467fe67ab79532714b8fa7efede0/data-manipulation/encryption/rc4/encrypt-data-using-rc4-ksa.yml) and [PRGA](https://github.com/fireeye/capa-rules/blob/7c59ad39d138467fe67ab79532714b8fa7efede0/data-manipulation/encryption/rc4/encrypt-data-using-rc4-prga.yml) algorithms of RC4 based on the assembly. This is more interesting since *capa* takes the structure of the binary into account. The rule [encrypt-data-using-rc4-ksa.yml](https://github.com/fireeye/capa-rules/blob/7c59ad39d138467fe67ab79532714b8fa7efede0/data-manipulation/encryption/rc4/encrypt-data-using-rc4-ksa.yml) detects the *KSA* as follows:
 
 ```yaml
-rule:                  
-  meta:                  
-    name: encrypt data using RC4 KSA              
-    namespace: data-manipulation/encryption/rc4           
-    author: moritz.raabe@fireeye.com             
-    scope: function           
-    att&ck:            
-      - Defense Evasion::Obfuscated Files or Information [T1027]             
-    mbc:            
-      - Cryptography::Encrypt Data::RC4 [C0027.009]        
-      - Cryptography::Encryption Key::RC4 KSA [C0028.002]         
+rule:
+  meta:
+    name: encrypt data using RC4 KSA
+    namespace: data-manipulation/encryption/rc4
+    author: moritz.raabe@fireeye.com
+    scope: function
+    att&ck:
+      - Defense Evasion::Obfuscated Files or Information [T1027]
+    mbc:
+      - Cryptography::Encrypt Data::RC4 [C0027.009]
+      - Cryptography::Encryption Key::RC4 KSA [C0028.002]
     examples:
-      - 34404A3FB9804977C6AB86CB991FB130:0x403D40           
-      - C805528F6844D7CAF5793C025B56F67D:0x4067AE           
-      - 9324D1A8AE37A36AE560C37448C9705A:0x404950            
-      - 782A48821D88060ADF0F7EF3E8759FEE3DDAD49E942DAAD18C5AF8AE0E9EB51E:0x405C42          
-      - 73CE04892E5F39EC82B00C02FC04C70F:0x40646E            
-  features:             
-    - or:            
-      - and:        
-        - basic block:       
-          - and:       
-            - description: initialize S       
-            # misses if regular loop is used,          
-            # however we cannot model that a loop contains a certain number        
-            - characteristic: tight loop       
-            - or:       
-              - number: 0xFF       
-              - number: 0x100       
-        - or:         
-          - match: calculate modulo 256 via x86 assembly         
-          # compiler may do this via zero-extended mov from 8-bit register         
-          - count(mnemonic(movzx)): 2 or more        
-        - or:       
-          - description: modulo key length        
-          - mnemonic: div       
-          - mnemonic: idiv          
-      - and:         
-        - description: optimized, writes DWORDs instead of bytes        
-        - or:       
-          - number: 0xFFFEFDFC       
-          - mnemonic: sub       
-        - or:       
-          - number: 0x03020100          
-          - mnemonic: add        
+      - 34404A3FB9804977C6AB86CB991FB130:0x403D40
+      - C805528F6844D7CAF5793C025B56F67D:0x4067AE
+      - 9324D1A8AE37A36AE560C37448C9705A:0x404950
+      - 782A48821D88060ADF0F7EF3E8759FEE3DDAD49E942DAAD18C5AF8AE0E9EB51E:0x405C42
+      - 73CE04892E5F39EC82B00C02FC04C70F:0x40646E
+  features:
+    - or:
+      - and:
+        - basic block:
+          - and:
+            - description: initialize S
+            # misses if regular loop is used,
+            # however we cannot model that a loop contains a certain number
+            - characteristic: tight loop
+            - or:
+              - number: 0xFF
+              - number: 0x100
+        - or:
+          - match: calculate modulo 256 via x86 assembly
+          # compiler may do this via zero-extended mov from 8-bit register
+          - count(mnemonic(movzx)): 2 or more
+        - or:
+          - description: modulo key length
+          - mnemonic: div
+          - mnemonic: idiv
+      - and:
+        - description: optimized, writes DWORDs instead of bytes
+        - or:
+          - number: 0xFFFEFDFC
+          - mnemonic: sub
+        - or:
+          - number: 0x03020100
+          - mnemonic: add
         - number: 0x4040404
 ```
 
@@ -138,23 +140,23 @@ rule:
 The second way detects optimizations where instead of bytes DWORDs are written by the *KSA* (lines 38-46). For instance, the password cracker John optimizes the K*S*A like this (see [opencl\_rc4.h](https://github.com/openwall/john/blob/b81ed703ceb7ca62df50c2fa0d4ea366ef713a4a/run/opencl/opencl_rc4.h)). It comprises an initialized array of 64 DWORDs:
 
 ```c
-#ifdef RC4_IV32       
-__constant uint rc4_iv[64] = { 0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c,       
-                               0x13121110, 0x17161514, 0x1b1a1918, 0x1f1e1d1c,       
-                               0x23222120, 0x27262524, 0x2b2a2928, 0x2f2e2d2c,       
-                               0x33323130, 0x37363534, 0x3b3a3938, 0x3f3e3d3c,       
-                               0x43424140, 0x47464544, 0x4b4a4948, 0x4f4e4d4c,       
-                               0x53525150, 0x57565554, 0x5b5a5958, 0x5f5e5d5c,       
-                               0x63626160, 0x67666564, 0x6b6a6968, 0x6f6e6d6c,       
-                               0x73727170, 0x77767574, 0x7b7a7978, 0x7f7e7d7c,       
-                               0x83828180, 0x87868584, 0x8b8a8988, 0x8f8e8d8c,       
-                               0x93929190, 0x97969594, 0x9b9a9998, 0x9f9e9d9c,       
-                               0xa3a2a1a0, 0xa7a6a5a4, 0xabaaa9a8, 0xafaeadac,       
-                               0xb3b2b1b0, 0xb7b6b5b4, 0xbbbab9b8, 0xbfbebdbc,      
-                               0xc3c2c1c0, 0xc7c6c5c4, 0xcbcac9c8, 0xcfcecdcc,       
-                               0xd3d2d1d0, 0xd7d6d5d4, 0xdbdad9d8, 0xdfdedddc,       
-                               0xe3e2e1e0, 0xe7e6e5e4, 0xebeae9e8, 0xefeeedec,       
-                               0xf3f2f1f0, 0xf7f6f5f4, 0xfbfaf9f8, 0xfffefdfc };        
+#ifdef RC4_IV32
+__constant uint rc4_iv[64] = { 0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c,
+                               0x13121110, 0x17161514, 0x1b1a1918, 0x1f1e1d1c,
+                               0x23222120, 0x27262524, 0x2b2a2928, 0x2f2e2d2c,
+                               0x33323130, 0x37363534, 0x3b3a3938, 0x3f3e3d3c,
+                               0x43424140, 0x47464544, 0x4b4a4948, 0x4f4e4d4c,
+                               0x53525150, 0x57565554, 0x5b5a5958, 0x5f5e5d5c,
+                               0x63626160, 0x67666564, 0x6b6a6968, 0x6f6e6d6c,
+                               0x73727170, 0x77767574, 0x7b7a7978, 0x7f7e7d7c,
+                               0x83828180, 0x87868584, 0x8b8a8988, 0x8f8e8d8c,
+                               0x93929190, 0x97969594, 0x9b9a9998, 0x9f9e9d9c,
+                               0xa3a2a1a0, 0xa7a6a5a4, 0xabaaa9a8, 0xafaeadac,
+                               0xb3b2b1b0, 0xb7b6b5b4, 0xbbbab9b8, 0xbfbebdbc,
+                               0xc3c2c1c0, 0xc7c6c5c4, 0xcbcac9c8, 0xcfcecdcc,
+                               0xd3d2d1d0, 0xd7d6d5d4, 0xdbdad9d8, 0xdfdedddc,
+                               0xe3e2e1e0, 0xe7e6e5e4, 0xebeae9e8, 0xefeeedec,
+                               0xf3f2f1f0, 0xf7f6f5f4, 0xfbfaf9f8, 0xfffefdfc };
 #endif
 ```
 

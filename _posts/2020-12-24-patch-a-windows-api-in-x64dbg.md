@@ -16,21 +16,21 @@ My quick hack was to prevent others instances to communicate via the network by 
 Most of the time I utilize [x64dbg](http://x64dbg.com/), an open source debugger. Since a couple of months [python bindings exist](https://github.com/x64dbg/x64dbgpy). They work fine, though there is no documentation. The following gist does the trick: patching ZwOpenProcess to always return zero. This should yield no more code injections in many malware families. Furthermore, you can use it as a blueprint for patching other APIs in *x64dbg*.
 
 ```python
-from x64dbgpy.pluginsdk import *       
-                         
-def patchZwOpenProcess():       
-    # This function patches the function ZwOpenProcess in such way that the XXX fails to open and infect more processes       
-    # The good thing about that is that there won't be any concurrency issues and you can be sure that the networking       
-    # will be done in the current process.       
-                
-    # patches mov eax, 0; jmp TO_RETURN (should be +3)       
-    PATCH = "\xB8" + "\x00" * 4 + "\xEB\x03" + "\x90" * 3       
-    addrZwOpenProcess = RemoteGetProcAddress('ntdll', 'ZwOpenProcess')       
-    memory.Write(addrZwOpenProcess, PATCH)       
-                
-def main():       
-    patchZwOpenProcess()       
-                
+from x64dbgpy.pluginsdk import *
+
+def patchZwOpenProcess():
+    # This function patches the function ZwOpenProcess in such way that the XXX fails to open and infect more processes
+    # The good thing about that is that there won't be any concurrency issues and you can be sure that the networking
+    # will be done in the current process.
+
+    # patches mov eax, 0; jmp TO_RETURN (should be +3)
+    PATCH = "\xB8" + "\x00" * 4 + "\xEB\x03" + "\x90" * 3
+    addrZwOpenProcess = RemoteGetProcAddress('ntdll', 'ZwOpenProcess')
+    memory.Write(addrZwOpenProcess, PATCH)
+
+def main():
+    patchZwOpenProcess()
+
 main()
 ```
 

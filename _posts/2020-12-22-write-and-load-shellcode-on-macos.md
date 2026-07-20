@@ -23,7 +23,7 @@ More precisely, a function that cleans up everything and gracefully exits the lo
 ```c
 const char* MOV_RAX = "\x48\xb8";
 const char* CALL_RAX = "\xff\xD0";
- 
+
 void writeTrampoline(long file_size){
      void (*p)(void) = exitGracefully;
      printf("Writing trampoline to clean up function @%p after shellcode\n", p);
@@ -40,7 +40,7 @@ If you allocate memory with malloc then this memory has Read-Write permissions. 
 
 So far, I have analyzed x86 and x64 and I have also written x86 assembly. But this time is the first time that I write x64 assembly. A quick and painless introduction to writing x64 assembly on macOS [here](http://www.idryman.org/blog/2014/12/02/writing-64-bit-assembly-on-mac-os-x/). I prepared two payloads. The first just exits the process immediately. Let’s have a look at the code snippet:
 
-```c
+```nasm
 xor %rbx, %rbx
 movl $0x2000001, %eax           # exit 0
 syscall
@@ -52,7 +52,7 @@ Since the above program is written in assembly, we pass the arguments in the reg
 
 For more information on the syscall calling conventions refer to [this document](http://people.freebsd.org/~obrien/amd64-elf-abi.pdf) (Chapter A.2.1). Back to the example, first we set *rbx* to zero (result of the *exit* syscall) and we move the value *0x2000001* (*exit* being the [first syscall](http://www.opensource.apple.com/source/xnu/xnu-1504.3.12/bsd/kern/syscalls.master)) to *rax*. And finally, we call into the kernel with syscall. The second payload prints “hello world” to *STDOUT*. Let’s have a look at the code:
 
-```c
+```nasm
 xor %rbx, %rbx                 # push the zero terminating C string to the stack
 pushq %rbx
 movq $0x0a21646c72, %rax
@@ -79,7 +79,7 @@ For implementing it, I had to toy around with *Xcode*, *llvm/clang*, *as*, *lldb
 
 Let’s execute the loader with the two payloads. First, let’s execute it with the exit payload:
 
-```bash
+```console
 $ ./loader shellcodes/exit.bin
  Opening shellcodes/exit.bin
  Trying to read 9 bytes.
@@ -94,7 +94,7 @@ But did it really work? Well, we can’t tell from this output. So we’ve to lo
 
 Ok, let’s execute our loader one more time but this time in conjunction with *dtrace*:
 
-```
+```console
 $ ./loader shellcodes/helloworld.bin
  Opening shellcodes/helloworld.bin
  Trying to read 49 bytes.

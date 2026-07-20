@@ -26,26 +26,26 @@ We can still identify that this is likely a PE file since the famous string `Thi
 So, fixing this kind of corrupted PE header is straightforward. First, we have to restore the magic number `MZ` at offset `0x0`. Second, we have to determine the offset to the PE header. The DOS header holds this offset in its field `e_lfanew` (see next code block with DOS header for reference). Therefore, we have to read the value of `e_lfanew` from the DOS header. `e_lfanew` resides at offset `0x3c`. Third, we have to restore the PE header magic number `PE\x00\x00` at the offset pointed to by `e_lfanew`. Finally, we should validate, if the file is now a valid PE file.
 
 ```c
-typedef struct _IMAGE_DOS_HEADER {                
-    WORD  e_magic;      /* 00: MZ Header signature */       
-    WORD  e_cblp;       /* 02: Bytes on last page of file */       
-    WORD  e_cp;         /* 04: Pages in file */       
-    WORD  e_crlc;       /* 06: Relocations */       
-    WORD  e_cparhdr;    /* 08: Size of header in paragraphs */       
-    WORD  e_minalloc;   /* 0a: Minimum extra paragraphs needed */       
-    WORD  e_maxalloc;   /* 0c: Maximum extra paragraphs needed */       
-    WORD  e_ss;         /* 0e: Initial (relative) SS value */       
-    WORD  e_sp;         /* 10: Initial SP value */       
-    WORD  e_csum;       /* 12: Checksum */        
-    WORD  e_ip;         /* 14: Initial IP value */           
-    WORD  e_cs;         /* 16: Initial (relative) CS value */          
-    WORD  e_lfarlc;     /* 18: File address of relocation table */       
-    WORD  e_ovno;       /* 1a: Overlay number */       
-    WORD  e_res[4];     /* 1c: Reserved words */       
-    WORD  e_oemid;      /* 24: OEM identifier (for e_oeminfo) */       
-    WORD  e_oeminfo;    /* 26: OEM information; e_oemid specific */       
-    WORD  e_res2[10];   /* 28: Reserved words */        
-    DWORD e_lfanew;     /* 3c: Offset to extended header */       
+typedef struct _IMAGE_DOS_HEADER {
+    WORD  e_magic;      /* 00: MZ Header signature */
+    WORD  e_cblp;       /* 02: Bytes on last page of file */
+    WORD  e_cp;         /* 04: Pages in file */
+    WORD  e_crlc;       /* 06: Relocations */
+    WORD  e_cparhdr;    /* 08: Size of header in paragraphs */
+    WORD  e_minalloc;   /* 0a: Minimum extra paragraphs needed */
+    WORD  e_maxalloc;   /* 0c: Maximum extra paragraphs needed */
+    WORD  e_ss;         /* 0e: Initial (relative) SS value */
+    WORD  e_sp;         /* 10: Initial SP value */
+    WORD  e_csum;       /* 12: Checksum */
+    WORD  e_ip;         /* 14: Initial IP value */
+    WORD  e_cs;         /* 16: Initial (relative) CS value */
+    WORD  e_lfarlc;     /* 18: File address of relocation table */
+    WORD  e_ovno;       /* 1a: Overlay number */
+    WORD  e_res[4];     /* 1c: Reserved words */
+    WORD  e_oemid;      /* 24: OEM identifier (for e_oeminfo) */
+    WORD  e_oeminfo;    /* 26: OEM information; e_oemid specific */
+    WORD  e_res2[10];   /* 28: Reserved words */
+    DWORD e_lfanew;     /* 3c: Offset to extended header */
 } IMAGE_DOS_HEADER, *PIMAGE_DOS_HEADER;
 ```
 
@@ -112,44 +112,44 @@ import sys
 import malduck
 
 def main(argv):
-   `if len(argv) != 2:`
-`   print('Usage: fix_pe_magic_numbers.py PATH_TO_DUMP')     `
-        `return`
+    if len(argv) != 2:
+        print('Usage: fix_pe_magic_numbers.py PATH_TO_DUMP')
+        return
 
-    `with open(argv[1], 'rb') as f:     `
-        `data = f.read()`
-        `pe = malduck.procmempe(buf=data)     `
+    with open(argv[1], 'rb') as f:
+        data = f.read()
+        pe = malduck.procmempe(buf=data)
 
-        `if pe.is_valid():         `
-            `print('This file is already a valid PE file. Skipping...')         `
-            `return     `
+        if pe.is_valid():
+            print('This file is already a valid PE file. Skipping...')
+            return
 
-        `pe.patchp(0, b'MZ')     `
-        `lfanew = pe.uint32p(0x3c)     `
-        `if lfanew > len(data):         `
-            `print('Bogus lfanew value ({hex(lfanew)}). Bailing out...')         `
-            `return     `
-        
-        `print(f'lfanew: {hex(lfanew)}')     `
-        `pe.patchp(lfanew, b'PE\x00\x00')     `
-        
-        `if pe.is_valid():         `
-            `print('Fixed file successfully. Dumping to new file...')         `
-            `with open(argv[1].replace('bin', '') + '_fixed_header.bin', 'wb') as g:`
- `    `    `g.write(pe.readp(0))         `
-                `print('Done.')     `
-        `else:         `
-            `print('Could not fix file, still not a valid PE file.')     `
-        
-        `pe.close()`
+        pe.patchp(0, b'MZ')
+        lfanew = pe.uint32p(0x3c)
+        if lfanew > len(data):
+            print('Bogus lfanew value ({hex(lfanew)}). Bailing out...')
+            return
 
-if <strong>name</strong> == '<strong>main</strong>':
+        print(f'lfanew: {hex(lfanew)}')
+        pe.patchp(lfanew, b'PE\x00\x00')
+
+        if pe.is_valid():
+            print('Fixed file successfully. Dumping to new file...')
+            with open(argv[1].replace('bin', '') + '_fixed_header.bin', 'wb') as g:
+                g.write(pe.readp(0))
+                print('Done.')
+        else:
+            print('Could not fix file, still not a valid PE file.')
+
+        pe.close()
+
+if __name__ == '__main__':
     main(sys.argv)
 ```
 
 Let’s see how it works with our broken memory dump from the beginning:
 
-```bash
+```console
 > file memdump.bin
 memdump.bin: data
 > python fix_pe_magic_numbers.py memdump.bin

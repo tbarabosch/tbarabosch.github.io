@@ -3,6 +3,11 @@ $ink: #151515;
 $muted: #5f5f5f;
 $rule: #b9b6ab;
 $code-bg: #eeece4;
+$syntax-brick: #7a2e2e;
+$syntax-forest: #2f5d3a;
+$syntax-slate: #315a70;
+$syntax-plum: #65466f;
+$syntax-comment: #66635c;
 $body-font: Georgia, "Times New Roman", Times, serif;
 $mono-font: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
@@ -182,31 +187,172 @@ pre code {
   padding: 0;
 }
 
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: $muted;
+div.highlighter-rouge {
+  position: relative;
 }
 
-.token.keyword,
-.token.important,
-.token.bold {
-  color: inherit;
+div.language-c.highlighter-rouge::before {
+  content: "[ C ]";
+}
+
+div.language-python.highlighter-rouge::before {
+  content: "[ PYTHON ]";
+}
+
+div.language-bash.highlighter-rouge::before,
+div.language-shell.highlighter-rouge::before {
+  content: "[ SHELL ]";
+}
+
+div.language-console.highlighter-rouge::before {
+  content: "[ SESSION ]";
+}
+
+div.language-yaml.highlighter-rouge::before {
+  content: "[ YAML ]";
+}
+
+div.language-dockerfile.highlighter-rouge::before {
+  content: "[ DOCKERFILE ]";
+}
+
+div.language-markdown.highlighter-rouge::before {
+  content: "[ MARKDOWN ]";
+}
+
+div.language-nasm.highlighter-rouge::before {
+  content: "[ ASSEMBLY ]";
+}
+
+div.highlighter-rouge[data-language]::before {
+  content: "[ " attr(data-language) " ]";
+}
+
+div.language-c.highlighter-rouge::before,
+div.language-python.highlighter-rouge::before,
+div.language-bash.highlighter-rouge::before,
+div.language-shell.highlighter-rouge::before,
+div.language-console.highlighter-rouge::before,
+div.language-yaml.highlighter-rouge::before,
+div.language-dockerfile.highlighter-rouge::before,
+div.language-markdown.highlighter-rouge::before,
+div.language-nasm.highlighter-rouge::before,
+div.highlighter-rouge[data-language]::before {
+  background: $paper;
+  color: $muted;
+  font-family: $mono-font;
+  font-size: 0.68rem;
+  font-weight: 700;
+  left: 0.55rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 0 0.3rem;
+  position: absolute;
+  top: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+// Rouge token classes. Keep punctuation and ordinary names in the base ink.
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cs {
+  color: $syntax-comment;
+  font-style: italic;
+}
+
+.highlight .cp,
+.highlight .gp,
+.highlight .k,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr {
+  color: $syntax-brick;
   font-weight: 700;
 }
 
-.token.string,
-.token.number,
-.token.function,
-.token.operator,
-.token.punctuation,
-.token.selector,
-.token.property,
-.token.tag,
-.token.attr-name,
-.token.attr-value {
-  color: inherit;
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sa,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sr,
+.highlight .ss,
+.highlight .sx {
+  color: $syntax-forest;
+}
+
+.highlight .il,
+.highlight .m,
+.highlight .mb,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .bp,
+.highlight .kc,
+.highlight .no {
+  color: $syntax-slate;
+  font-weight: 600;
+}
+
+.highlight .na,
+.highlight .nb,
+.highlight .nc,
+.highlight .nd,
+.highlight .ne,
+.highlight .nf,
+.highlight .nl,
+.highlight .nn,
+.highlight .nt,
+.highlight .kt {
+  color: $syntax-plum;
+  font-weight: 600;
+}
+
+.highlight .gh,
+.highlight .gu {
+  color: $syntax-plum;
+  font-weight: 700;
+}
+
+.highlight .go {
+  color: $syntax-comment;
+}
+
+.highlight .ge {
+  font-style: italic;
+}
+
+.highlight .gs {
+  font-weight: 700;
+}
+
+.highlight .err {
+  color: $syntax-brick;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.12em;
+}
+
+div.highlighter-rouge[data-language="YARA"] .err {
+  color: $syntax-slate;
+  text-decoration: none;
+}
+
+@media print {
+  pre,
+  div.highlighter-rouge::before {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }
 
 img,
