@@ -24,6 +24,6 @@ This blog is where I write down technical material that should last longer than 
 
 ## CONTACT
 
-You can find my projects on [GitHub](https://github.com/tbarabosch) and my professional profile on [LinkedIn](https://www.linkedin.com/in/thomas-barabosch-3328b4256/).
+You can find my projects on [GitHub](https://github.com/tbarabosch) and my professional profile on [LinkedIn](https://www.linkedin.com/in/thomas-barabosch-3328b4256/). For open-source contribution matters, email me at [oss@tbarabosch.com](mailto:oss@tbarabosch.com).
 
 The posts here are my own and reflect my personal views, not those of any past, current, or future employer.
