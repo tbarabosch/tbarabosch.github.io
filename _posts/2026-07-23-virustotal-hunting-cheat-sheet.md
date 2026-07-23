@@ -1,6 +1,6 @@
 ---
 title: 'VirusTotal Hunting Cheat Sheet'
-date: '2026-07-23T12:00:00+02:00'
+date: '2026-07-23T10:49:00+02:00'
 author: tbarabosch
 layout: post
 ---
