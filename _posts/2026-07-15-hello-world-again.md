@@ -3,6 +3,8 @@ title: 'Hello, world, again'
 date: '2026-07-15T00:00:00+02:00'
 author: tbarabosch
 layout: post
+tags:
+  - site notes
 ---
 
 Every now and then, a system deserves a clean boot.

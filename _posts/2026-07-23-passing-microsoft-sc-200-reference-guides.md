@@ -3,6 +3,10 @@ title: 'Passing Microsoft SC-200: Exam and KQL Reference Guides'
 date: '2026-07-23T14:09:40+02:00'
 author: tbarabosch
 layout: post
+tags:
+  - security operations
+  - threat hunting
+  - Microsoft Sentinel
 ---
 
 I recently took Microsoft's SC-200 exam and [passed it](https://learn.microsoft.com/en-gb/users/thomasb-2201/credentials/b2760494574a0925). It was genuinely fun to prepare for: the material gave me a reason to go beyond what I already knew, especially around the different Microsoft Defender for Endpoint (MDE) variants and the operational depth of Microsoft Sentinel.

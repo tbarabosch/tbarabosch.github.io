@@ -3,6 +3,10 @@ title: 'How to patch a Windows API in x64dbg'
 date: '2020-12-24T12:00:00+00:00'
 author: tbarabosch
 layout: post
+tags:
+  - malware analysis
+  - reverse engineering
+  - Windows
 ---
 
 > **Reviewed July 2026:** This post is kept as a historical debugging note. The x64dbg and Python plugin APIs may have changed since publication.

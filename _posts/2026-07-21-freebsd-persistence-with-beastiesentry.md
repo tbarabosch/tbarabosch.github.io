@@ -3,6 +3,10 @@ title: 'Persistence on FreeBSD with BeastieSentry'
 date: '2026-07-21T12:00:00+02:00'
 author: tbarabosch
 layout: post
+tags:
+  - incident response
+  - systems security
+  - FreeBSD
 ---
 
 Persistence is often associated with exotic rootkits, patched kernels and stealthy implants. Those techniques exist, but an attacker who already controls a FreeBSD host may not need any of them. The operating system already contains reliable ways to start code during boot, run it on a schedule, load it into privileged processes or provide access later. Most of these mechanisms are also used every day by administrators.

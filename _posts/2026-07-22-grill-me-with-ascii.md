@@ -3,6 +3,8 @@ title: 'Grill me with ASCII'
 date: '2026-07-22T12:00:00+02:00'
 author: tbarabosch
 layout: post
+tags:
+  - AI tooling
 ---
 
 Matt Pocock’s original [`grill-me` skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) is delightfully stubborn. Give Codex a plan and it does not immediately produce an implementation. It inspects the available context, recommends an answer and asks one question. Then it waits. The interview continues until the design is clear enough to build, or until abandoning it starts to look like the sensible option.

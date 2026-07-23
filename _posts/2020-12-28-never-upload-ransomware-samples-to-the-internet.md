@@ -3,6 +3,10 @@ title: 'Never upload ransomware samples to the Internet'
 date: '2020-12-28T22:51:09+00:00'
 author: tbarabosch
 layout: post
+tags:
+  - incident response
+  - malware analysis
+  - VirusTotal
 ---
 
 Ransomware is our contemporary plague. It is a thriving business that attracts more and more cybercriminals every month. New ransomware gangs [sprout like mushrooms](https://www.zdnet.com/article/the-ransomware-landscape-is-more-crowded-than-you-think/). These self-proclaimed “security teams” test the security of many small to large enterprises. But their unsolicited penetration tests are not that cheap. What they leave behind is pure mayhem and a huge bill for the victims. Furthermore, some attacks are really disgusting since ransomware gangs have targeted non-profit organizations, schools, and even hospitals on various occasions.

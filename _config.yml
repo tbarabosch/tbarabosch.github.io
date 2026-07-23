@@ -29,6 +29,8 @@ apple_touch_icon: images/apple-touch-icon.png
 navigation:
   - text: Home
     url: /
+  - text: Tags
+    url: /tags/
   - text: About
     url: /about/
   - text: RSS

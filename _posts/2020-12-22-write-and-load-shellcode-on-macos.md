@@ -3,6 +3,10 @@ title: 'How to write and load shellcode on macOS'
 date: '2020-12-22T09:58:07+00:00'
 author: tbarabosch
 layout: post
+tags:
+  - reverse engineering
+  - systems security
+  - macOS
 ---
 
 > **Reviewed July 2026:** This post is kept as a historical low-level programming note. Modern macOS toolchains and execution protections may require adjustments.

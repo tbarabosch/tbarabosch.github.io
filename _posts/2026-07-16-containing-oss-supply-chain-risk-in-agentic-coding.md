@@ -3,6 +3,10 @@ title: 'How I contain OSS supply-chain risk with Apple Containers'
 date: '2026-07-16T12:00:00+02:00'
 author: tbarabosch
 layout: post
+tags:
+  - AI tooling
+  - software supply chain
+  - Apple Containers
 ---
 
 I have been using coding agents quite a lot lately. Much of their usefulness does not come from code generation alone. Codex can run the compiler, look at a failing test, change a file and try again. I do not have to copy commands between a chat window and a terminal. For this to work, the agent needs access to a shell, and this shell can also run a package manager.

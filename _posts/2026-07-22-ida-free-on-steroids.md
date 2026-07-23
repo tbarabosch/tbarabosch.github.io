@@ -3,6 +3,10 @@ title: 'IDA Free on Steroids: Automating Reverse Engineering with IDC and Codex'
 date: '2026-07-22T14:00:00+02:00'
 author: tbarabosch
 layout: post
+tags:
+  - AI tooling
+  - reverse engineering
+  - IDA
 ---
 
 IDA Free can disassemble a binary, debug it, save the database and even decompile x86 code through Hex-Rays' cloud. For a personal project that is already a serious toolbox. The painful omission appears when I want to automate a repetitive job: Free has no IDAPython API or C++ SDK. Its one built-in scripting route is IDC.
