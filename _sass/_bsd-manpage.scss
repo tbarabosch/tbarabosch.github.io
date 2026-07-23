@@ -395,6 +395,34 @@ figure {
   outline-offset: 0.3rem;
 }
 
+.guide-previews {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 1.75rem 0 1.35rem;
+}
+
+.guide-preview {
+  margin: 0;
+  min-width: 0;
+}
+
+.guide-preview-link {
+  display: block;
+}
+
+.guide-preview-link:hover,
+.guide-preview-link:focus-visible {
+  background: transparent;
+  color: $ink;
+  outline: 1px solid $ink;
+  outline-offset: 0.2rem;
+}
+
+.guide-preview img {
+  width: 100%;
+}
+
 figcaption {
   color: $muted;
   font-family: $mono-font;
@@ -609,5 +637,9 @@ figcaption {
   .article-list.compact .article-row {
     grid-template-columns: 1fr;
     margin-bottom: 0.9rem;
+  }
+
+  .guide-previews {
+    grid-template-columns: 1fr;
   }
 }

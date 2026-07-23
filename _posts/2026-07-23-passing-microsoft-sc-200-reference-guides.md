@@ -14,3 +14,18 @@ I recently took Microsoft's SC-200 exam and [passed it](https://learn.microsoft.
 </figure>
 
 To make that preparation easier to revisit, I condensed the notes that served me well into two printable one-page reference guides: the [SC-200 Exam Reference Guide](/assets/files/sc-200-exam-reference-guide.pdf) and the [SC-200 KQL Reference Guide](/assets/files/sc-200-kql-reference-guide.pdf). They are useful aids for preparing for the exam and quickly reviewing the blueprint, product boundaries, detection and response workflows, Sentinel concepts, KQL operators, and practical hunt patterns.
+
+<div class="guide-previews" role="group" aria-label="SC-200 reference guide downloads">
+  <figure class="guide-preview">
+    <a class="guide-preview-link" href="/assets/files/sc-200-exam-reference-guide.pdf" aria-label="Open the SC-200 Exam Reference Guide PDF">
+      <img src="/assets/images/posts/passing-microsoft-sc-200-reference-guides/sc-200-exam-reference-guide-preview.png" alt="Preview of the SC-200 Exam Reference Guide" width="842" height="596">
+    </a>
+    <figcaption>SC-200 Exam Reference Guide (PDF)</figcaption>
+  </figure>
+  <figure class="guide-preview">
+    <a class="guide-preview-link" href="/assets/files/sc-200-kql-reference-guide.pdf" aria-label="Open the SC-200 KQL Reference Guide PDF">
+      <img src="/assets/images/posts/passing-microsoft-sc-200-reference-guides/sc-200-kql-reference-guide-preview.png" alt="Preview of the SC-200 KQL Reference Guide" width="842" height="596">
+    </a>
+    <figcaption>SC-200 KQL Reference Guide (PDF)</figcaption>
+  </figure>
+</div>
