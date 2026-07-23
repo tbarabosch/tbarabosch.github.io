@@ -373,6 +373,28 @@ figure {
   margin: 0 0 1.35rem;
 }
 
+.credential-badge {
+  display: flex;
+  justify-content: center;
+  margin: 1.75rem 0 2rem;
+}
+
+.credential-badge a {
+  display: block;
+}
+
+.credential-badge img {
+  border: 0;
+  width: min(14rem, 60vw);
+}
+
+.credential-badge a:hover,
+.credential-badge a:focus-visible {
+  background: transparent;
+  outline: 1px solid $ink;
+  outline-offset: 0.3rem;
+}
+
 figcaption {
   color: $muted;
   font-family: $mono-font;
