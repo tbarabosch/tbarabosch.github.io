@@ -1,5 +1,5 @@
 ---
-title: 'I Passed SC-200: Two One-Page Cheat Sheets'
+title: 'Passing Microsoft SC-200: Exam and KQL Cheat Sheets'
 date: '2026-07-23T14:09:40+02:00'
 author: tbarabosch
 layout: post
