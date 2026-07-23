@@ -553,6 +553,13 @@ figcaption {
   margin-left: 2rem;
 }
 
+.post-tags {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+}
+
 .tag-pill {
   border: 1px solid $rule;
   border-radius: 999px;
@@ -563,6 +570,10 @@ figcaption {
   padding: 0.12rem 0.55rem;
   text-decoration: none;
   white-space: nowrap;
+}
+
+.post-tags .tag-pill {
+  padding: 0.18rem 0.75rem;
 }
 
 .tag-pill:hover,
@@ -679,6 +690,11 @@ figcaption {
 
   .tag-index {
     margin-left: 0;
+  }
+
+  .post-tags-label,
+  .post-tags {
+    grid-column: 1 / -1;
   }
 
   .article-row,

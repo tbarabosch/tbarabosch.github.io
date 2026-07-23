@@ -12,13 +12,11 @@ layout: default
         <dt>date</dt>
         <dd><time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%Y-%m-%d" }}</time></dd>
         {% if page.tags and page.tags != empty %}
-        <dt>tags</dt>
-        <dd>
-          <ul class="tag-list post-tags">
-            {% for tag in page.tags %}
-            <li><a class="tag-pill" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a></li>
-            {% endfor %}
-          </ul>
+        <dt class="post-tags-label">tags</dt>
+        <dd class="post-tags">
+          {% for tag in page.tags %}
+          <a class="tag-pill" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
+          {% endfor %}
         </dd>
         {% endif %}
       </dl>
