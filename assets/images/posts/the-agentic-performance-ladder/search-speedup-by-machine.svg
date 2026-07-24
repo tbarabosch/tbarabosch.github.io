@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" role="img" aria-labelledby="title desc">
+  <title id="title">Search speedup by implementation and machine</title>
+  <desc id="desc">A logarithmic dot plot comparing median exhaustive-search speedups for five implementations on Apple M1 Pro and A18 Pro systems. Both machines progress from the Python baseline to roughly five-thousand-times faster Metal search kernels.</desc>
+  <rect width="960" height="620" fill="#f7f5ee"/>
+  <text x="48.0" y="48.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="0.08em">[ FIGURE 1 ]</text>
+  <text x="48.0" y="78.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="20" font-weight="700" text-anchor="start">Search speedup by implementation and machine</text>
+  <text x="48.0" y="105.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="12" font-weight="400" text-anchor="start">publication profile / 2^20 candidates / median search time / logarithmic scale</text>
+  <line x1="48.0" y1="126.0" x2="912.0" y2="126.0" stroke="#b9b6ab" stroke-width="1.0"/>
+  <line x1="258.0" y1="158.0" x2="258.0" y2="509.0" stroke="#b9b6ab" stroke-width="1.0"/>
+  <text x="258.0" y="151.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="400" text-anchor="middle">1x</text>
+  <line x1="399.5" y1="158.0" x2="399.5" y2="509.0" stroke="#b9b6ab" stroke-width="1.0" stroke-dasharray="2 5"/>
+  <text x="399.5" y="151.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="400" text-anchor="middle">10x</text>
+  <line x1="541.0" y1="158.0" x2="541.0" y2="509.0" stroke="#b9b6ab" stroke-width="1.0" stroke-dasharray="2 5"/>
+  <text x="541.0" y="151.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="400" text-anchor="middle">100x</text>
+  <line x1="682.5" y1="158.0" x2="682.5" y2="509.0" stroke="#b9b6ab" stroke-width="1.0" stroke-dasharray="2 5"/>
+  <text x="682.5" y="151.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="400" text-anchor="middle">1,000x</text>
+  <line x1="824.0" y1="158.0" x2="824.0" y2="509.0" stroke="#b9b6ab" stroke-width="1.0" stroke-dasharray="2 5"/>
+  <text x="824.0" y="151.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="400" text-anchor="middle">10,000x</text>
+  <text x="48.0" y="201.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="12" font-weight="700" text-anchor="start">00  PYTHON BASELINE</text>
+  <line x1="258.0" y1="220.0" x2="824.0" y2="220.0" stroke="#b9b6ab" stroke-width="0.8"/>
+  <line x1="258.0" y1="186.0" x2="258.0" y2="186.0" stroke="#151515" stroke-width="1.2"/>
+  <circle cx="258.0" cy="186.0" r="5.0" fill="#151515" stroke="#151515" stroke-width="1.5"/>
+  <text x="268.0" y="190.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="700" text-anchor="start">M1 1.00×</text>
+  <line x1="258.0" y1="206.0" x2="258.0" y2="206.0" stroke="#5f5f5f" stroke-width="1.2"/>
+  <polygon points="258.0,200.0 264.0,206.0 258.0,212.0 252.0,206.0" fill="#f7f5ee" stroke="#5f5f5f" stroke-width="1.5"/>
+  <text x="268.0" y="210.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="700" text-anchor="start">A18 1.00×</text>
+  <text x="48.0" y="273.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="12" font-weight="700" text-anchor="start">01  OPTIMIZED PYTHON</text>
+  <line x1="258.0" y1="292.0" x2="824.0" y2="292.0" stroke="#b9b6ab" stroke-width="0.8"/>
+  <line x1="258.0" y1="258.0" x2="367.2" y2="258.0" stroke="#151515" stroke-width="1.2"/>
+  <circle cx="367.2" cy="258.0" r="5.0" fill="#151515" stroke="#151515" stroke-width="1.5"/>
+  <text x="377.2" y="262.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="700" text-anchor="start">M1 5.91×</text>
+  <line x1="258.0" y1="278.0" x2="323.3" y2="278.0" stroke="#5f5f5f" stroke-width="1.2"/>
+  <polygon points="323.3,272.0 329.3,278.0 323.3,284.0 317.3,278.0" fill="#f7f5ee" stroke="#5f5f5f" stroke-width="1.5"/>
+  <text x="333.3" y="282.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="700" text-anchor="start">A18 2.89×</text>
+  <text x="48.0" y="345.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="12" font-weight="700" text-anchor="start">02  PYTHON + C++ KERNEL</text>
+  <line x1="258.0" y1="364.0" x2="824.0" y2="364.0" stroke="#b9b6ab" stroke-width="0.8"/>
+  <line x1="258.0" y1="330.0" x2="673.2" y2="330.0" stroke="#151515" stroke-width="1.2"/>
+  <circle cx="673.2" cy="330.0" r="5.0" fill="#151515" stroke="#151515" stroke-width="1.5"/>
+  <text x="683.2" y="334.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="700" text-anchor="start">M1 860.21×</text>
+  <line x1="258.0" y1="350.0" x2="641.9" y2="350.0" stroke="#5f5f5f" stroke-width="1.2"/>
+  <polygon points="641.9,344.0 647.9,350.0 641.9,356.0 635.9,350.0" fill="#f7f5ee" stroke="#5f5f5f" stroke-width="1.5"/>
+  <text x="651.9" y="354.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="700" text-anchor="start">A18 516.64×</text>
+  <text x="48.0" y="417.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="12" font-weight="700" text-anchor="start">03  NATIVE C++</text>
+  <line x1="258.0" y1="436.0" x2="824.0" y2="436.0" stroke="#b9b6ab" stroke-width="0.8"/>
+  <line x1="258.0" y1="402.0" x2="676.4" y2="402.0" stroke="#151515" stroke-width="1.2"/>
+  <circle cx="676.4" cy="402.0" r="5.0" fill="#151515" stroke="#151515" stroke-width="1.5"/>
+  <text x="686.4" y="406.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="700" text-anchor="start">M1 905.58×</text>
+  <line x1="258.0" y1="422.0" x2="660.5" y2="422.0" stroke="#5f5f5f" stroke-width="1.2"/>
+  <polygon points="660.5,416.0 666.5,422.0 660.5,428.0 654.5,422.0" fill="#f7f5ee" stroke="#5f5f5f" stroke-width="1.5"/>
+  <text x="670.5" y="426.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="700" text-anchor="start">A18 699.35×</text>
+  <text x="48.0" y="489.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="12" font-weight="700" text-anchor="start">04  APPLE METAL</text>
+  <line x1="258.0" y1="508.0" x2="824.0" y2="508.0" stroke="#b9b6ab" stroke-width="0.8"/>
+  <line x1="258.0" y1="474.0" x2="784.9" y2="474.0" stroke="#151515" stroke-width="1.2"/>
+  <circle cx="784.9" cy="474.0" r="5.0" fill="#151515" stroke="#151515" stroke-width="1.5"/>
+  <text x="774.9" y="478.0" fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="700" text-anchor="end">M1 5289.58×</text>
+  <line x1="258.0" y1="494.0" x2="780.2" y2="494.0" stroke="#5f5f5f" stroke-width="1.2"/>
+  <polygon points="780.2,488.0 786.2,494.0 780.2,500.0 774.2,494.0" fill="#f7f5ee" stroke="#5f5f5f" stroke-width="1.5"/>
+  <text x="770.2" y="498.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="700" text-anchor="end">A18 4905.71×</text>
+  <line x1="48.0" y1="529.0" x2="912.0" y2="529.0" stroke="#b9b6ab" stroke-width="1.0"/>
+  <text x="48.0" y="551.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="11" font-weight="400" text-anchor="start">M1 PRO: 8 CPU WORKERS / A18 PRO: 6 CPU WORKERS</text>
+  <text x="48.0" y="572.0" fill="#5f5f5f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" text-anchor="start">source: results/reference_m1_pro_20bit.json + results/reference_a18_pro_20bit.json</text>
+</svg>
