@@ -576,14 +576,18 @@ figcaption {
   padding: 0.18rem 0.75rem;
 }
 
-.tag-pill:hover,
-.tag-pill:focus-visible {
+a.tag-pill:hover,
+a.tag-pill:focus-visible {
   border-color: $ink;
 }
 
-.tag-pill:focus-visible {
+a.tag-pill:focus-visible {
   outline: 2px solid $ink;
   outline-offset: 2px;
+}
+
+.tag-pill-static {
+  color: $muted;
 }
 
 .tag-section .manual-label {

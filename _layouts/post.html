@@ -15,7 +15,11 @@ layout: default
         <dt class="post-tags-label">tags</dt>
         <dd class="post-tags">
           {% for tag in page.tags %}
+          {% if site.data.tags contains tag %}
           <a class="tag-pill" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
+          {% else %}
+          <span class="tag-pill tag-pill-static">{{ tag }}</span>
+          {% endif %}
           {% endfor %}
         </dd>
         {% endif %}
