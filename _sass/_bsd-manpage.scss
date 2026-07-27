@@ -620,6 +620,41 @@ figcaption {
   min-width: 0;
 }
 
+.contact-list {
+  list-style: none;
+  margin: 0 0 1.35rem;
+  padding: 0;
+}
+
+.contact-item {
+  align-items: baseline;
+  display: grid;
+  gap: 0.25rem 1rem;
+  grid-template-columns: minmax(13rem, max-content) minmax(0, 1fr);
+}
+
+.contact-item + .contact-item {
+  margin-top: 0.75rem;
+}
+
+.contact-link {
+  align-items: center;
+  display: inline-flex;
+  font-family: $mono-font;
+  gap: 0.5rem;
+  width: fit-content;
+}
+
+.contact-icon {
+  flex: 0 0 auto;
+  height: 1rem;
+  width: 1rem;
+}
+
+.contact-description {
+  color: $muted;
+}
+
 .archive-top-link {
   font-family: $mono-font;
   text-decoration: none;
@@ -701,6 +736,11 @@ figcaption {
   .article-list.compact .article-row {
     grid-template-columns: 1fr;
     margin-bottom: 0.9rem;
+  }
+
+  .contact-item {
+    gap: 0.1rem;
+    grid-template-columns: 1fr;
   }
 
   .guide-previews {

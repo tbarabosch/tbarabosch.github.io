@@ -33,6 +33,8 @@ navigation:
     url: /tags/
   - text: About
     url: /about/
+  - text: Contact
+    url: /contact/
   - text: RSS
     url: /feed.xml
 

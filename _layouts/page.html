@@ -8,8 +8,8 @@ layout: default
       <p class="manual-label">NAME</p>
       <h1 class="post-title">{{ page.title }}</h1>
     </header><!-- .post-header -->
-    <section class="manual-section">
-      <h2 class="manual-label">ABOUT</h2>
+    <section class="manual-section" aria-labelledby="page-section-heading">
+      <h2 id="page-section-heading" class="manual-label">{{ page.section_label | default: 'ABOUT' | escape }}</h2>
       <div class="post-content">
         {{content}}
       </div><!-- .post-content -->

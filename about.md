@@ -22,8 +22,4 @@ Operationally, I care about turning research into response: threat actor trackin
 
 This blog is where I write down technical material that should last longer than a short post elsewhere: reverse-engineering notes, malware and threat research, systems security experiments, tool write-ups, cloud and security-operations observations, incident-response lessons, book recommendations, and the occasional personal opinion about cyber security.
 
-## CONTACT
-
-You can find my projects on [GitHub](https://github.com/tbarabosch) and my professional profile on [LinkedIn](https://www.linkedin.com/in/thomas-barabosch-3328b4256/). For open-source contribution matters, email me at [oss@tbarabosch.com](mailto:oss@tbarabosch.com).
-
 The posts here are my own and reflect my personal views, not those of any past, current, or future employer.
