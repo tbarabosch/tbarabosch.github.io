@@ -439,11 +439,10 @@ figcaption {
 }
 
 .manual-head {
-  align-items: baseline;
   border-bottom: 1px solid $rule;
   display: grid;
-  gap: 1rem;
-  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  gap: 0.25rem;
+  grid-template-columns: 1fr;
   padding-bottom: 0.5rem;
 }
 
@@ -458,10 +457,6 @@ figcaption {
 .site-topic {
   color: $muted;
   font-size: 0.82rem;
-  overflow: hidden;
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .site-navigation {
@@ -748,20 +743,6 @@ a.tag-pill:focus-visible {
 
   .site {
     padding-top: 1.25rem;
-  }
-
-  .manual-head {
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
-  }
-
-  .site-title-echo {
-    display: none;
-  }
-
-  .site-topic {
-    text-align: left;
-    white-space: normal;
   }
 
   .manual-name,
