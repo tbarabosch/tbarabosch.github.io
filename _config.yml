@@ -60,5 +60,6 @@ exclude:
   - Containerfile
   - Gemfile
   - Gemfile.lock
+  - README.md
   - scripts/
   - vendor/
