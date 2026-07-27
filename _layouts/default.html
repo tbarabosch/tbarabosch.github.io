@@ -18,7 +18,12 @@
   <link rel="apple-touch-icon" href="{{ site.apple_touch_icon | relative_url }}" sizes="180x180">
   {% endif %}
   <!-- Styles -->
-  <link href="{{ '/assets/css/style.css' | relative_url }}" rel="stylesheet">
+  {% if site.github.build_revision %}
+  {% assign stylesheet_version = site.github.build_revision %}
+  {% else %}
+  {% assign stylesheet_version = site.time | date: '%s' %}
+  {% endif %}
+  <link href="{{ '/assets/css/style.css' | relative_url }}?v={{ stylesheet_version | escape }}" rel="stylesheet">
 </head>
 <body>
 
