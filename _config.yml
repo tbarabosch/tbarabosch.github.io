@@ -27,14 +27,15 @@ apple_touch_icon: images/apple-touch-icon.png
 
 # Site navigation - each item must have a title and a url.
 navigation:
-  - text: Home
-    url: /
   - text: Tags
     url: /tags/
   - text: About
     url: /about/
   - text: Contact
     url: /contact/
+
+# Utility navigation is visually separated from the primary page links.
+utility_navigation:
   - text: RSS
     url: /feed.xml
 

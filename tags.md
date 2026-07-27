@@ -4,10 +4,12 @@ title: Tags
 permalink: /tags/
 ---
 
-<main class="main-content">
+<main id="main-content" class="main-content">
   <section class="manual-section" aria-labelledby="name-heading">
-    <h1 id="name-heading" class="manual-label">NAME</h1>
-    <p class="manual-copy"><strong>tags</strong> - Browse articles by topic and technology.</p>
+    <p class="manual-label">NAME</p>
+    <div class="manual-name">
+      <h1 id="name-heading" class="manual-title">tags</h1><span class="manual-summary"> - Browse articles by topic and technology.</span>
+    </div>
   </section>
 
   <section class="manual-section" aria-labelledby="index-heading">

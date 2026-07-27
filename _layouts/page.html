@@ -2,17 +2,19 @@
 layout: default
 ---
 
-<main class="main-content">
-  <article class="post">
-    <header class="post-header">
+<main id="main-content" class="main-content">
+  <article class="manual-page">
+    <section class="manual-section" aria-labelledby="page-title">
       <p class="manual-label">NAME</p>
-      <h1 class="post-title">{{ page.title }}</h1>
-    </header><!-- .post-header -->
+      <div class="manual-name">
+        <h1 id="page-title" class="manual-title">{{ page.title }}</h1>
+      </div>
+    </section>
     <section class="manual-section" aria-labelledby="page-section-heading">
-      <h2 id="page-section-heading" class="manual-label">{{ page.section_label | default: 'ABOUT' | escape }}</h2>
+      <h2 id="page-section-heading" class="manual-label">{{ page.section_label | default: 'DESCRIPTION' | escape }}</h2>
       <div class="post-content">
         {{content}}
       </div><!-- .post-content -->
     </section>
-  </article><!-- .post -->
+  </article><!-- .manual-page -->
 </main><!-- .site-main -->

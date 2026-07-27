@@ -10,6 +10,9 @@ $syntax-plum: #65466f;
 $syntax-comment: #66635c;
 $body-font: Georgia, "Times New Roman", Times, serif;
 $mono-font: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+$manual-indent: 2rem;
+$manual-indent-small: 1rem;
+$prose-width: 46rem;
 
 *,
 *::before,
@@ -432,7 +435,7 @@ figcaption {
 
 .site-header {
   font-family: $mono-font;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .manual-head {
@@ -462,10 +465,24 @@ figcaption {
 }
 
 .site-navigation {
+  align-items: baseline;
   border-bottom: 1px solid $rule;
   color: $muted;
+  display: flex;
+  flex-wrap: wrap;
   font-size: 0.86rem;
-  padding: 0.55rem 0 1rem;
+  gap: 0.25rem 1rem;
+  justify-content: space-between;
+  padding: 0.5rem 0 0.75rem;
+}
+
+.site-navigation-primary,
+.site-navigation-utility {
+  white-space: nowrap;
+}
+
+.site-navigation-utility {
+  margin-left: auto;
 }
 
 .site-navigation a,
@@ -485,7 +502,7 @@ figcaption {
 }
 
 .manual-section {
-  margin-bottom: 2.35rem;
+  margin-bottom: 2rem;
 }
 
 .manual-label {
@@ -499,21 +516,51 @@ figcaption {
   text-transform: uppercase;
 }
 
-.manual-copy,
+.manual-name,
 .post-content,
 .post-meta {
-  margin-left: 2rem;
+  margin-left: $manual-indent;
 }
 
-.post-header {
-  border-bottom: 1px solid $rule;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
+.manual-name {
+  line-height: 1.5;
+  max-width: $prose-width;
 }
 
-.post-title {
+.manual-title {
+  display: inline;
   font-size: 1.35rem;
-  margin: 0 0 1rem 2rem;
+  line-height: inherit;
+  margin: 0;
+}
+
+.manual-summary {
+  font-size: 1rem;
+}
+
+.post-content > p,
+.post-content > ul,
+.post-content > ol,
+.post-content > dl,
+.post-content > blockquote,
+.post-content > h2,
+.post-content > h3,
+.post-content > h4,
+.post-content > h5,
+.post-content > h6 {
+  max-width: $prose-width;
+}
+
+.post-content > p:has(img),
+.post-content > p:has(embed),
+.post-content > p:has(iframe),
+.post-content > p:has(object),
+.post-content > p:has(video) {
+  max-width: none;
+}
+
+.profile-portrait {
+  width: min(14rem, 100%);
 }
 
 .post-meta {
@@ -522,6 +569,7 @@ figcaption {
   font-size: 0.84rem;
   gap: 0.25rem 1rem;
   grid-template-columns: max-content minmax(0, 1fr);
+  max-width: $prose-width;
 }
 
 .post-meta dt {
@@ -550,7 +598,7 @@ figcaption {
 }
 
 .tag-index {
-  margin-left: 2rem;
+  margin-left: $manual-indent;
 }
 
 .post-tags {
@@ -597,7 +645,7 @@ a.tag-pill:focus-visible {
 .article-list {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 2rem;
+  padding: 0 0 0 $manual-indent;
 }
 
 .article-row {
@@ -668,7 +716,7 @@ a.tag-pill:focus-visible {
   border-top: 1px solid $rule;
   font-family: $mono-font;
   font-size: 0.82rem;
-  margin-top: 3rem;
+  margin-top: 2.5rem;
   padding-top: 1rem;
 }
 
@@ -716,38 +764,38 @@ a.tag-pill:focus-visible {
     white-space: normal;
   }
 
-  .manual-copy,
+  .manual-name,
   .post-content,
-  .post-meta,
-  .post-title {
-    margin-left: 0;
+  .post-meta {
+    margin-left: $manual-indent-small;
   }
 
   .article-list {
-    padding-left: 0;
+    padding-left: $manual-indent-small;
   }
 
   .tag-index {
-    margin-left: 0;
+    margin-left: $manual-indent-small;
   }
 
-  .post-tags-label,
-  .post-tags {
-    grid-column: 1 / -1;
+  .guide-previews {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-navigation-primary {
+    white-space: normal;
   }
 
   .article-row,
   .article-list.compact .article-row {
     grid-template-columns: 1fr;
-    margin-bottom: 0.9rem;
+    margin-bottom: 0.8rem;
   }
 
   .contact-item {
     gap: 0.1rem;
-    grid-template-columns: 1fr;
-  }
-
-  .guide-previews {
     grid-template-columns: 1fr;
   }
 }

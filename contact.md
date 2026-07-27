@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Contact
-section_label: CONTACT
+section_label: CHANNELS
 permalink: /contact/
 ---
 

@@ -1,16 +1,27 @@
 <header class="site-header">
   <div class="manual-head" aria-label="{{ site.title }}">
-    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title | upcase }}(7)</a>
+    <a class="site-title" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>{{ site.title | upcase }}(7)</a>
     <span class="site-topic">{{ site.description }}</span>
     <span class="site-title site-title-echo" aria-hidden="true">{{ site.title | upcase }}(7)</span>
   </div>
   <nav class="site-navigation" aria-label="Main navigation">
-    {% for item in site.navigation %}
-    {% assign current = nil %}
-    {% if page.url == item.url %}
-    {% assign current = 'page' %}
-    {% endif %}
-    <a href="{{ item.url | relative_url }}"{% if current %} aria-current="{{ current }}"{% endif %}>{{ item.text | downcase }}</a>{% unless forloop.last %}<span aria-hidden="true"> / </span>{% endunless %}
-    {% endfor %}
+    <span class="site-navigation-primary">
+      {% for item in site.navigation %}
+      {% assign current = nil %}
+      {% if page.url == item.url %}
+      {% assign current = 'page' %}
+      {% endif %}
+      <a href="{{ item.url | relative_url }}"{% if current %} aria-current="{{ current }}"{% endif %}>{% if current %}<span aria-hidden="true">[</span>{% endif %}{{ item.text | downcase }}{% if current %}<span aria-hidden="true">]</span>{% endif %}</a>{% unless forloop.last %}<span aria-hidden="true"> / </span>{% endunless %}
+      {% endfor %}
+    </span>
+    <span class="site-navigation-utility">
+      {% for item in site.utility_navigation %}
+      {% assign current = nil %}
+      {% if page.url == item.url %}
+      {% assign current = 'page' %}
+      {% endif %}
+      <a href="{{ item.url | relative_url }}"{% if current %} aria-current="{{ current }}"{% endif %}>{% if current %}<span aria-hidden="true">[</span>{% endif %}{{ item.text | downcase }}{% if current %}<span aria-hidden="true">]</span>{% endif %}</a>{% unless forloop.last %}<span aria-hidden="true"> / </span>{% endunless %}
+      {% endfor %}
+    </span>
   </nav>
 </header>

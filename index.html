@@ -2,10 +2,12 @@
 layout: default
 ---
 
-<main class="main-content">
+<main id="main-content" class="main-content">
   <section class="manual-section" aria-labelledby="name-heading">
-    <h1 id="name-heading" class="manual-label">NAME</h1>
-    <p class="manual-copy"><strong>{{ site.title }}</strong> - {{ site.description }}</p>
+    <p class="manual-label">NAME</p>
+    <div class="manual-name">
+      <h1 id="name-heading" class="manual-title">{{ site.title }}</h1><span class="manual-summary"> - {{ site.description }}</span>
+    </div>
   </section>
 
   <section class="manual-section" aria-labelledby="articles-heading">

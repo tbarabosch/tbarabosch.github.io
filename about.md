@@ -2,9 +2,11 @@
 layout: page
 title: 'About me'
 date: '2020-12-22T09:31:44+00:00'
+section_label: PROFILE
 ---
 
 ![Thomas Barabosch](/images/author.jpg)
+{: .profile-portrait }
 
 ## FOCUS
 
