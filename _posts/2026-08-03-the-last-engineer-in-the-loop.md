@@ -19,7 +19,7 @@ A manager can delegate technical work because a trained engineer receives it. Wi
 
 ## The last engineer in the loop
 
-The problem is older than LLMs. In her 1983 paper [*Ironies of Automation*](https://doi.org/10.1016/0005-1098(83)90046-8), Lisanne Bainbridge described what happens when an operator is left monitoring an automated process and handling the unusual situations that the automation cannot solve. These are exactly the situations in which understanding the system matters most.
+The problem is older than LLMs. In her 1983 paper [*Ironies of Automation*](https://web.archive.org/web/20200717054958if_/https://www.ise.ncsu.edu/wp-content/uploads/2017/02/Bainbridge_1983_Automatica.pdf), Lisanne Bainbridge described what happens when an operator is left monitoring an automated process and handling the unusual situations that the automation cannot solve. These are exactly the situations in which understanding the system matters most.
 
 I highly recommend reading the paper. It is only five pages long. Whenever Bainbridge writes *automated system*, mentally read *agentic coding*. Replace *operator* with *developer*. Not every sentence maps, but far more of the paper survives this substitution than I expected.
 
