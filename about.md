@@ -25,3 +25,11 @@ Operationally, I care about turning research into response: threat actor trackin
 This blog is where I write down technical material that should last longer than a short post elsewhere: reverse-engineering notes, malware and threat research, systems security experiments, tool write-ups, security operations observations, incident-response lessons, book recommendations, and the occasional personal opinion about cyber security.
 
 The posts here are my own and reflect my personal views, not those of any past, current, or future employer.
+
+## AI USE
+{: #ai-use }
+
+<div class="ai-disclosure">
+  <img class="ai-disclosure-badge" src="/assets/images/about/made-with-ai.png" alt="Made with AI badge featuring a friendly robot" width="1684" height="503">
+  <p>Some material on this blog may be created with the help of generative AI. I use AI for ideation, writing and text generation, code writing and code review, and related editorial and engineering tasks. I review and edit the output, and test or verify it where relevant, before publication. I remain responsible for the final content, including its accuracy, judgments, and opinions.</p>
+</div>

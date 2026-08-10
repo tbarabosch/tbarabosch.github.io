@@ -41,7 +41,7 @@ utility_navigation:
 
 # Site footer
 footer:
-  content: "&copy; 2026 Thomas Barabosch"
+  content: "&copy; 2020&ndash;2026 Thomas Barabosch &middot; Made with ❤️ and AI assistance 🤖 &middot; [details](/about/#ai-use)"
 
 # Permalinks
 permalink: /:title/
