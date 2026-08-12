@@ -170,11 +170,11 @@ bool IsVminitdArgumentPresent() {
 }
 ```
 
-The complete C++17 example is available in [`apple_container_detect`](https://github.com/tbarabosch/apple_container_detect). Its runner starts an Ubuntu container, compiles the probe inside the disposable guest and prints both results:
+The complete C++17 example is available in [`apple_container_detect`](https://github.com/tbarabosch/macos-re/tree/main/apple_container_detect). Its runner starts an Ubuntu container, compiles the probe inside the disposable guest and prints both results:
 
 ```console
-$ git clone https://github.com/tbarabosch/apple_container_detect.git
-$ cd apple_container_detect
+$ git clone https://github.com/tbarabosch/macos-re.git
+$ cd macos-re/apple_container_detect
 $ ./run.sh
 ...
 Checking for traces of Apple containerization...
