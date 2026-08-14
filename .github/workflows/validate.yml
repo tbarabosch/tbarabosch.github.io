@@ -1,0 +1,35 @@
+name: Validate site
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby and locked gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Check generated tag catalog
+        run: scripts/update-tags.sh --check
+
+      - name: Test tag generation and Git hook
+        run: scripts/test-update-tags.sh
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --trace
+
+      - name: Validate generated site
+        run: ruby scripts/validate-site.rb

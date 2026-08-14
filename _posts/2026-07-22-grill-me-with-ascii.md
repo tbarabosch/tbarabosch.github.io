@@ -1,6 +1,7 @@
 ---
 title: 'Grill me with ASCII'
 date: '2026-07-22T12:00:00+02:00'
+last_modified_at: '2026-07-22T12:00:00+02:00'
 author: tbarabosch
 layout: post
 tags:

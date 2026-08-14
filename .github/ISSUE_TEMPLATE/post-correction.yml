@@ -1,0 +1,35 @@
+name: Post correction
+description: Report a factual or technical issue in a published article.
+title: "[Correction] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping keep the technical material accurate. Do not include secrets, personal data, credentials, or live malware samples.
+  - type: input
+    id: article
+    attributes:
+      label: Article URL
+      placeholder: https://tbarabosch.com/example-post/
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should be corrected?
+      description: Identify the passage and explain the technical or factual problem.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence
+      description: Optional links to primary documentation, source code, or research.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I have not included secrets, personal data, credentials, or live malware samples.
+          required: true

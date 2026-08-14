@@ -1,6 +1,7 @@
 ---
 title: 'Trap fuzzing: random instructions, real bugs'
 date: '2026-08-11T12:00:00+02:00'
+last_modified_at: '2026-08-11T12:00:00+02:00'
 author: tbarabosch
 layout: post
 tags:

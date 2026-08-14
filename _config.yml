@@ -11,6 +11,11 @@ lang: en-US
 # Site title
 title: "Thomas Barabosch"
 
+# Author identity used by visible post metadata and machine-readable SEO data.
+author:
+  name: "Thomas Barabosch"
+  url: "https://tbarabosch.com/about/"
+
 # A description of your site for meta tag, search engine results.
 description: "Systems security, reverse engineering, threat research, incident response, and AI Engineering."
 
@@ -27,8 +32,10 @@ apple_touch_icon: images/apple-touch-icon.png
 
 # Site navigation - each item must have a title and a url.
 navigation:
-  - text: Tags
-    url: /tags/
+  - text: Topics
+    url: /topics/
+  - text: Archive
+    url: /archive/
   - text: About
     url: /about/
   - text: Contact
@@ -36,6 +43,8 @@ navigation:
 
 # Utility navigation is visually separated from the primary page links.
 utility_navigation:
+  - text: Search
+    url: /search/
   - text: RSS
     url: /feed.xml
 
@@ -48,6 +57,30 @@ permalink: /:title/
 
 # Conversion
 markdown: kramdown
+
+# Existing long-form posts use this marker to define their reusable excerpt.
+excerpt_separator: "<!--more-->"
+
+# Plugins are already pinned by the github-pages bundle.
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# The default social preview remains separate from the visible page design.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image:
+        path: /images/social-card.png
+        width: 1200
+        height: 630
+
+social:
+  name: "Thomas Barabosch"
+  links:
+    - "https://github.com/tbarabosch"
+    - "https://www.linkedin.com/in/thomas-barabosch-3328b4256/"
 
 # Sass
 sass:

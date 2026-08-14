@@ -1,6 +1,7 @@
 ---
 title: 'The Last Engineer in the Loop'
 date: '2026-08-03T12:00:00+02:00'
+last_modified_at: '2026-08-03T12:00:00+02:00'
 author: tbarabosch
 layout: post
 tags:

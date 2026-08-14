@@ -2,6 +2,7 @@
 id: 62
 title: 'Provoke a kernel panic in FreeBSD'
 date: '2020-12-23T11:52:54+00:00'
+last_modified_at: '2020-12-23T11:52:54+00:00'
 author: tbarabosch
 layout: post
 tags:

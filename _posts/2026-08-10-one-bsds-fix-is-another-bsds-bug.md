@@ -1,8 +1,10 @@
 ---
 title: 'One BSD’s fix is another BSD’s bug'
 date: '2026-08-10T18:00:00+02:00'
+last_modified_at: '2026-08-10T18:00:00+02:00'
 author: tbarabosch
 layout: post
+toc: true
 tags:
   - systems security
   - FreeBSD
@@ -15,6 +17,13 @@ A source-code fix describes two things at once. It shows how the code should loo
 Years ago I turned this question into a research prototype called [HistRepo](https://github.com/tbarabosch/bsd-histrepo). It collected the histories of several BSD projects, selected commits that looked like bug fixes and searched the other source trees for code resembling the pre-fix version. The implementation was rather crude. The idea was not.
 
 <!--more-->
+
+<nav class="post-toc" aria-labelledby="contents-heading" markdown="1">
+<p id="contents-heading" class="manual-label">CONTENTS</p>
+
+* TOC
+{:toc}
+</nav>
 
 ## A patch is also a search signature
 

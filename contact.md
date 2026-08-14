@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Contact
+description: Ways to contact Thomas Barabosch about security research, technical corrections, and professional topics.
 section_label: CHANNELS
 permalink: /contact/
 ---

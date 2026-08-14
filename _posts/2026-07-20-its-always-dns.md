@@ -1,6 +1,7 @@
 ---
 title: "It's always DNS"
 date: '2026-07-20T12:00:00+02:00'
+last_modified_at: '2026-07-20T12:00:00+02:00'
 author: tbarabosch
 layout: post
 tags:

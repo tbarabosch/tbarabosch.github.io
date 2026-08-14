@@ -1,6 +1,7 @@
 ---
 title: 'Learn to quickly detect RC4 encryption in (malicious) binaries'
 date: '2020-12-23T17:00:00+00:00'
+last_modified_at: '2020-12-23T17:00:00+00:00'
 author: tbarabosch
 layout: post
 tags:

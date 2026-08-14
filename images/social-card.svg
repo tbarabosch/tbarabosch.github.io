@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Thomas Barabosch</title>
+  <desc id="desc">Social preview card for a blog about systems security, reverse engineering, threat research, incident response, and AI engineering.</desc>
+  <rect width="1200" height="630" fill="#f7f5ee"/>
+  <g fill="#151515" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace">
+    <text x="96" y="128" font-size="38" font-weight="700">THOMAS BARABOSCH(7)</text>
+    <path d="M96 166H1104" stroke="#b9b6ab" stroke-width="2"/>
+    <text x="96" y="252" font-size="31" font-weight="700">SYSTEMS SECURITY / REVERSE ENGINEERING</text>
+    <text x="96" y="320" font-size="31" font-weight="700">THREAT RESEARCH / INCIDENT RESPONSE</text>
+    <text x="96" y="388" font-size="31" font-weight="700">AI ENGINEERING</text>
+    <path d="M96 476H1104" stroke="#b9b6ab" stroke-width="2"/>
+    <text x="96" y="536" fill="#5f5f5f" font-size="25">tbarabosch.com</text>
+  </g>
+</svg>

@@ -1,8 +1,10 @@
 ---
 title: 'How I contain OSS supply-chain risk with Apple Containers'
 date: '2026-07-16T12:00:00+02:00'
+last_modified_at: '2026-07-16T12:00:00+02:00'
 author: tbarabosch
 layout: post
+toc: true
 tags:
   - AI tooling
   - software supply chain
@@ -18,6 +20,13 @@ Package installation can execute code. [npm runs lifecycle scripts](https://docs
 This was already a problem before agentic programming. Agents just make it much easier to cross this boundary quickly and repeatedly.
 
 <!--more-->
+
+<nav class="post-toc" aria-labelledby="contents-heading" markdown="1">
+<p id="contents-heading" class="manual-label">CONTENTS</p>
+
+* TOC
+{:toc}
+</nav>
 
 ## The current threat landscape
 

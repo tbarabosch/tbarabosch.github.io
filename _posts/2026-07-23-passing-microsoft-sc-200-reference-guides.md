@@ -1,6 +1,7 @@
 ---
 title: 'Passing Microsoft SC-200: Exam and KQL Reference Guides'
 date: '2026-07-23T14:09:40+02:00'
+last_modified_at: '2026-07-23T14:09:40+02:00'
 author: tbarabosch
 layout: post
 tags:

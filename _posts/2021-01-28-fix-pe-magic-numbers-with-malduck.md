@@ -1,8 +1,10 @@
 ---
 title: 'Learn how to fix PE magic numbers with Malduck'
 date: '2021-01-28T07:00:00+00:00'
+last_modified_at: '2021-01-28T07:00:00+00:00'
 author: tbarabosch
 layout: post
+toc: true
 tags:
   - malware analysis
   - reverse engineering
@@ -12,6 +14,13 @@ tags:
 Malware often corrupts the Portable Executable (PE) header to hinder its analysis. By overwriting parts of the PE header, malware evades simple memory dumpers and thwarts proper loading by analysis tools. If we’re lucky then malware only overwrites the magic numbers of the PE header (`MZ` and `PE`) and leaves the rest of the header intact. We can fix such corrupted PE headers with ease. All we need is a little bit of knowledge about the PE format and the right tool to manipulate memory dumps.
 
 <!--more-->
+
+<nav class="post-toc" aria-labelledby="contents-heading" markdown="1">
+<p id="contents-heading" class="manual-label">CONTENTS</p>
+
+* TOC
+{:toc}
+</nav>
 
 First, we’ll learn how to identify such corrupted PE headers quickly with a hexeditor. Next, we’ll see how to manipulate memory dumps with [Malduck](https://malduck.readthedocs.io/en/latest/). This section gives you a head start on how to use this great Python module effectively. Finally, we are putting it all together and write a script to fix PE magic numbers of a corrupted PE header.
 
