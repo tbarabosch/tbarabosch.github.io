@@ -14,13 +14,11 @@ layout: default
   <section class="manual-section" aria-labelledby="recent-heading">
     <h2 id="recent-heading" class="manual-label">RECENT CHANGES</h2>
     <ol class="article-list">
-      {% for post in changed_posts limit: 10 %}
-      {% assign published_date = post.date | date: "%Y-%m-%d" %}
+      {% for post in changed_posts limit: 5 %}
       {% assign changed_date = post.last_modified_at | default: post.date | date: "%Y-%m-%d" %}
-      <li class="article-row change-row">
+      <li class="article-row">
         <time class="article-date" datetime="{{ changed_date }}">{{ changed_date }}</time>
         <a class="article-title" href="{{ site.baseurl }}{{ post.url }}" rel="bookmark">{{ post.title }}</a>
-        <span class="change-status">{% if changed_date == published_date %}new{% else %}updated{% endif %}</span>
       </li>
       {% endfor %}
     </ol>

@@ -76,15 +76,34 @@ layout: default
     {% capture correction_body %}Article: {{ page.url | absolute_url }}{% endcapture %}
     <section class="manual-section post-support" aria-labelledby="feedback-heading">
       <h2 id="feedback-heading" class="manual-label">FEEDBACK</h2>
-      <p>
-        <a href="https://github.com/tbarabosch/tbarabosch.github.io/issues/new?template=post-correction.yml&amp;title={{ correction_title | url_encode }}">Report a correction on GitHub</a>
-        <span aria-hidden="true"> / </span>
-        <a href="mailto:oss@tbarabosch.com?subject={{ correction_subject | url_encode }}&amp;body={{ correction_body | url_encode }}">send a correction by email</a>
+      <p class="post-support-inline-actions">
+        <a class="post-support-link" href="https://github.com/tbarabosch/tbarabosch.github.io/issues/new?template=post-correction.yml&amp;title={{ correction_title | url_encode }}">
+          {% include channel-icon.html name="github" %}
+          <span>Report a correction on GitHub</span>
+        </a>
+        <span class="post-support-separator" aria-hidden="true">/</span>
+        <a class="post-support-link" href="mailto:oss@tbarabosch.com?subject={{ correction_subject | url_encode }}&amp;body={{ correction_body | url_encode }}">
+          {% include channel-icon.html name="email" %}
+          <span>send a correction by email</span>
+        </a>
       </p>
     </section>
     <section class="manual-section post-support" aria-labelledby="follow-heading">
       <h2 id="follow-heading" class="manual-label">FOLLOW</h2>
-      <p><a href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS</a></p>
+      <ul class="post-support-actions">
+        <li>
+          <a class="post-support-link" href="{{ '/feed.xml' | relative_url }}">
+            {% include channel-icon.html name="rss" %}
+            <span>Subscribe via RSS</span>
+          </a>
+        </li>
+        <li>
+          <a class="post-support-link" href="https://www.linkedin.com/in/thomas-barabosch-3328b4256/">
+            {% include channel-icon.html name="linkedin" %}
+            <span>Connect on LinkedIn</span>
+          </a>
+        </li>
+      </ul>
     </section>
   </article><!-- .manual-page -->
 

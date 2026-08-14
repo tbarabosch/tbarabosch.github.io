@@ -1,4 +1,4 @@
-$paper: #f7f5ee;
+$paper: #f3eedf;
 $ink: #151515;
 $muted: #5f5f5f;
 $rule: #b9b6ab;
@@ -796,10 +796,6 @@ a.tag-pill:focus-visible {
   grid-template-columns: 10ch minmax(0, 1fr);
 }
 
-.change-row {
-  grid-template-columns: 10ch minmax(0, 1fr) max-content;
-}
-
 .article-date,
 .archive-top-link {
   color: $muted;
@@ -808,12 +804,6 @@ a.tag-pill:focus-visible {
 
 .article-title {
   min-width: 0;
-}
-
-.change-status {
-  color: $muted;
-  font-size: 0.7rem;
-  text-transform: uppercase;
 }
 
 .manual-action {
@@ -845,14 +835,27 @@ a.tag-pill:focus-visible {
 }
 
 .post-support > p,
-.post-support-list {
+.post-support-list,
+.post-support-actions {
   margin-left: $manual-indent;
   max-width: $prose-width;
 }
 
-.post-support-list {
+.post-support-list,
+.post-support-actions {
   list-style: none;
   padding: 0;
+}
+
+.post-support-inline-actions {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.4rem;
+}
+
+.post-support-actions li + li {
+  margin-top: 0.35rem;
 }
 
 .post-support-list li {
@@ -931,12 +934,20 @@ a.tag-pill:focus-visible {
   margin-top: 0.75rem;
 }
 
-.contact-link {
+.contact-link,
+.post-support-link {
   align-items: center;
   display: inline-flex;
-  font-family: $mono-font;
   gap: 0.5rem;
   width: fit-content;
+}
+
+.contact-link {
+  font-family: $mono-font;
+}
+
+.post-support-link {
+  min-height: 1.5rem;
 }
 
 .contact-icon {
@@ -1010,6 +1021,7 @@ a.tag-pill:focus-visible {
   .topic-overview,
   .post-support > p,
   .post-support-list,
+  .post-support-actions,
   .search-controls {
     margin-left: $manual-indent-small;
   }
@@ -1036,8 +1048,7 @@ a.tag-pill:focus-visible {
   }
 
   .article-row,
-  .article-list.compact .article-row,
-  .change-row {
+  .article-list.compact .article-row {
     grid-template-columns: 1fr;
     margin-bottom: 0.8rem;
   }

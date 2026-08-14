@@ -249,10 +249,9 @@
   4. Existing footer
 - The homepage H1 and positioning statement are established content and must
   not change during unrelated work.
-- `RECENT CHANGES` shows the ten newest or substantively updated posts, sorted
-  by `last_modified_at` descending. Each entry is labeled `NEW` when its change
-  date equals its publication date and `UPDATED` otherwise, and the section
-  links to the complete archive.
+- `RECENT CHANGES` shows the five newest or substantively updated posts, sorted
+  by `last_modified_at` descending. Each entry shows its change date and title
+  without a status label, and the section links to the complete archive.
 - `TOPICS` shows all five expertise areas. Each displays its total article
   count, the two most recently changed matching posts, and a full-topic link.
   Cross-topic membership is intentional.
@@ -274,7 +273,7 @@
 - Preserve the post-ending sections:
   - `SEE ALSO` for previous/next articles and matching topics
   - `FEEDBACK` for the GitHub correction form and prefilled email fallback
-  - `FOLLOW` for the full-content RSS feed
+  - `FOLLOW` for the full-content RSS feed and LinkedIn profile
 - Correction links must include enough article context to identify the page.
   GitHub and email activate only after an explicit reader click.
 - Keep the GitHub correction issue form's required article URL and correction
@@ -310,8 +309,9 @@
 - Use restrained ASCII-inspired structure through section labels, aligned
   metadata, simple rules, and small markers. Do not ship fragile ASCII box art
   as responsive interface chrome.
-- Tag pills and the existing small inline SVG contact icons are intentional.
-  New graphical conventions must be equally restrained.
+- Tag pills and the small inline SVG channel icons used on contact and post
+  support links are intentional. New graphical conventions must be equally
+  restrained.
 - Preserve a visible-on-focus skip link and programmatic focus on the main
   content target.
 - Keep interactive navigation and reading controls at least 24 by 24 CSS

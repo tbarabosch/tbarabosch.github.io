@@ -310,6 +310,32 @@ post_records.each do |post|
     errors << "#{post[:relative]}: toc: true did not generate a contents section"
   end
 
+  feedback_section = html[/<section\b[^>]*aria-labelledby\s*=\s*(["'])feedback-heading\1[^>]*>.*?<\/section>/im]
+  if feedback_section
+    feedback_links = html_values(feedback_section, "a", "href")
+    github_correction = feedback_links.find { |href| href.start_with?("https://github.com/tbarabosch/tbarabosch.github.io/issues/new?") }
+    email_correction = feedback_links.find { |href| href.start_with?("mailto:oss@tbarabosch.com?") }
+    errors << "#{post[:relative]}: GitHub correction link is missing article context" unless github_correction&.include?("title=")
+    unless email_correction&.include?("subject=") && email_correction.include?("body=")
+      errors << "#{post[:relative]}: email correction link is missing article context"
+    end
+    errors << "#{post[:relative]}: feedback links must include GitHub and email icons" unless feedback_section.scan(/class="contact-icon"/i).length == 2
+  else
+    errors << "#{post[:relative]}: generated post is missing the FEEDBACK section"
+  end
+
+  follow_section = html[/<section\b[^>]*aria-labelledby\s*=\s*(["'])follow-heading\1[^>]*>.*?<\/section>/im]
+  if follow_section
+    follow_links = html_values(follow_section, "a", "href")
+    errors << "#{post[:relative]}: FOLLOW must link to /feed.xml" unless follow_links.include?("/feed.xml")
+    linkedin_url = "https://www.linkedin.com/in/thomas-barabosch-3328b4256/"
+    errors << "#{post[:relative]}: FOLLOW must link to LinkedIn" unless follow_links.include?(linkedin_url)
+    errors << "#{post[:relative]}: FOLLOW must say Connect on LinkedIn" unless follow_section.include?("Connect on LinkedIn")
+    errors << "#{post[:relative]}: FOLLOW links must include RSS and LinkedIn icons" unless follow_section.scan(/class="contact-icon"/i).length == 2
+  else
+    errors << "#{post[:relative]}: generated post is missing the FOLLOW section"
+  end
+
   json_ld_text = html.scan(/<script\b[^>]*type\s*=\s*(["'])application\/ld\+json\1[^>]*>(.*?)<\/script>/im).map(&:last).first
   next unless json_ld_text
 
@@ -327,6 +353,23 @@ post_records.each do |post|
   end
 end
 
+contact_page = SITE.join("contact/index.html")
+if contact_page.file?
+  html = contact_page.read
+  contact_links = html_values(html, "a", "href")
+  expected_contact_links = [
+    "https://github.com/tbarabosch",
+    "https://www.linkedin.com/in/thomas-barabosch-3328b4256/",
+    "mailto:oss@tbarabosch.com"
+  ]
+  expected_contact_links.each do |href|
+    errors << "contact page is missing #{href}" unless contact_links.include?(href)
+  end
+  errors << "contact page must render three channel icons" unless html.scan(/class="contact-icon"/i).length == 3
+else
+  errors << "contact page is missing"
+end
+
 homepage = SITE.join("index.html")
 if homepage.file?
   html = homepage.read
@@ -336,6 +379,23 @@ if homepage.file?
     errors << "homepage must place RECENT CHANGES before TOPICS"
   end
   errors << "homepage H1 changed unexpectedly" unless html.match?(/<h1[^>]*class="manual-title"[^>]*>Thomas Barabosch<\/h1>/)
+
+  recent_section = html[/<section\b[^>]*aria-labelledby\s*=\s*(["'])recent-heading\1[^>]*>.*?<\/section>/im]
+  if recent_section
+    recent_rows = recent_section.scan(/<li\b[^>]*class\s*=\s*(["'])[^"']*\barticle-row\b[^"']*\1[^>]*>/i).length
+    generated_post_count = post_records.count { |post| generated_target(post[:route]).file? }
+    expected_recent_rows = [generated_post_count, 5].min
+    unless recent_rows == expected_recent_rows
+      errors << "homepage must show #{expected_recent_rows} recent articles; found #{recent_rows}"
+    end
+    if recent_section.match?(/\bchange-status\b/i) || recent_section.match?(/>\s*(?:new|updated)\s*</i)
+      errors << "homepage recent articles must not display status badges"
+    end
+    archive_links = html_values(recent_section, "a", "href")
+    errors << "homepage recent articles must link to /archive/" unless archive_links.include?("/archive/")
+  else
+    errors << "homepage is missing the RECENT CHANGES section"
+  end
 end
 
 robots = SITE.join("robots.txt")
@@ -363,8 +423,11 @@ if feed.file?
 end
 
 compiled_css = SITE.join("assets/css/style.css")
-if compiled_css.file? && compiled_css.read.match?(%r{(?:@import|url\()[^)]*https?://}i)
-  errors << "compiled CSS loads a remote resource"
+if compiled_css.file?
+  css = compiled_css.read
+  errors << "compiled CSS loads a remote resource" if css.match?(%r{(?:@import|url\()[^)]*https?://}i)
+  errors << "compiled CSS must use #f3eedf for the html background" unless css.match?(/html\s*\{[^}]*background:\s*#f3eedf/i)
+  errors << "compiled CSS must use #f3eedf for the body background" unless css.match?(/body\s*\{[^}]*background:\s*#f3eedf/i)
 end
 
 search_page = SITE.join("search/index.html")
