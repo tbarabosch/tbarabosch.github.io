@@ -1,6 +1,7 @@
 ---
 title: 'Detecting Apple Container from inside the guest'
 date: '2026-08-12T12:00:00+02:00'
+last_modified_at: '2026-08-12T12:00:00+02:00'
 author: tbarabosch
 layout: post
 tags:

@@ -2,9 +2,9 @@
 layout: default
 ---
 
-<main id="main-content" class="main-content">
+<main id="main-content" class="main-content" tabindex="-1">
 
-  <article class="manual-page">
+  <article class="manual-page" data-canonical-url="{{ page.url | absolute_url }}">
     <section class="manual-section" aria-labelledby="post-title">
       <p class="manual-label">NAME</p>
       <div class="manual-name">
@@ -14,8 +14,20 @@ layout: default
     <section class="manual-section" aria-labelledby="metadata-heading">
       <h2 id="metadata-heading" class="manual-label">METADATA</h2>
       <dl class="post-meta">
-        <dt>date</dt>
+        <dt>author</dt>
+        <dd><a href="{{ '/about/' | relative_url }}" rel="author">{{ site.author.name }}</a></dd>
+        <dt>published</dt>
         <dd><time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%Y-%m-%d" }}</time></dd>
+        {% assign published_date = page.date | date: "%Y-%m-%d" %}
+        {% assign modified_date = page.last_modified_at | default: page.date | date: "%Y-%m-%d" %}
+        {% unless modified_date == published_date %}
+        <dt>updated</dt>
+        <dd><time datetime="{{ modified_date }}">{{ modified_date }}</time></dd>
+        {% endunless %}
+        {% assign post_word_count = content | strip_html | number_of_words %}
+        {% assign reading_minutes = post_word_count | plus: 199 | divided_by: 200 %}
+        <dt>length</dt>
+        <dd>{{ reading_minutes }} min read</dd>
         {% if page.tags and page.tags != empty %}
         <dt class="post-tags-label">tags</dt>
         <dd class="post-tags">
@@ -35,6 +47,44 @@ layout: default
       <div class="post-content">
         {{content}}
       </div><!-- .post-content -->
+    </section>
+    <section class="manual-section post-support" aria-labelledby="see-also-heading">
+      <h2 id="see-also-heading" class="manual-label">SEE ALSO</h2>
+      <ul class="post-support-list">
+        {% if page.previous %}
+        <li><span>previous</span> <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a></li>
+        {% endif %}
+        {% if page.next %}
+        <li><span>next</span> <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a></li>
+        {% endif %}
+        {% for topic in site.data.topics %}
+          {% assign topic_match = false %}
+          {% for tag in page.tags %}
+            {% if topic.tags contains tag %}
+              {% assign topic_match = true %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% if topic_match %}
+        <li><span>topic</span> <a href="{{ '/topics/' | relative_url }}#{{ topic.slug }}">{{ topic.name }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+    {% capture correction_title %}Correction: {{ page.title }}{% endcapture %}
+    {% capture correction_subject %}Correction: {{ page.title }}{% endcapture %}
+    {% capture correction_body %}Article: {{ page.url | absolute_url }}{% endcapture %}
+    <section class="manual-section post-support" aria-labelledby="feedback-heading">
+      <h2 id="feedback-heading" class="manual-label">FEEDBACK</h2>
+      <p>
+        <a href="https://github.com/tbarabosch/tbarabosch.github.io/issues/new?template=post-correction.yml&amp;title={{ correction_title | url_encode }}">Report a correction on GitHub</a>
+        <span aria-hidden="true"> / </span>
+        <a href="mailto:oss@tbarabosch.com?subject={{ correction_subject | url_encode }}&amp;body={{ correction_body | url_encode }}">send a correction by email</a>
+      </p>
+    </section>
+    <section class="manual-section post-support" aria-labelledby="follow-heading">
+      <h2 id="follow-heading" class="manual-label">FOLLOW</h2>
+      <p><a href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS</a></p>
     </section>
   </article><!-- .manual-page -->
 

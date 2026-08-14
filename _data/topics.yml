@@ -1,0 +1,34 @@
+- name: "Systems Security"
+  slug: systems-security
+  tags:
+    - "systems security"
+    - "FreeBSD"
+    - "OpenBSD"
+    - "NetBSD"
+    - "virtualization"
+    - "Apple Containers"
+    - "fuzzing"
+- name: "Reverse Engineering"
+  slug: reverse-engineering
+  tags:
+    - "reverse engineering"
+    - "malware analysis"
+    - "IDA"
+- name: "Threat Research"
+  slug: threat-research
+  tags:
+    - "threat hunting"
+    - "VirusTotal"
+    - "YARA"
+- name: "Incident Response"
+  slug: incident-response
+  tags:
+    - "incident response"
+    - "security operations"
+    - "Microsoft Sentinel"
+- name: "AI Engineering"
+  slug: ai-engineering
+  tags:
+    - "AI tooling"
+    - "skill development"
+    - "Prolog"

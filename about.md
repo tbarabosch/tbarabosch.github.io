@@ -1,6 +1,7 @@
 ---
 layout: page
 title: 'About me'
+description: Background, professional focus, and AI-use notes for security researcher Thomas Barabosch.
 date: '2020-12-22T09:31:44+00:00'
 section_label: PROFILE
 ---

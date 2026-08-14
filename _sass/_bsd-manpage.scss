@@ -59,6 +59,24 @@ body {
   width: 1px;
 }
 
+.skip-link {
+  background: $ink;
+  color: $paper;
+  font-family: $mono-font;
+  left: 0.75rem;
+  padding: 0.45rem 0.65rem;
+  position: fixed;
+  top: 0.75rem;
+  transform: translateY(-200%);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  outline: 2px solid $ink;
+  outline-offset: 2px;
+  transform: translateY(0);
+}
+
 a {
   color: $ink;
   text-decoration: underline;
@@ -190,6 +208,11 @@ pre code {
   padding: 0;
 }
 
+.post-content :not(pre) > code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 div.highlighter-rouge {
   position: relative;
 }
@@ -209,6 +232,26 @@ div.language-shell.highlighter-rouge::before {
 
 div.language-console.highlighter-rouge::before {
   content: "[ SESSION ]";
+}
+
+div.language-text.highlighter-rouge::before {
+  content: "[ TEXT ]";
+}
+
+div.language-cpp.highlighter-rouge::before {
+  content: "[ C++ ]";
+}
+
+div.language-swift.highlighter-rouge::before {
+  content: "[ SWIFT ]";
+}
+
+div.language-prolog.highlighter-rouge::before {
+  content: "[ PROLOG ]";
+}
+
+div.language-diff.highlighter-rouge::before {
+  content: "[ DIFF ]";
 }
 
 div.language-yaml.highlighter-rouge::before {
@@ -236,6 +279,11 @@ div.language-python.highlighter-rouge::before,
 div.language-bash.highlighter-rouge::before,
 div.language-shell.highlighter-rouge::before,
 div.language-console.highlighter-rouge::before,
+div.language-text.highlighter-rouge::before,
+div.language-cpp.highlighter-rouge::before,
+div.language-swift.highlighter-rouge::before,
+div.language-prolog.highlighter-rouge::before,
+div.language-diff.highlighter-rouge::before,
 div.language-yaml.highlighter-rouge::before,
 div.language-dockerfile.highlighter-rouge::before,
 div.language-markdown.highlighter-rouge::before,
@@ -254,6 +302,55 @@ div.highlighter-rouge[data-language]::before {
   top: 0;
   transform: translateY(-50%);
   z-index: 1;
+}
+
+.code-copy {
+  background: $paper;
+  border: 1px solid $rule;
+  color: $muted;
+  cursor: pointer;
+  font-family: $mono-font;
+  font-size: 0.68rem;
+  line-height: 1;
+  min-height: 1.5rem;
+  padding: 0.25rem 0.4rem;
+  position: absolute;
+  right: 0.45rem;
+  top: 0.35rem;
+  z-index: 2;
+}
+
+.code-copy:hover,
+.code-copy:focus-visible {
+  background: $ink;
+  border-color: $ink;
+  color: $paper;
+  outline: 0;
+}
+
+.heading-permalink {
+  color: $muted;
+  font-size: 0.8em;
+  font-weight: 400;
+  opacity: 0.55;
+  text-decoration: none;
+}
+
+.heading-permalink:hover,
+.heading-permalink:focus-visible {
+  opacity: 1;
+}
+
+.full-image-link {
+  display: block;
+  width: fit-content;
+}
+
+.full-image-link:hover,
+.full-image-link:focus-visible {
+  background: transparent;
+  outline: 1px solid $ink;
+  outline-offset: 0.2rem;
 }
 
 // Rouge token classes. Keep punctuation and ordinary names in the base ink.
@@ -486,6 +583,12 @@ figcaption {
   text-decoration: none;
 }
 
+.site-navigation a {
+  align-items: center;
+  display: inline-flex;
+  min-height: 1.5rem;
+}
+
 .site-navigation a[aria-current="page"] {
   color: $ink;
   font-weight: 700;
@@ -552,6 +655,24 @@ figcaption {
 .post-content > p:has(object),
 .post-content > p:has(video) {
   max-width: none;
+}
+
+.post-toc {
+  border-bottom: 1px solid $rule;
+  border-top: 1px solid $rule;
+  margin: 1.75rem 0;
+  max-width: $prose-width;
+  padding: 0.85rem 0;
+}
+
+.post-toc .manual-label {
+  margin-bottom: 0.55rem;
+}
+
+.post-toc ul {
+  font-family: $mono-font;
+  font-size: 0.82rem;
+  margin: 0;
 }
 
 .profile-portrait {
@@ -675,6 +796,10 @@ a.tag-pill:focus-visible {
   grid-template-columns: 10ch minmax(0, 1fr);
 }
 
+.change-row {
+  grid-template-columns: 10ch minmax(0, 1fr) max-content;
+}
+
 .article-date,
 .archive-top-link {
   color: $muted;
@@ -683,6 +808,110 @@ a.tag-pill:focus-visible {
 
 .article-title {
   min-width: 0;
+}
+
+.change-status {
+  color: $muted;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.manual-action {
+  font-family: $mono-font;
+  font-size: 0.78rem;
+  margin: 0.75rem 0 0 $manual-indent;
+}
+
+.topic-overview {
+  margin-left: $manual-indent;
+}
+
+.topic-overview-section + .topic-overview-section {
+  margin-top: 1.35rem;
+}
+
+.topic-heading {
+  font-size: 0.9rem;
+  margin: 0 0 0.45rem;
+}
+
+.topic-heading span {
+  color: $muted;
+  font-weight: 400;
+}
+
+.topic-overview .article-list {
+  padding-left: $manual-indent-small;
+}
+
+.post-support > p,
+.post-support-list {
+  margin-left: $manual-indent;
+  max-width: $prose-width;
+}
+
+.post-support-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-support-list li {
+  display: grid;
+  gap: 0.25rem 1rem;
+  grid-template-columns: 8ch minmax(0, 1fr);
+}
+
+.post-support-list li + li {
+  margin-top: 0.35rem;
+}
+
+.post-support-list span {
+  color: $muted;
+  font-family: $mono-font;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.search-controls {
+  margin-left: $manual-indent;
+  max-width: $prose-width;
+}
+
+.search-controls label {
+  display: block;
+  font-family: $mono-font;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.search-controls input {
+  appearance: none;
+  background: $paper;
+  border: 1px solid $rule;
+  border-radius: 0;
+  color: $ink;
+  font: inherit;
+  padding: 0.45rem 0.55rem;
+  width: 100%;
+}
+
+.search-controls input:focus-visible {
+  border-color: $ink;
+  outline: 2px solid $ink;
+  outline-offset: 2px;
+}
+
+.search-status,
+.search-empty {
+  color: $muted;
+  font-family: $mono-font;
+  font-size: 0.78rem;
+  margin: 0.45rem 0 0;
+}
+
+.search-results [hidden] {
+  display: none;
 }
 
 .contact-list {
@@ -777,6 +1006,14 @@ a.tag-pill:focus-visible {
     margin-left: $manual-indent-small;
   }
 
+  .manual-action,
+  .topic-overview,
+  .post-support > p,
+  .post-support-list,
+  .search-controls {
+    margin-left: $manual-indent-small;
+  }
+
   .guide-previews {
     grid-template-columns: 1fr;
   }
@@ -799,7 +1036,8 @@ a.tag-pill:focus-visible {
   }
 
   .article-row,
-  .article-list.compact .article-row {
+  .article-list.compact .article-row,
+  .change-row {
     grid-template-columns: 1fr;
     margin-bottom: 0.8rem;
   }
@@ -807,5 +1045,55 @@ a.tag-pill:focus-visible {
   .contact-item {
     gap: 0.1rem;
     grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  html,
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  body {
+    font-size: 11pt;
+    padding: 0;
+  }
+
+  .site {
+    max-width: none;
+    padding: 0;
+  }
+
+  .site-navigation,
+  .site-footer,
+  .skip-link,
+  .code-copy,
+  .heading-permalink,
+  .post-support {
+    display: none !important;
+  }
+
+  .manual-name,
+  .post-content,
+  .post-meta {
+    margin-left: 0;
+  }
+
+  pre {
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+
+  a {
+    color: #000;
+  }
+
+  .manual-page[data-canonical-url]::after {
+    content: "Canonical URL: " attr(data-canonical-url);
+    display: block;
+    font-family: $mono-font;
+    font-size: 8pt;
+    margin-top: 1.5rem;
   }
 }

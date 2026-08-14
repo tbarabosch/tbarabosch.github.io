@@ -44,14 +44,14 @@ IMAGE_NAME=my-jekyll-image scripts/build-site.sh
 
 Do not fall back to host `bundle`, `jekyll`, `gem install`, or other host Ruby commands when Apple Containers is unavailable.
 
-The tag generator has a dependency-free shell test suite. Run it inside the image created by the canonical build:
+The tag generator and generated-site validator are dependency-free. Run them inside the image created by the canonical build:
 
 ```bash
 container run --rm \
   --volume "$PWD:/workspace" \
   --workdir /workspace \
   tbarabosch-github-io-jekyll \
-  bash -lc 'scripts/test-update-tags.sh'
+  bash -lc 'scripts/test-update-tags.sh && ruby scripts/validate-site.rb'
 ```
 
 If `IMAGE_NAME` was overridden for the build, use that image name for the test container as well.
@@ -70,7 +70,7 @@ The pre-commit hook:
 2. Regenerates `_data/tags.yml`.
 3. Stages the generated tag catalog with the commit.
 
-Only tags used by at least two distinct posts are included in the public tag index. `_data/tags.yml` is generated and must not be edited manually.
+Every tag used by a post is included in the public tag index, including tags used once. `_data/tags.yml` is generated and must not be edited manually.
 
 Post tags must use a YAML block list:
 
@@ -101,6 +101,7 @@ Normal editing uses the first command. CI-style validation uses `--check`; the p
 | `_sass/_bsd-manpage.scss` | Main visual system and responsive styles |
 | `assets/css/style.scss` | Jekyll Sass entry point |
 | `_data/tags.yml` | Generated public tag catalog |
+| `_data/topics.yml` | Curated expertise areas and their matching tags |
 | `_data/social.json` | Offsite link metadata |
 | `assets/images/posts/<post-slug>/` | Local images belonging to a post |
 | `assets/files/` | Downloadable documents referenced by the site |
@@ -115,6 +116,7 @@ Create posts under `_posts/` with standard front matter:
 ---
 title: 'Example post title'
 date: '2026-07-27T10:00:00+02:00'
+last_modified_at: '2026-07-27T10:00:00+02:00'
 author: tbarabosch
 layout: post
 tags:
@@ -122,6 +124,16 @@ tags:
   - reverse engineering
 ---
 ```
+
+Keep `last_modified_at` equal to the publication date until the article receives a substantive technical revision. Every post except intentionally topic-neutral `site notes` must match at least one tag in `_data/topics.yml`.
+
+For long posts with at least two sections, opt into Kramdown's build-time contents list:
+
+```yaml
+toc: true
+```
+
+Insert the standard `CONTENTS` block after the excerpt separator. It remains usable without JavaScript; the local script only adds heading permalinks and reading conveniences.
 
 Use local post images with absolute site paths:
 
@@ -181,7 +193,7 @@ container run --rm \
   --volume "$PWD:/workspace" \
   --workdir /workspace \
   tbarabosch-github-io-jekyll \
-  bash -lc 'scripts/test-update-tags.sh'
+  bash -lc 'scripts/test-update-tags.sh && ruby scripts/validate-site.rb'
 ```
 
 Do not commit `_site/`, Jekyll caches, local Bundler state, or `vendor/bundle/`. Keep changes focused, preserve external research citations, and never add secrets, credentials, trackers, or live malware samples.

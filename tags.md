@@ -1,10 +1,11 @@
 ---
 layout: default
 title: Tags
+description: Browse every granular technology and security tag used by articles on tbarabosch.com.
 permalink: /tags/
 ---
 
-<main id="main-content" class="main-content">
+<main id="main-content" class="main-content" tabindex="-1">
   <section class="manual-section" aria-labelledby="name-heading">
     <p class="manual-label">NAME</p>
     <div class="manual-name">

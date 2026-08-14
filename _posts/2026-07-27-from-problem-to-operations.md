@@ -1,8 +1,10 @@
 ---
 title: 'From Problem to Operations: An Engineering Workflow for Security Teams'
 date: '2026-07-27T10:00:00+02:00'
+last_modified_at: '2026-07-27T10:00:00+02:00'
 author: tbarabosch
 layout: post
+toc: true
 tags:
   - engineering
   - incident response
@@ -31,6 +33,13 @@ Put differently:
 That system needs more than code. It needs evidence, a clear problem statement, a reviewed design, safe delivery, feedback from production, useful documentation, trained users and an owner.
 
 <!--more-->
+
+<nav class="post-toc" aria-labelledby="contents-heading" markdown="1">
+<p id="contents-heading" class="manual-label">CONTENTS</p>
+
+* TOC
+{:toc}
+</nav>
 
 ## A running example: detecting MFA fatigue
 

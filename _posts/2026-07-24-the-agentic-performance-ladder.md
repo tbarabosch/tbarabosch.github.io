@@ -1,8 +1,10 @@
 ---
 title: 'The Agentic Performance Ladder: Python, Native Kernels, and Metal'
 date: '2026-07-24T12:00:00+02:00'
+last_modified_at: '2026-07-24T12:00:00+02:00'
 author: tbarabosch
 layout: post
+toc: true
 tags:
   - AI tooling
   - macOS
@@ -39,6 +41,13 @@ clear, known-good Python
 This is much easier with a coding agent than it used to be. Codex is the concrete agent I used for the example in this post, but the pattern is not product-specific. The useful capability is the loop: inspect the real code, make a bounded change, run the compiler and harness, study the result, and repeat. OpenAI describes a similar use case as using Codex in a [scored improvement loop](https://developers.openai.com/codex/use-cases). Here the score is not an abstract eval. It is correctness first, then measured search and wall time.
 
 <!--more-->
+
+<nav class="post-toc" aria-labelledby="contents-heading" markdown="1">
+<p id="contents-heading" class="manual-label">CONTENTS</p>
+
+* TOC
+{:toc}
+</nav>
 
 ## A benchmark made for the ladder
 

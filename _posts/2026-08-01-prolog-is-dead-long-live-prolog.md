@@ -1,8 +1,10 @@
 ---
 title: 'Prolog is dead, long live Prolog!'
 date: '2026-08-01T12:00:00+02:00'
+last_modified_at: '2026-08-01T12:00:00+02:00'
 author: tbarabosch
 layout: post
+toc: true
 tags:
   - AI tooling
   - reverse engineering
@@ -30,6 +32,13 @@ I do not want to stretch the word *hallucination* until it means every incorrect
 That narrower problem suggests an old solution. Let the language model translate and explain. Let a symbolic engine perform the deduction.
 
 <!--more-->
+
+<nav class="post-toc" aria-labelledby="contents-heading" markdown="1">
+<p id="contents-heading" class="manual-label">CONTENTS</p>
+
+* TOC
+{:toc}
+</nav>
 
 ## Make the reasoning executable
 

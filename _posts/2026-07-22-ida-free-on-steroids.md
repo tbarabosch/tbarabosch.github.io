@@ -1,8 +1,10 @@
 ---
 title: 'IDA Free on Steroids: Automating Reverse Engineering with IDC and Codex'
 date: '2026-07-22T14:00:00+02:00'
+last_modified_at: '2026-07-22T14:00:00+02:00'
 author: tbarabosch
 layout: post
+toc: true
 tags:
   - AI tooling
   - reverse engineering
@@ -12,6 +14,13 @@ tags:
 IDA Free can disassemble a binary, debug it, save the database and even decompile x86 code through Hex-Rays' cloud. For a personal project that is already a serious toolbox. The painful omission appears when I want to automate a repetitive job: Free has no IDAPython API or C++ SDK. Its one built-in scripting route is IDC.
 
 <!--more-->
+
+<nav class="post-toc" aria-labelledby="contents-heading" markdown="1">
+<p id="contents-heading" class="manual-label">CONTENTS</p>
+
+* TOC
+{:toc}
+</nav>
 
 That sounds like a dead end only until the task becomes concrete. IDC is awkward, but it can still walk functions and cross-references, inspect names and flags, rename database objects, write comments and produce reports. In this post I use it to turn a stripped ELF's anonymous functions into an explainable first-pass map. Then I package the knowledge required to write such scripts as a Codex skill, so I do not have to relearn IDC for every small reversing job.
 

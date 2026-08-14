@@ -1,6 +1,7 @@
 ---
 title: 'Detect API hashing with YARA'
 date: '2021-03-16T16:42:31+00:00'
+last_modified_at: '2021-03-16T16:42:31+00:00'
 author: tbarabosch
 layout: post
 tags:
