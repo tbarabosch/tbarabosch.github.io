@@ -53,7 +53,9 @@
 - Keep the voice direct, technically grounded, and personal without becoming
   promotional. Favor precise nouns and verbs, active constructions where
   natural, and paragraphs centered on one technical idea.
-- Use first person only for actions, findings, measurements, experience, or
+- Prefer second person for reader actions, generic procedures, and explanations
+  of how an API is used. Prefer a neutral construction when no actor matters.
+  Reserve first person for actions, findings, measurements, experience, or
   opinions supported by author notes, repository artifacts, or other evidence.
   Never invent an action, anecdote, judgment, result, or belief to make prose
   sound personal.
