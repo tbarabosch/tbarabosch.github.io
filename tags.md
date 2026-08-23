@@ -18,19 +18,23 @@ permalink: /tags/
     <ul class="tag-list tag-index">
       {% for tag_name in site.data.tags %}
       {% assign tag_posts = site.tags[tag_name] %}
+      {% if tag_posts and tag_posts != empty %}
       <li>
         <a class="tag-pill" href="#{{ tag_name | slugify }}">{{ tag_name }} ({{ tag_posts | size }})</a>
       </li>
+      {% endif %}
       {% endfor %}
     </ul>
   </section>
 
   {% for tag_name in site.data.tags %}
-  {% assign tag_posts = site.tags[tag_name] | sort: "date" | reverse %}
+  {% assign tag_posts = site.tags[tag_name] %}
+  {% if tag_posts and tag_posts != empty %}
+  {% assign sorted_tag_posts = tag_posts | sort: "date" | reverse %}
   <section class="manual-section tag-section" aria-labelledby="{{ tag_name | slugify }}">
     <h2 id="{{ tag_name | slugify }}" class="manual-label">{{ tag_name }}</h2>
     <ol class="article-list compact">
-      {% for post in tag_posts %}
+      {% for post in sorted_tag_posts %}
       <li class="article-row">
         <time class="article-date" datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%Y-%m-%d" }}</time>
         <a class="article-title" href="{{ post.url | relative_url }}" rel="bookmark">{{ post.title }}</a>
@@ -38,5 +42,6 @@ permalink: /tags/
       {% endfor %}
     </ol>
   </section>
+  {% endif %}
   {% endfor %}
 </main><!-- .main-content -->
