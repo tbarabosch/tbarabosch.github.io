@@ -4,6 +4,7 @@ date: '2026-08-27T12:00:00+02:00'
 last_modified_at: '2026-08-27T12:00:00+02:00'
 author: tbarabosch
 layout: post
+permalink: /2026/08/27/preparing-for-bsd-specialist-with-a-one-page-cheat-sheet.html
 tags:
   - systems security
   - FreeBSD

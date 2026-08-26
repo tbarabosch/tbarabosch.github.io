@@ -144,7 +144,8 @@ tracked_posts.each do |relative|
   end
 
   slug = File.basename(relative, ".md").sub(/\A\d{4}-\d{2}-\d{2}-/, "")
-  post_records << { relative: relative, data: data, published_at: published, route: "/#{slug}/" }
+  route = data["permalink"] || "/#{slug}/"
+  post_records << { relative: relative, data: data, published_at: published, route: route }
 end
 
 # Jekyll validates front matter for every source post but omits future-dated
