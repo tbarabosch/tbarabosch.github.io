@@ -70,6 +70,9 @@ unless SITE.directory?
   exit 1
 end
 
+site_config = load_yaml(ROOT.join("_config.yml"))
+builds_future_posts = site_config.is_a?(Hash) && site_config["future"] == true
+
 tracked_posts = Open3.capture2("git", "-C", ROOT.to_s, "ls-files", "--", "_posts/*.md").first.lines.map(&:strip).reject(&:empty?)
 errors << "no tracked posts found" if tracked_posts.empty?
 
@@ -117,6 +120,7 @@ tracked_posts.each do |relative|
     errors << "#{relative}: duplicate post title #{data['title'].inspect}"
   end
 
+  published = nil
   begin
     published = DateTime.parse(data["date"].to_s)
     modified = DateTime.parse(data["last_modified_at"].to_s)
@@ -140,7 +144,13 @@ tracked_posts.each do |relative|
   end
 
   slug = File.basename(relative, ".md").sub(/\A\d{4}-\d{2}-\d{2}-/, "")
-  post_records << { relative: relative, data: data, route: "/#{slug}/" }
+  post_records << { relative: relative, data: data, published_at: published, route: "/#{slug}/" }
+end
+
+# Jekyll validates front matter for every source post but omits future-dated
+# posts from generated collections unless the site explicitly enables them.
+generated_post_records = post_records.select do |post|
+  builds_future_posts || post[:published_at].nil? || post[:published_at] <= DateTime.now
 end
 
 missing_tags = used_tags - catalog_tags.to_set
@@ -295,7 +305,7 @@ html_paths.each do |path|
   end
 end
 
-post_records.each do |post|
+generated_post_records.each do |post|
   output = generated_target(post[:route])
   unless output.file?
     errors << "#{post[:relative]}: generated post is missing at #{post[:route]}"
@@ -409,7 +419,7 @@ sitemap = SITE.join("sitemap.xml")
 if sitemap.file?
   text = sitemap.read
   errors << "sitemap.xml contains no URLs" unless text.include?("<loc>")
-  post_records.each do |post|
+  generated_post_records.each do |post|
     errors << "sitemap.xml is missing #{post[:route]}" unless text.include?("<loc>#{SITE_URL}#{post[:route]}</loc>")
   end
 end
@@ -433,7 +443,7 @@ end
 search_page = SITE.join("search/index.html")
 if search_page.file?
   html = search_page.read
-  errors << "search page must expose every article without JavaScript" unless html.scan(/class="article-row search-result"/).length == post_records.length
+  errors << "search page must expose every published article without JavaScript" unless html.scan(/class="article-row search-result"/).length == generated_post_records.length
   errors << "search page must explain its no-JavaScript fallback" unless html.include?("<noscript>")
 end
 
