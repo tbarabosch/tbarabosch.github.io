@@ -247,16 +247,12 @@
 - Preserve the homepage hierarchy unless the task explicitly changes it:
   1. Existing `NAME` section and H1
   2. `RECENT CHANGES`
-  3. `TOPICS`
-  4. Existing footer
+  3. Existing footer
 - The homepage H1 and positioning statement are established content and must
   not change during unrelated work.
-- `RECENT CHANGES` shows the five newest or substantively updated posts, sorted
+- `RECENT CHANGES` shows the ten newest or substantively updated posts, sorted
   by `last_modified_at` descending. Each entry shows its change date and title
   without a status label, and the section links to the complete archive.
-- `TOPICS` shows all five expertise areas. Each displays its total article
-  count, the two most recently changed matching posts, and a full-topic link.
-  Cross-topic membership is intentional.
 - Preserve these discovery routes:
   - `/topics/` for the complete grouped knowledge index
   - `/archive/` for all posts by original publication year and date
@@ -425,11 +421,12 @@
 
 - The generated-site validator checks internal paths and fragments, required
   post metadata, topic coverage, tag completeness, unique SEO elements, Open
-  Graph data, JSON-LD, sitemap, robots, feed, social image, homepage order,
+  Graph data, JSON-LD, sitemap, robots, feed, social image, homepage structure,
   search fallback, and the absence of remote scripts and trackers.
 - For presentation or interaction changes, also check at approximately 390 px
   and 1280 px that:
-  - the homepage H1 is unchanged and Recent Changes precedes Topics
+  - the homepage H1 is unchanged, Recent Changes follows it, and no topic
+    overview is present
   - no page-level horizontal scrolling occurs
   - fenced code scrolls internally and copies exact source text
   - singleton tags resolve to article lists

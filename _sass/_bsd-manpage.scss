@@ -812,28 +812,6 @@ a.tag-pill:focus-visible {
   margin: 0.75rem 0 0 $manual-indent;
 }
 
-.topic-overview {
-  margin-left: $manual-indent;
-}
-
-.topic-overview-section + .topic-overview-section {
-  margin-top: 1.35rem;
-}
-
-.topic-heading {
-  font-size: 0.9rem;
-  margin: 0 0 0.45rem;
-}
-
-.topic-heading span {
-  color: $muted;
-  font-weight: 400;
-}
-
-.topic-overview .article-list {
-  padding-left: $manual-indent-small;
-}
-
 .post-support > p,
 .post-support-list,
 .post-support-actions {
@@ -1018,7 +996,6 @@ a.tag-pill:focus-visible {
   }
 
   .manual-action,
-  .topic-overview,
   .post-support > p,
   .post-support-list,
   .post-support-actions,

@@ -384,10 +384,13 @@ end
 homepage = SITE.join("index.html")
 if homepage.file?
   html = homepage.read
+  name_position = html.index('id="name-heading"')
   recent_position = html.index("RECENT CHANGES")
-  topics_position = html.index("TOPICS")
-  unless recent_position && topics_position && recent_position < topics_position
-    errors << "homepage must place RECENT CHANGES before TOPICS"
+  unless name_position && recent_position && name_position < recent_position
+    errors << "homepage must place RECENT CHANGES after NAME"
+  end
+  if html.match?(/\bid\s*=\s*(["'])topics-heading\1/i) || html.match?(/\bclass\s*=\s*(["'])[^"']*\btopic-overview\b[^"']*\1/i)
+    errors << "homepage must not include a TOPICS overview"
   end
   errors << "homepage H1 changed unexpectedly" unless html.match?(/<h1[^>]*class="manual-title"[^>]*>Thomas Barabosch<\/h1>/)
 
@@ -395,7 +398,7 @@ if homepage.file?
   if recent_section
     recent_rows = recent_section.scan(/<li\b[^>]*class\s*=\s*(["'])[^"']*\barticle-row\b[^"']*\1[^>]*>/i).length
     generated_post_count = post_records.count { |post| generated_target(post[:route]).file? }
-    expected_recent_rows = [generated_post_count, 5].min
+    expected_recent_rows = [generated_post_count, 10].min
     unless recent_rows == expected_recent_rows
       errors << "homepage must show #{expected_recent_rows} recent articles; found #{recent_rows}"
     end
