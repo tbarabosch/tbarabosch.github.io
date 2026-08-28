@@ -115,8 +115,8 @@ Create posts under `_posts/` with standard front matter:
 ```yaml
 ---
 title: 'Example post title'
-date: '2026-07-27T10:00:00+02:00'
-last_modified_at: '2026-07-27T10:00:00+02:00'
+date: '2026-07-27T12:00:00+02:00'
+last_modified_at: '2026-07-27T12:00:00+02:00'
 author: tbarabosch
 layout: post
 tags:
@@ -126,6 +126,12 @@ tags:
 ```
 
 Keep `last_modified_at` equal to the publication date until the article receives a substantive technical revision. Every post except intentionally topic-neutral `site notes` must match at least one tag in `_data/topics.yml`.
+
+### Scheduling posts
+
+Future-dated posts may be committed to `main` before publication. Jekyll omits them until their complete front-matter `date`, including its time and UTC offset, has passed. GitHub Pages does not rebuild merely because that time arrives, so the `Rebuild GitHub Pages` workflow requests a fresh legacy Pages build every day at 12:17 in `Europe/Madrid`. The standard 12:00 post timestamp therefore publishes shortly after noon; a later timestamp waits for the following daily rebuild.
+
+The workflow can also be run manually from the repository's Actions page. GitHub may delay scheduled workflows during periods of high load, and it may disable them in a public repository after 60 days without repository activity. See GitHub's documentation for [scheduled workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule) and the [Pages rebuild endpoint](https://docs.github.com/en/rest/pages/pages#request-a-github-pages-build).
 
 For long posts with at least two sections, opt into Kramdown's build-time contents list:
 
