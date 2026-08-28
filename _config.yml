@@ -94,5 +94,6 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - ideas.md
   - scripts/
   - vendor/

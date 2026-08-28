@@ -21,6 +21,8 @@
 - Run `git status --short --branch` before editing.
 - Inspect the relevant implementation, content, and current diff before
   deciding what to change.
+- `ideas.md` is a local editorial notebook. Never stage, commit, publish, or
+  otherwise add it to the Git repository.
 - Preserve all user changes, including untracked files. Never assume that an
   unrelated draft, generated-looking file, or partial edit is disposable.
 - Do not rewrite published prose during layout, metadata, taxonomy, tooling,
