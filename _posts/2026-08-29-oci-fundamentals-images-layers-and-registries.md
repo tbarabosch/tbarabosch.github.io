@@ -4,6 +4,20 @@ date: '2026-08-29T12:00:00+02:00'
 last_modified_at: '2026-08-29T12:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/oci-fundamentals-images-layers-and-registries/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'An OCI image is a graph of content-addressed blobs.'
+  eyebrow: 'Systems Security / OCI'
+  panel_label: 'OCI image / content graph'
+  source:
+    language: text
+    occurrence: 2
+  highlight: 'filesystem changes'
+  accent: 'manifest: linux/arm64'
 tags:
   - systems security
   - Apple Containers
