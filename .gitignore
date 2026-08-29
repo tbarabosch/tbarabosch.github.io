@@ -15,5 +15,8 @@ vendor/bundle
 _asset_bundler_cache
 _site
 
+# Local Python environment for social-card artwork
+.venv-social-card/
+
 # Local editorial notes
 /ideas.md

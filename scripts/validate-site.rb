@@ -9,6 +9,7 @@ require "pathname"
 require "set"
 require "uri"
 require "yaml"
+require "zlib"
 
 ROOT = Pathname.new(__dir__).join("..").expand_path
 SITE = ROOT.join("_site")
@@ -63,6 +64,89 @@ def generated_target(path)
   return SITE.join(clean, "index.html") if path.end_with?("/") && SITE.join(clean, "index.html").file?
 
   candidate
+end
+
+def validate_social_png(path, label, errors)
+  unless path.file?
+    errors << "#{label} is missing: #{path.relative_path_from(SITE)}"
+    return
+  end
+
+  png = path.binread
+  signature = "\x89PNG\r\n\x1a\n".b
+  raise "invalid signature" unless png.start_with?(signature)
+
+  offset = signature.bytesize
+  dimensions = nil
+  saw_image_data = false
+  saw_end = false
+  while offset < png.bytesize
+    raise "truncated chunk" if offset + 12 > png.bytesize
+
+    length = png.byteslice(offset, 4).unpack1("N")
+    chunk_end = offset + 12 + length
+    raise "truncated chunk data" if chunk_end > png.bytesize
+
+    type = png.byteslice(offset + 4, 4)
+    data = png.byteslice(offset + 8, length)
+    stored_crc = png.byteslice(offset + 8 + length, 4).unpack1("N")
+    raise "invalid chunk CRC" unless Zlib.crc32(type + data) == stored_crc
+
+    if dimensions.nil?
+      raise "missing initial IHDR" unless type == "IHDR" && length == 13
+
+      dimensions = data.byteslice(0, 8).unpack("NN")
+    elsif type == "IHDR"
+      raise "duplicate IHDR"
+    elsif type == "IDAT"
+      saw_image_data = true
+    elsif type == "IEND"
+      raise "invalid IEND" unless length.zero? && saw_image_data
+
+      saw_end = true
+      raise "data follows IEND" unless chunk_end == png.bytesize
+    end
+    offset = chunk_end
+  end
+  raise "missing IEND" unless saw_end
+
+  width, height = dimensions
+  return if [width, height] == [1_200, 630]
+
+  errors << "#{label} must be 1200x630, got #{width}x#{height}: #{path.relative_path_from(SITE)}"
+rescue StandardError => error
+  errors << "#{label} is not a valid PNG (#{error.message}): #{path.relative_path_from(SITE)}"
+end
+
+def local_social_image(value, label, errors)
+  uri = URI.parse(value)
+  if uri.host
+    unless uri.scheme == "https" && uri.host == "tbarabosch.com" &&
+           uri.port == 443 && uri.userinfo.nil?
+      errors << "#{label} must use a local social image, got #{value.inspect}"
+      return nil
+    end
+  elsif !value.start_with?("/")
+    errors << "#{label} must use an absolute local social-image path, got #{value.inspect}"
+    return nil
+  end
+
+  path = uri.path
+  unless path.start_with?("/")
+    errors << "#{label} has an invalid social-image path: #{value.inspect}"
+    return nil
+  end
+
+  target = SITE.join(path.delete_prefix("/")).cleanpath
+  relative = target.relative_path_from(SITE).to_s
+  if relative == ".." || relative.start_with?("../")
+    errors << "#{label} social image escapes the generated site: #{value.inspect}"
+    return nil
+  end
+  target
+rescue URI::InvalidURIError
+  errors << "#{label} has an invalid Open Graph image URL: #{value.inspect}"
+  nil
 end
 
 unless SITE.directory?
@@ -172,15 +256,7 @@ required_files.each do |relative|
 end
 
 social_card = SITE.join("images/social-card.png")
-if social_card.file?
-  png = social_card.binread
-  if png.byteslice(0, 8) != "\x89PNG\r\n\x1a\n".b || png.bytesize < 24
-    errors << "default social image is not a valid PNG"
-  else
-    width, height = png.byteslice(16, 8).unpack("NN")
-    errors << "default social image must be 1200x630, got #{width}x#{height}" unless [width, height] == [1_200, 630]
-  end
-end
+validate_social_png(social_card, "default social image", errors)
 
 html_paths = SITE.glob("**/*.html").sort
 errors << "generated site contains no HTML" if html_paths.empty?
@@ -188,6 +264,7 @@ errors << "generated site contains no HTML" if html_paths.empty?
 seen_titles = {}
 seen_descriptions = {}
 seen_canonicals = {}
+validated_social_images = Set.new
 
 html_paths.each do |path|
   relative = path.relative_path_from(SITE).to_s
@@ -213,6 +290,13 @@ html_paths.each do |path|
   }.each do |label, values|
     errors << "#{relative}: expected one #{label}, found #{values.length}" unless values.length == 1
     errors << "#{relative}: #{label} is empty" if values.length == 1 && values.first.strip.empty?
+  end
+
+  if og_images.length == 1
+    social_image = local_social_image(og_images.first, relative, errors)
+    if social_image && validated_social_images.add?(social_image.to_s)
+      validate_social_png(social_image, "#{relative} Open Graph image", errors)
+    end
   end
 
   if titles.length == 1

@@ -368,6 +368,12 @@
 - Preserve the local 1200 by 630 monochrome default social image. Per-post
   overrides must also be local and must not add an ordinary-load third-party
   request.
+- Generate configured per-post social cards with
+  `scripts/generate-social-card.py`. The script reads `image` and
+  `social_card` front matter without editing the post, writes a deterministic
+  1200 by 630 PNG under the post's asset directory, and supports a non-writing
+  `--check` mode. Use the exact-pinned, wheel-only artwork requirements in the
+  ignored `.venv-social-card` environment on macOS.
 - Preserve `/sitemap.xml`, `/robots.txt`, and the full-content `/feed.xml` with
   author metadata.
 - Do not add analytics, trackers, remote fonts, remote scripts, social widgets,

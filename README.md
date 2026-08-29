@@ -10,6 +10,7 @@ The site uses a Unix/BSD manpage-inspired design: serif long-form text, monospac
 - Apple Containers available to start locally
 - Git
 - Network access when the container image or Ruby gems must be downloaded
+- Python 3.10 or newer when generating social cards
 
 Ruby, Bundler, and Jekyll must not be installed or run directly on the host.
 
@@ -91,6 +92,66 @@ scripts/update-tags.sh --staged
 
 Normal editing uses the first command. CI-style validation uses `--check`; the pre-commit hook uses `--staged` so unstaged post changes cannot leak into the commit.
 
+## Social cards
+
+Posts may define a local 1200 by 630 image that serves both as their Open Graph
+preview and as an upload for LinkedIn. The generator uses the site's palette,
+SF Mono and Georgia, so run it on macOS.
+
+Create the exact-pinned, wheel-only artwork environment once:
+
+```bash
+python3 -m venv .venv-social-card
+.venv-social-card/bin/python -m pip install \
+  --only-binary=:all: \
+  -r scripts/requirements-social-card.txt
+```
+
+An ASCII card reuses a fenced block already present in its post:
+
+```yaml
+image:
+  path: /assets/images/posts/example-post/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'The mapped image is not the complete file.'
+  eyebrow: 'Reverse Engineering / PE'
+  panel_label: 'PE file / raw offsets'
+  source:
+    language: text
+    occurrence: 1
+  highlight: 'appended bytes'
+  accent: 'overlay candidate'
+```
+
+`highlight` and `accent` are optional, but each configured value must occur
+exactly once in the selected fence. A text card uses the same `image`,
+`subtitle` and `eyebrow` fields with a short text block:
+
+```yaml
+social_card:
+  layout: text
+  subtitle: 'A short description of the result.'
+  eyebrow: 'Systems Security / FreeBSD'
+  panel_label: 'Finding'
+  text: 'One precise sentence that remains readable in a social feed.'
+```
+
+`panel_label` is optional for text cards and defaults to `TEXT`.
+
+Generate or verify a card without changing its post:
+
+```bash
+.venv-social-card/bin/python scripts/generate-social-card.py _posts/example.md
+.venv-social-card/bin/python scripts/generate-social-card.py --check _posts/example.md
+```
+
+The output path must be a PNG directly under the post's matching
+`assets/images/posts/<post-slug>/` directory. Generation replaces only that
+derived PNG and does so atomically; `--check` never writes files.
+
 ## Repository layout
 
 | Path | Purpose |
@@ -105,7 +166,7 @@ Normal editing uses the first command. CI-style validation uses `--check`; the p
 | `_data/social.json` | Offsite link metadata |
 | `assets/images/posts/<post-slug>/` | Local images belonging to a post |
 | `assets/files/` | Downloadable documents referenced by the site |
-| `scripts/` | Build, hook-installation, and tag-maintenance scripts |
+| `scripts/` | Build, validation, artwork, hook-installation, and tag-maintenance scripts |
 | `.githooks/` | Repository-managed Git hooks |
 
 ## Writing posts

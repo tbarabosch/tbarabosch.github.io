@@ -4,6 +4,20 @@ date: '2026-08-28T12:00:00+02:00'
 last_modified_at: '2026-08-28T12:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/what-lives-after-the-last-pe-section/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'The mapped image is not the complete file.'
+  eyebrow: 'Reverse Engineering / PE'
+  panel_label: 'PE file / raw offsets'
+  source:
+    language: text
+    occurrence: 1
+  highlight: 'appended bytes'
+  accent: 'overlay candidate'
 tags:
   - malware analysis
   - reverse engineering
