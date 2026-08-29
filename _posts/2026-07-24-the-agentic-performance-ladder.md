@@ -5,6 +5,20 @@ last_modified_at: '2026-07-24T12:00:00+02:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/the-agentic-performance-ladder/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'Optimize the measured hot path one stage at a time.'
+  eyebrow: 'AI Engineering / Performance'
+  panel_label: 'GPU / candidate mapping'
+  source:
+    language: text
+    occurrence: 7
+  highlight: 'candidate 1048575'
+  accent: 'GPU thread 1048575'
 tags:
   - AI tooling
   - macOS

@@ -4,6 +4,20 @@ date: '2020-12-22T09:58:07+00:00'
 last_modified_at: '2020-12-22T09:58:07+00:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/write-and-load-shellcode-on-macos/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'Assemble bytes, map memory, and hand control to the payload.'
+  eyebrow: 'Reverse Engineering / macOS'
+  panel_label: 'Loader / execution'
+  source:
+    language: console
+    occurrence: 1
+  highlight: 'Hexdump of shellcode:'
+  accent: '$ ./loader shellcodes/exit.bin'
 tags:
   - reverse engineering
   - systems security

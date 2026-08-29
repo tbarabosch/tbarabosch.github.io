@@ -5,6 +5,18 @@ last_modified_at: '2026-08-10T18:00:00+02:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/one-bsds-fix-is-another-bsds-bug/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'The deleted side of a fix can become a search signature in sibling trees.'
+  eyebrow: 'Systems Security / BSDs'
+  panel_label: 'Shared fix / memory leak'
+  source:
+    language: diff
+    occurrence: 1
 tags:
   - systems security
   - FreeBSD

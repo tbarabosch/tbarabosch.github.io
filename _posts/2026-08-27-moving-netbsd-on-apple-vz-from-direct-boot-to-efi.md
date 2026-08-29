@@ -4,6 +4,20 @@ date: '2026-08-27T22:00:00+02:00'
 last_modified_at: '2026-08-27T22:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/moving-netbsd-on-apple-vz-from-direct-boot-to-efi/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'EFI removed guest-specific boot patches and moved closer to stock NetBSD.'
+  eyebrow: 'Systems Security / NetBSD'
+  panel_label: 'Direct boot / EFI'
+  source:
+    language: text
+    occurrence: 1
+  highlight: 'four patch files'
+  accent: 'three generic Virtio patches'
 tags:
   - NetBSD
   - virtualization

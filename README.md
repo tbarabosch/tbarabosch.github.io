@@ -139,7 +139,10 @@ social_card:
   text: 'One precise sentence that remains readable in a social feed.'
 ```
 
-`panel_label` is optional for text cards and defaults to `TEXT`.
+`panel_label` is optional for text cards and defaults to `TEXT`. `title` is
+optional for either layout and provides a shorter display title when the post
+title cannot fit in two readable lines; it does not change the post title,
+permalink or SEO metadata.
 
 Generate or verify a card without changing its post:
 

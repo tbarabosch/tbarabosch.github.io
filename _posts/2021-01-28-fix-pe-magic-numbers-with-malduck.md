@@ -5,6 +5,20 @@ last_modified_at: '2021-01-28T07:00:00+00:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/fix-pe-magic-numbers-with-malduck/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'Repairing MZ and PE can turn an opaque dump back into a parseable file.'
+  eyebrow: 'Reverse Engineering / PE'
+  panel_label: 'Malduck / repair'
+  source:
+    language: console
+    occurrence: 1
+  highlight: 'memdump.bin: data'
+  accent: 'memdump_fixed_header.bin: PE32+ executable (console) x86-64, for MS Windows'
 tags:
   - malware analysis
   - reverse engineering

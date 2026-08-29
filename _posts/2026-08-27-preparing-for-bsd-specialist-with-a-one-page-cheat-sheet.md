@@ -5,6 +5,16 @@ last_modified_at: '2026-08-27T12:00:00+02:00'
 author: tbarabosch
 layout: post
 permalink: /2026/08/27/preparing-for-bsd-specialist-with-a-one-page-cheat-sheet.html
+image:
+  path: /assets/images/posts/preparing-for-bsd-specialist-with-a-one-page-cheat-sheet/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'One page for the commands and configuration files BSDs do not share.'
+  eyebrow: 'Systems Security / BSD'
+  panel_label: 'Exam review'
+  text: 'Compare FreeBSD, NetBSD, and OpenBSD where Linux muscle memory misleads.'
 tags:
   - systems security
   - FreeBSD

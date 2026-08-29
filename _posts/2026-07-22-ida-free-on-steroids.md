@@ -5,6 +5,16 @@ last_modified_at: '2026-07-22T14:00:00+02:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/ida-free-on-steroids/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'IDC gives IDA Free a narrow but useful automation seam.'
+  eyebrow: 'Reverse Engineering / IDA'
+  panel_label: 'Automation path'
+  text: 'Let Codex write bounded IDC, run it in IDA, then inspect the database changes.'
 tags:
   - AI tooling
   - reverse engineering

@@ -4,6 +4,16 @@ date: '2026-07-22T12:00:00+02:00'
 last_modified_at: '2026-07-22T12:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/grill-me-with-ascii/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'A wrong arrow is easier to notice than a wrong paragraph.'
+  eyebrow: 'AI Engineering / Skill Design'
+  panel_label: 'Interview protocol'
+  text: 'Mark decisions [D], assumptions [A], open questions [?], and risks [R].'
 tags:
   - AI tooling
 ---

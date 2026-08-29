@@ -4,6 +4,16 @@ date: '2026-08-26T12:00:00+02:00'
 last_modified_at: '2026-08-26T12:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/preparing-for-gh-500-with-a-final-review-guide/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: "A one-page map of GitHub's security products and their boundaries."
+  eyebrow: 'Systems Security / GitHub'
+  panel_label: 'Final review'
+  text: 'Separate secret protection, supply-chain controls, code security, and CodeQL decisions.'
 tags:
   - systems security
   - GitHub

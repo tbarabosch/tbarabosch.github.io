@@ -5,6 +5,16 @@ last_modified_at: '2026-08-18T12:00:00+02:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/build-a-tiny-linux-vm-with-apple-vz/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'The smallest useful VZ machine needs a kernel, initramfs, and console.'
+  eyebrow: 'Systems Security / Apple VZ'
+  panel_label: 'Direct boot'
+  text: 'VZLinuxBootLoader maps the kernel and initramfs, wires the console, and starts Linux at /bin/sh.'
 tags:
   - virtualization
   - macOS

@@ -4,6 +4,16 @@ date: '2026-08-11T12:00:00+02:00'
 last_modified_at: '2026-08-11T12:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/trap-fuzzing/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'Random instructions drive a rarely tested boundary in privileged code.'
+  eyebrow: 'Systems Security / Fuzzing'
+  panel_label: 'Input boundary'
+  text: 'Generate bytes, execute them in disposable processes, and keep the crashing input.'
 tags:
   - systems security
   - fuzzing

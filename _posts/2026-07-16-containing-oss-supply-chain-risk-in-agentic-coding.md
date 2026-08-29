@@ -5,6 +5,20 @@ last_modified_at: '2026-07-16T12:00:00+02:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/containing-oss-supply-chain-risk-in-agentic-coding/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'Agentic speed is useful only inside an explicit execution boundary.'
+  eyebrow: 'AI Engineering / Supply Chain'
+  panel_label: 'Install / guardrails'
+  source:
+    language: bash
+    occurrence: 1
+  highlight: '--only-binary=:all:'
+  accent: '--ignore-scripts'
 tags:
   - AI tooling
   - software supply chain

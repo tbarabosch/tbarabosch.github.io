@@ -4,6 +4,20 @@ date: '2020-12-23T17:00:00+00:00'
 last_modified_at: '2020-12-23T17:00:00+00:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/detect-rc4-encryption-in-malicious-binaries/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'The key-scheduling loop leaves a recognizable implementation shape.'
+  eyebrow: 'Reverse Engineering / RC4'
+  panel_label: 'RC4 / key scheduling'
+  source:
+    language: text
+    occurrence: 1
+  highlight: 'S[i] := i'
+  accent: 'swap values of S[i] and S[j]'
 tags:
   - malware analysis
   - reverse engineering

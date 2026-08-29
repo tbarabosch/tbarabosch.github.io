@@ -4,6 +4,16 @@ date: '2026-08-14T22:41:06+02:00'
 last_modified_at: '2026-08-14T22:41:06+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/finding-things-on-this-blog-got-easier/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'Topics, archive, tags, and local search divide the navigation work.'
+  eyebrow: 'Site Notes / Discovery'
+  panel_label: 'Discovery routes'
+  text: '/topics/ for expertise, /archive/ for time, /tags/ for detail, /search/ for recall.'
 tags:
   - site notes
 ---

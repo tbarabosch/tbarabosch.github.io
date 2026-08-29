@@ -5,6 +5,21 @@ last_modified_at: '2026-08-18T21:30:00+02:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/porting-netbsd-to-apple-vz/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  title: 'Porting NetBSD to Apple VZ'
+  layout: ascii
+  subtitle: 'A direct AArch64 boot turned VZ Virtio devices into NetBSD hardware.'
+  eyebrow: 'Systems Security / NetBSD'
+  panel_label: 'Build / boot'
+  source:
+    language: console
+    occurrence: 1
+  highlight: '$ make build'
+  accent: '$ make smoke'
 tags:
   - NetBSD
   - virtualization

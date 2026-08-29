@@ -5,6 +5,16 @@ last_modified_at: '2020-12-28T22:51:09+00:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/never-upload-ransomware-samples-to-the-internet/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'A victim-specific sample may expose the victim before analysis begins.'
+  eyebrow: 'Incident Response / Ransomware'
+  panel_label: 'Operational rule'
+  text: 'Keep ransomware samples private; hunt with derived indicators instead.'
 tags:
   - incident response
   - malware analysis

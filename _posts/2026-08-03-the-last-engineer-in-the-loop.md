@@ -4,6 +4,16 @@ date: '2026-08-03T12:00:00+02:00'
 last_modified_at: '2026-08-03T12:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/the-last-engineer-in-the-loop/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'The LLM can produce the code; expertise still has to judge it.'
+  eyebrow: 'AI Engineering / Agentic Coding'
+  panel_label: 'Responsibility'
+  text: 'Architecture, evidence, safety, and the shipping decision remain human work.'
 tags:
   - AI tooling
   - engineering

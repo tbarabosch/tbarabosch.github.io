@@ -4,6 +4,16 @@ date: '2026-08-23T12:00:00+02:00'
 last_modified_at: '2026-08-23T12:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/preparing-for-aws-saa-c03-with-a-final-review-guide/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'One printable page for the service boundaries exam questions exploit.'
+  eyebrow: 'Systems Security / AWS'
+  panel_label: 'Final review'
+  text: 'Compare resilience, cost, limits, endpoints, and the answers that are almost right.'
 tags:
   - systems security
   - AWS

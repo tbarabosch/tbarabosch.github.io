@@ -4,6 +4,20 @@ date: '2021-03-16T16:42:31+00:00'
 last_modified_at: '2021-03-16T16:42:31+00:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/apihash-to-yara/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'Resolve an API hash once, then turn the algorithm into a YARA hunt.'
+  eyebrow: 'Threat Research / YARA'
+  panel_label: 'CRC32 / Sleep'
+  source:
+    language: console
+    occurrence: 1
+  highlight: "b'Sleep'"
+  accent: "'0xcef2eda8'"
 tags:
   - malware analysis
   - reverse engineering

@@ -4,6 +4,16 @@ date: '2020-12-24T12:00:00+00:00'
 last_modified_at: '2020-12-24T12:00:00+00:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/patch-a-windows-api-in-x64dbg/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'Force one call to fail and isolate the behavior you need to observe.'
+  eyebrow: 'Reverse Engineering / x64dbg'
+  panel_label: 'Debugging tactic'
+  text: 'Patch the target process in memory, change only ZwOpenProcess, and keep the experiment reversible.'
 tags:
   - malware analysis
   - reverse engineering

@@ -5,6 +5,20 @@ last_modified_at: '2026-07-27T10:00:00+02:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/from-problem-to-operations/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'Security engineering ends in an observable, maintainable operation.'
+  eyebrow: 'Incident Response / Engineering'
+  panel_label: 'Deployment / escalation'
+  source:
+    language: text
+    occurrence: 4
+  highlight: 'run in shadow'
+  accent: 'automated response?'
 tags:
   - engineering
   - incident response

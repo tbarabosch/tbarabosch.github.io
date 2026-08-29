@@ -4,6 +4,16 @@ date: '2026-07-23T14:09:40+02:00'
 last_modified_at: '2026-07-23T14:09:40+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/passing-microsoft-sc-200-reference-guides/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'Two one-page guides for the exam blueprint and practical KQL.'
+  eyebrow: 'Incident Response / Microsoft Sentinel'
+  panel_label: 'Reference set'
+  text: 'Review product boundaries, detection workflows, Sentinel concepts, and high-signal KQL.'
 tags:
   - security operations
   - threat hunting

@@ -4,6 +4,16 @@ date: '2026-08-10T12:00:00+02:00'
 last_modified_at: '2026-08-10T12:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/giving-every-macos-app-a-security-passport/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'Signed metadata in; concise local explanation out.'
+  eyebrow: 'AI Engineering / macOS'
+  panel_label: 'Security passport'
+  text: 'Collect signatures, entitlements, and sandbox status with ordinary tools; let the local model translate only.'
 tags:
   - AI tooling
   - macOS

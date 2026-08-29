@@ -4,6 +4,16 @@ date: '2026-07-15T10:49:00+02:00'
 last_modified_at: '2026-07-15T10:49:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/virustotal-hunting-cheat-sheet/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'A field reference for turning search modifiers into repeatable hunts.'
+  eyebrow: 'Threat Research / VirusTotal'
+  panel_label: 'Hunting guide'
+  text: 'Start broad, add file or network pivots, and keep the final query ready to paste.'
 tags:
   - threat hunting
   - VirusTotal

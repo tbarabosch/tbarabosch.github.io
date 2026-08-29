@@ -5,6 +5,20 @@ last_modified_at: '2026-08-16T12:00:00+02:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/adopting-a-freebsd-port/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'A simple pkg install is backed by a small, maintained port.'
+  eyebrow: 'Systems Security / FreeBSD'
+  panel_label: 'Port / files'
+  source:
+    language: text
+    occurrence: 2
+  highlight: '|-- distinfo'
+  accent: 'misc/xdelta3/'
 tags:
   - FreeBSD
   - software supply chain

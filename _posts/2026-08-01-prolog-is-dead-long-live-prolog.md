@@ -5,6 +5,20 @@ last_modified_at: '2026-08-01T12:00:00+02:00'
 author: tbarabosch
 layout: post
 toc: true
+image:
+  path: /assets/images/posts/prolog-is-dead-long-live-prolog/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'Let the model translate; let a deterministic engine perform the deduction.'
+  eyebrow: 'AI Engineering / Prolog'
+  panel_label: 'Query / relation'
+  source:
+    language: console
+    occurrence: 1
+  highlight: 'Grandchild = carol'
+  accent: 'Grandchild = dave'
 tags:
   - AI tooling
   - reverse engineering

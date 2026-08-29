@@ -5,6 +5,16 @@ date: '2020-12-23T11:52:54+00:00'
 last_modified_at: '2020-12-23T11:52:54+00:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/provoke-a-kernel-panic-in-freebsd/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'Turn a panic path into a deliberate lab event.'
+  eyebrow: 'Systems Security / FreeBSD'
+  panel_label: 'Controlled crash'
+  text: 'One kernel module, one write through NULL, one intentionally crashed test system.'
 tags:
   - systems security
   - FreeBSD

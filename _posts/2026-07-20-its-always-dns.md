@@ -4,6 +4,16 @@ date: '2026-07-20T12:00:00+02:00'
 last_modified_at: '2026-07-20T12:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/its-always-dns/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: text
+  subtitle: 'The smallest infrastructure change can still become the entire incident.'
+  eyebrow: 'Site Notes / DNS'
+  panel_label: 'Change record'
+  text: 'Custom domain configured. Caches observed. Incident title prepared in advance.'
 tags:
   - site notes
 ---

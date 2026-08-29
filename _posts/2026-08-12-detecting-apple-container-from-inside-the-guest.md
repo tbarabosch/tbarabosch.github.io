@@ -4,6 +4,20 @@ date: '2026-08-12T12:00:00+02:00'
 last_modified_at: '2026-08-12T12:00:00+02:00'
 author: tbarabosch
 layout: post
+image:
+  path: /assets/images/posts/detecting-apple-container-from-inside-the-guest/social-card.png
+  width: 1200
+  height: 630
+social_card:
+  layout: ascii
+  subtitle: 'Guest-visible markers distinguish an Apple container from a generic VZ VM.'
+  eyebrow: 'Systems Security / Apple Containers'
+  panel_label: 'Detection / evidence matrix'
+  source:
+    language: text
+    occurrence: 4
+  highlight: 'yes               yes              likely Apple container'
+  accent: 'likely Apple container'
 tags:
   - Apple Containers
   - virtualization

@@ -216,7 +216,7 @@ def load_card(raw_post_path: Path) -> Card:
     slug = name_match.group("slug")
 
     data, body = parse_front_matter(post_path)
-    title = require_string(data, "title", "front matter")
+    post_title = require_string(data, "title", "front matter")
     tags = data.get("tags")
     if not isinstance(tags, list) or not tags or not all(
         isinstance(tag, str) and tag.strip() for tag in tags
@@ -225,6 +225,7 @@ def load_card(raw_post_path: Path) -> Card:
 
     image = require_mapping(data.get("image"), "image")
     social = require_mapping(data.get("social_card"), "social_card")
+    title = optional_string(social, "title", "social_card") or post_title
     layout = require_string(social, "layout", "social_card").lower()
     if layout not in {"ascii", "text"}:
         raise CardError("social_card.layout must be 'ascii' or 'text'")
