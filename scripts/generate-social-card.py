@@ -73,6 +73,7 @@ class Card:
     panel_label: str
     highlight: str | None = None
     accent: str | None = None
+    panel_image: Path | None = None
 
 
 def px(value: float) -> int:
@@ -198,6 +199,25 @@ def output_path(image: dict[str, object], slug: str) -> Path:
     return candidate
 
 
+def panel_image_path(social: dict[str, object], target: Path) -> Path:
+    raw_path = require_string(social, "asset", "social_card")
+    if not raw_path.startswith("/"):
+        raise CardError("social_card.asset must be an absolute site path")
+
+    posix_path = PurePosixPath(raw_path)
+    if ".." in posix_path.parts or posix_path.suffix.lower() != ".png":
+        raise CardError("social_card.asset must be a PNG without parent traversal")
+
+    candidate = (ROOT / raw_path.removeprefix("/")).resolve(strict=False)
+    if candidate.parent != target.parent or candidate == target:
+        raise CardError(
+            "social_card.asset must be another PNG in the post asset directory"
+        )
+    if not candidate.is_file():
+        raise CardError(f"social_card.asset does not exist: {raw_path}")
+    return candidate
+
+
 def load_card(raw_post_path: Path) -> Card:
     try:
         post_path = raw_post_path.resolve(strict=True)
@@ -227,13 +247,14 @@ def load_card(raw_post_path: Path) -> Card:
     social = require_mapping(data.get("social_card"), "social_card")
     title = optional_string(social, "title", "social_card") or post_title
     layout = require_string(social, "layout", "social_card").lower()
-    if layout not in {"ascii", "text"}:
-        raise CardError("social_card.layout must be 'ascii' or 'text'")
+    if layout not in {"ascii", "image", "text"}:
+        raise CardError("social_card.layout must be 'ascii', 'image', or 'text'")
 
     subtitle = require_string(social, "subtitle", "social_card")
     eyebrow = require_string(social, "eyebrow", "social_card")
     target = output_path(image, slug)
 
+    panel_image = None
     if layout == "ascii":
         panel_label = require_string(social, "panel_label", "social_card")
         source = require_mapping(social.get("source"), "social_card.source")
@@ -246,7 +267,7 @@ def load_card(raw_post_path: Path) -> Card:
         accent = optional_string(social, "accent", "social_card")
         validate_match(content, highlight, "highlight")
         validate_match(content, accent, "accent")
-    else:
+    elif layout == "text":
         forbidden = [
             key
             for key in ("source", "highlight", "accent")
@@ -258,6 +279,21 @@ def load_card(raw_post_path: Path) -> Card:
             )
         panel_label = optional_string(social, "panel_label", "social_card") or "TEXT"
         content = require_string(social, "text", "social_card")
+        highlight = None
+        accent = None
+    else:
+        forbidden = [
+            key
+            for key in ("source", "highlight", "accent", "text")
+            if key in social
+        ]
+        if forbidden:
+            raise CardError(
+                "image layout does not accept: " + ", ".join(sorted(forbidden))
+            )
+        panel_label = require_string(social, "panel_label", "social_card")
+        panel_image = panel_image_path(social, target)
+        content = ""
         highlight = None
         accent = None
 
@@ -273,6 +309,7 @@ def load_card(raw_post_path: Path) -> Card:
         panel_label=panel_label,
         highlight=highlight,
         accent=accent,
+        panel_image=panel_image,
     )
 
 
@@ -487,6 +524,40 @@ def draw_text_panel(draw: ImageDraw.ImageDraw, card: Card) -> None:
         )
 
 
+def draw_image_panel(
+    canvas: Image.Image, draw: ImageDraw.ImageDraw, card: Card
+) -> None:
+    if card.panel_image is None:
+        raise CardError("image layout is missing its panel image")
+
+    panel = (px(64), px(310), px(1136), px(560))
+    draw.rectangle(panel, fill=CODE_BG)
+    try:
+        with Image.open(card.panel_image) as source:
+            screenshot = source.convert("RGB")
+    except OSError as error:
+        raise CardError(f"cannot read social_card.asset: {error}") from error
+
+    available_width = panel[2] - panel[0]
+    available_height = panel[3] - panel[1]
+    scale = min(
+        available_width / screenshot.width,
+        available_height / screenshot.height,
+    )
+    screenshot = screenshot.resize(
+        (
+            round(screenshot.width * scale),
+            round(screenshot.height * scale),
+        ),
+        Image.Resampling.LANCZOS,
+    )
+    image_x = panel[0] + (available_width - screenshot.width) // 2
+    image_y = panel[1] + (available_height - screenshot.height) // 2
+    canvas.paste(screenshot, (image_x, image_y))
+    draw.rectangle(panel, outline=RULE, width=px(1))
+    draw_panel_label(draw, card.panel_label, load_font(MONO_PATH, 17))
+
+
 def render(card: Card) -> bytes:
     canvas = Image.new("RGB", (px(WIDTH), px(HEIGHT)), PAPER)
     draw = ImageDraw.Draw(canvas)
@@ -538,8 +609,10 @@ def render(card: Card) -> bytes:
 
     if card.layout == "ascii":
         draw_ascii_panel(draw, card)
-    else:
+    elif card.layout == "text":
         draw_text_panel(draw, card)
+    else:
+        draw_image_panel(canvas, draw, card)
 
     draw.line(
         (margin, px(586), px(WIDTH - 64), px(586)), fill=RULE, width=px(1)

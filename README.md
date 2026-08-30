@@ -140,9 +140,21 @@ social_card:
 ```
 
 `panel_label` is optional for text cards and defaults to `TEXT`. `title` is
-optional for either layout and provides a shorter display title when the post
+optional for all layouts and provides a shorter display title when the post
 title cannot fit in two readable lines; it does not change the post title,
 permalink or SEO metadata.
+
+An image card puts an existing local PNG in the panel. The source must be a
+different PNG in the same post asset directory as the generated card:
+
+```yaml
+social_card:
+  layout: image
+  subtitle: 'A short description of the result.'
+  eyebrow: 'Reverse Engineering / Entropy'
+  panel_label: 'entropy-map / 72 bins'
+  asset: /assets/images/posts/example-post/terminal-output.png
+```
 
 Generate or verify a card without changing its post:
 
