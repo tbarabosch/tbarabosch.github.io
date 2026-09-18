@@ -222,7 +222,7 @@
 
 - `_data/topics.yml` is the curated expertise taxonomy. Agents must not add,
   rename, remove, reorder, or remap topics without explicit author approval.
-- The five topics and their matching tags are:
+- The six topics and their matching tags are:
   - **Systems Security:** `systems security`, `FreeBSD`, `OpenBSD`, `NetBSD`,
     `virtualization`, `Apple Containers`, `fuzzing`
   - **Reverse Engineering:** `reverse engineering`, `malware analysis`, `IDA`
@@ -230,6 +230,7 @@
   - **Incident Response:** `incident response`, `security operations`,
     `Microsoft Sentinel`
   - **AI Engineering:** `AI tooling`, `skill development`, `Prolog`
+  - **Programming Languages:** `programming languages`
 - If a proposed article does not fit an existing topic, ask before changing
   the taxonomy. Do not force an inaccurate tag merely to pass validation.
 - Granular tags may be added when they accurately describe an article. Tag

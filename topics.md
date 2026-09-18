@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Topics
-description: Browse tbarabosch.com by systems security, reverse engineering, threat research, incident response, and AI engineering.
+description: Browse tbarabosch.com by systems security, reverse engineering, threat research, incident response, AI engineering, and programming languages.
 permalink: /topics/
 ---
 
@@ -9,7 +9,7 @@ permalink: /topics/
   <section class="manual-section" aria-labelledby="name-heading">
     <p class="manual-label">NAME</p>
     <div class="manual-name">
-      <h1 id="name-heading" class="manual-title">topics</h1><span class="manual-summary"> - Browse the knowledge base by security discipline.</span>
+      <h1 id="name-heading" class="manual-title">topics</h1><span class="manual-summary"> - Browse the knowledge base by technical subject.</span>
     </div>
   </section>
 
