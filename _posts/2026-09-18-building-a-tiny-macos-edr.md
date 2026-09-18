@@ -30,7 +30,7 @@ One of my favorite ways to answer questions like these is to build a tiny versio
 
 The result is a tiny EDR proof of concept: one sensor, a JSONL log, three simple rules and one response action. It is not an attempt to reproduce a production EDR product. The goal is to isolate a few core mechanisms so that I can inspect every event and every decision. No service, no external rule language and no third-party Python packages.
 
-On macOS, the natural sensor is the Endpoint Security framework. Direct clients need a restricted entitlement, but Apple already ships an entitled exploration tool called `eslogger`. This post first looks at Endpoint Security, what `eslogger` provides and why the tool is useful for debugging and malware analysis. Then we use its events to build the complete one-file Python PoC.
+On macOS, the natural sensor is Apple's [Endpoint Security framework](https://developer.apple.com/documentation/endpointsecurity). Direct clients need a restricted entitlement, but Apple already ships an entitled exploration tool called [`eslogger`](https://developer.apple.com/videos/play/wwdc2022/110345/). This post first looks at Endpoint Security, what `eslogger` provides and why the tool is useful for debugging and malware analysis. Then we use its events to build the complete one-file Python PoC.
 
 <!--more-->
 
@@ -69,11 +69,11 @@ Hand's book discusses Windows facilities such as process callbacks, filesystem m
 
 ## Endpoint Security on macOS
 
-Apple's [Endpoint Security framework](https://developer.apple.com/documentation/EndpointSecurity) is a C API for monitoring security-relevant activity. A client subscribes to event types and receives messages about executions, forks, signals, mounts, file operations and many other actions. Newer macOS versions have added events for logins, launch items, Gatekeeper and XProtect as well.
+Apple's [Endpoint Security framework](https://developer.apple.com/documentation/endpointsecurity) is a C API for monitoring security-relevant activity. A client subscribes to specific [`es_event_type_t` values](https://developer.apple.com/documentation/endpointsecurity/es_event_type_t) and receives messages about executions, forks, signals, mounts, file operations and many other actions. Apple's [WWDC22 Endpoint Security session](https://developer.apple.com/videos/play/wwdc2022/110345/) documents the macOS Ventura additions for authentication, login sessions, Gatekeeper and XProtect.
 
-There are two event families worth remembering. An `AUTH` event arrives before an operation and asks the client for a decision. A `NOTIFY` event arrives after the operation. Apple's [`es_message_t` documentation](https://developer.apple.com/documentation/endpointsecurity/es_message_t) describes both. If you want to deny an execution before the first instruction runs, you need `AUTH_EXEC`. If you receive `NOTIFY_EXEC` and kill the process afterwards, you are reacting. That distinction matters when we add the response action below.
+There are two event families worth remembering. An `AUTH` event arrives before an operation and asks the client for a decision. A `NOTIFY` event arrives after the operation. Apple's [`es_message_t` documentation](https://developer.apple.com/documentation/endpointsecurity/es_message_t) describes both. If you want to deny an execution before the first instruction runs, you need [`AUTH_EXEC`](https://developer.apple.com/documentation/endpointsecurity/es_event_type_auth_exec). If you receive `NOTIFY_EXEC` and kill the process afterwards, you are reacting. That distinction matters when we add the response action below.
 
-The API is not available to every program. Direct clients need the restricted [`com.apple.developer.endpoint-security.client` entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.endpoint-security.client). A production Endpoint Security client normally lives in a system extension bundled with an application. System extensions run in user space and replaced many jobs that previously required third-party kernel extensions; Apple's [deployment documentation](https://support.apple.com/guide/deployment/system-extensions-in-macos-depa5fb8376f/web) explains how they are approved and managed.
+The API is not available to every program. Direct clients need the restricted [`com.apple.developer.endpoint-security.client` entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.endpoint-security.client). A production Endpoint Security client normally lives in a system extension bundled with an application. Apple's [System Extensions and DriverKit overview](https://developer.apple.com/system-extensions/) explains the user-space model, while the [installation documentation](https://developer.apple.com/documentation/systemextensions/installing-system-extensions-and-drivers/) covers bundling, activation and entitlement checks.
 
 The entitlement and system-extension model is appropriate for software with system-wide visibility and response capabilities. For this 303-line learning project, I needed a way to study notification events without distributing a system extension. `ctypes` can load a C library, but it cannot obtain an Apple entitlement on my behalf. Direct access to Endpoint Security was therefore outside the scope of this experiment.
 
@@ -93,7 +93,7 @@ fork
 ...
 ```
 
-Listing the event names needs no special privilege. Collecting events does. `eslogger(1)` requires root and Full Disk Access for the program that starts it. If you run it from Terminal, grant Terminal Full Disk Access, quit it completely, reopen it and then use `sudo`. Otherwise, you may spend some quality time wondering why the command that needs to see the system cannot see the system.
+Listing the event names needs no special privilege. Collecting events does. Apple states that [`eslogger` must run as superuser and that its responsible process needs Full Disk Access](https://developer.apple.com/videos/play/wwdc2022/110345/). If you run it from Terminal, grant Terminal Full Disk Access, quit it completely, reopen it and then use `sudo`. Otherwise, you may spend some quality time wondering why the command that needs to see the system cannot see the system.
 
 A narrow process-lifecycle capture takes one command:
 
@@ -101,9 +101,9 @@ A narrow process-lifecycle capture takes one command:
 sudo /usr/bin/eslogger exec fork exit > process-events.jsonl
 ```
 
-JSON Lines is a convenient format here. Python can read one event at a time without loading the complete capture into memory, and tools such as `jq` can inspect the same file. The event-specific objects resemble their Endpoint Security counterparts. For example, an `exec` event contains the target process, arguments and environment values documented for [`es_event_exec_t`](https://developer.apple.com/documentation/endpointsecurity/es_event_exec_t).
+[JSON Lines](https://jsonlines.org/) is a convenient format here. Python can read one event at a time without loading the complete capture into memory, and tools such as [`jq`](https://jqlang.org/) can inspect the same file. Apple says that [`eslogger` structures its JSON like the native C representation](https://developer.apple.com/videos/play/wwdc2022/110345/). For example, an `exec` event contains the target process, arguments and environment values documented for [`es_event_exec_t`](https://developer.apple.com/documentation/endpointsecurity/es_event_exec_t).
 
-Before building anything on top of that output, read the warning in the manual page: the JSON format is not an API and may change without warning. `eslogger` also exposes notification events, not authorization events. It is a tool for exploration and prototyping, which is exactly how Apple presents it in the WWDC session. It is not a shortcut for shipping an Endpoint Security product in Python.
+Before building anything on top of that output, read Apple's warning: [`eslogger` is not intended for use by applications and its output may change in software updates](https://developer.apple.com/videos/play/wwdc2022/110345/). It also exposes notification events, not authorization events. Apple presents it as an exploration and prototyping tool, not as an application API or a replacement for a native Endpoint Security client.
 
 ## eslogger is useful beyond this PoC
 
@@ -117,7 +117,7 @@ sudo /usr/bin/eslogger --select /bin/zsh exec create rename
 
 This helps when debugging installers, launch agents, shell scripts and system utilities. It can also show what changed between two versions of an application. Start a narrow capture, reproduce the behavior and compare the results. No debugger injection and no modifications to the program are required.
 
-For malware analysis, the same approach works inside an isolated and disposable analysis system. `eslogger` can record the processes, files and launch items created by a sample. Running the logger does not provide containment, so the usual laboratory isolation still applies.
+For malware analysis, the same approach works inside an isolated and disposable analysis system. `eslogger` can record the processes, files and launch items created by a sample. Apple explicitly calls out [observing malicious software behavior and prototyping detections](https://developer.apple.com/videos/play/wwdc2022/110345/) as uses for the tool. Running the logger does not provide containment, so the usual laboratory isolation still applies.
 
 It is also handy for detection development. Capture a benign reproducer once, sanitize the JSONL file and replay it while working on a rule. This is much nicer than launching the same command every time an index into a nested dictionary is wrong.
 
@@ -129,13 +129,13 @@ For the PoC, I settled on seven event types:
 
 | Event | Reason for keeping it |
 | --- | --- |
-| `exec` | Supplies the new executable, arguments and target PID. |
-| `fork` | Preserves basic process-lifecycle context for later work. |
-| `exit` | Marks the other end of a process lifetime. |
-| `create` | Exposes new filesystem objects, including launch-item paths. |
-| `rename` | Catches files moved into an interesting destination. |
-| `unlink` | Records removal without subscribing to every write. |
-| `btm_launch_item_add` | Reports a Background Task Management launch-item addition. |
+| [`exec`](https://developer.apple.com/documentation/endpointsecurity/es_event_exec_t) | Supplies the new executable, arguments and target PID. |
+| [`fork`](https://developer.apple.com/documentation/endpointsecurity/es_event_fork_t) | Preserves basic process-lifecycle context for later work. |
+| [`exit`](https://developer.apple.com/documentation/endpointsecurity/es_event_exit_t) | Marks the other end of a process lifetime. |
+| [`create`](https://developer.apple.com/documentation/endpointsecurity/es_event_create_t) | Exposes new filesystem objects, including launch-item paths. |
+| [`rename`](https://developer.apple.com/documentation/endpointsecurity/es_event_rename_t) | Catches files moved into an interesting destination. |
+| [`unlink`](https://developer.apple.com/documentation/endpointsecurity/es_event_unlink_t) | Records removal without subscribing to every write. |
+| [`btm_launch_item_add`](https://developer.apple.com/documentation/endpointsecurity/es_event_btm_launch_item_add_t) | Reports a Background Task Management launch-item addition. |
 
 Only three events or event combinations produce alerts: execution from a temporary directory, inline code passed to a shell or interpreter and launch-item persistence. `fork`, `exit` and `unlink` are simply recorded. An event can be useful during an investigation without being suspicious by itself.
 
@@ -197,7 +197,7 @@ def live_stream():
     return child, child.stdout
 ```
 
-`Popen` leaves `eslogger` in the current process group. This matters because `eslogger` suppresses events from its own group. The Python process can therefore write the evidence file without collecting its own writes and creating a feedback loop.
+Python's [`subprocess.Popen`](https://docs.python.org/3.11/library/subprocess.html#subprocess.Popen) leaves `eslogger` in the current process group because the script does not request a new session or process group. The local `eslogger(1)` manual documents that the tool suppresses events generated by processes in its own process group. The Python process can therefore write the evidence file without collecting its own writes and creating a feedback loop.
 
 I leave standard error attached to the terminal. If `eslogger` complains about Full Disk Access or exits for another reason, the message should be visible instead of disappearing into a pipe. The main loop reads one line at a time. Malformed JSON is reported and skipped, but a failed log write stops the program. The evidence and alert stream should remain consistent.
 
@@ -234,7 +234,7 @@ def redact_environment(message):
 
 Apple's [`es_event_exec_t`](https://developer.apple.com/documentation/endpointsecurity/es_event_exec_t) includes arguments and environment variables. Environment values are unnecessary for these rules and frequently contain credentials, so they are removed. Arguments stay because the inline-interpreter rule needs `-c` and `-e`. They can also contain secrets, which means the resulting log is still sensitive.
 
-The file is opened with append mode, `O_NOFOLLOW` where available and permission mode `0600`. There is no rotation. “Delete the lab log when finished” is the entire retention policy.
+The file is opened with append mode, [`O_NOFOLLOW`](https://docs.python.org/3.11/library/os.html#os.O_NOFOLLOW) where available and permission mode `0600`. There is no rotation. “Delete the lab log when finished” is the entire retention policy.
 
 Offline replay uses the same processing path without root:
 
@@ -299,11 +299,11 @@ def process_path(pid):
     return buffer.value.decode("utf-8", "replace")
 ```
 
-`ctypes` is part of the standard library and `libproc` ships with macOS. The path returned by `proc_pidpath` must match the path from the event after resolving symlinks. Only then does the script call `os.kill(pid, signal.SIGKILL)`.
+[`ctypes`](https://docs.python.org/3.11/library/ctypes.html) is part of the standard library and `libproc` ships with macOS. Apple publishes the [`proc_pidpath` declaration in XNU's `libproc.h`](https://github.com/apple-oss-distributions/xnu/blob/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/libsyscall/wrappers/libproc/libproc.h#L102), where the surrounding header also labels these process-information interfaces private and subject to change. The path returned by `proc_pidpath` must match the path from the event after resolving symlinks. Only then does the script call [`os.kill(pid, signal.SIGKILL)`](https://docs.python.org/3.11/library/os.html#os.kill).
 
 Even this check is not perfect. The process can exit between `proc_pidpath` and `os.kill`, and the PID can theoretically be reused. Therefore, the alert says `signal-sent`, not `process-killed`. The script knows that the system call succeeded; it does not wait for proof that the process died.
 
-Also remember that `eslogger` gave us a notification. The program has already started by the time Python sees it. This PoC demonstrates post-execution response; an entitled native Endpoint Security client could instead use `AUTH_EXEC` for a pre-execution decision.
+Also remember that `eslogger` gave us a notification. The program has already started by the time Python sees it. This PoC demonstrates post-execution response; an entitled native Endpoint Security client could instead use [`AUTH_EXEC`](https://developer.apple.com/documentation/endpointsecurity/es_event_type_auth_exec) for a pre-execution decision.
 
 ## So, does it work?
 
@@ -347,8 +347,8 @@ These are test cases, not malware simulations. The plist is empty and never pass
 
 The complete [`mini_edr` directory at commit `9ef9883`](https://github.com/tbarabosch/macos-re/tree/9ef9883b5616328baab5a161da33cc958a537ad4/mini_edr) is small enough to read in one sitting. The PoC deliberately leaves out schema compatibility, dropped-event accounting, process trees, correlation, databases, log rotation, service installation, network telemetry, signing, notarization, quarantine, tamper protection and remote collection. Those are capabilities a production endpoint agent needs, and implementing them would be a different project.
 
-The next technical step would be a native Swift system extension, subject to receiving the Endpoint Security entitlement. Typed Endpoint Security messages would replace the JSON parsing, and `AUTH` events could make pre-execution decisions possible. The client would also need asynchronous processing, load testing, event muting and bounded storage. At that point, 303 lines would be a distant memory.
+The next technical step would be a native Swift [system extension](https://developer.apple.com/system-extensions/), subject to receiving the [Endpoint Security entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.endpoint-security.client). Typed Endpoint Security messages would replace the JSON parsing, and `AUTH` events could make pre-execution decisions possible. The client would also need asynchronous processing, load testing, event muting and bounded storage. At that point, 303 lines would be a distant memory.
 
-YARA scanning would be a useful optional addition for files that triggered a rule. I would also like to revisit my old [`classify_macho.py`](https://github.com/tbarabosch/macos-re/blob/main/malware_toys/classify_macho.py) experiment. It compared several classifiers using only file size, section count and Mach-O header flags. The script has Python 2-era APIs, and the original dataset and evaluation are not good enough for a modern experiment. Even after fixing that, an ML score should provide another hint to an analyst. It should not decide whether a process deserves `SIGKILL`.
+[YARA](https://yara.readthedocs.io/en/stable/) scanning would be a useful optional addition for files that triggered a rule. I would also like to revisit my old [`classify_macho.py`](https://github.com/tbarabosch/macos-re/blob/main/malware_toys/classify_macho.py) experiment. It compared several classifiers using only file size, section count and Mach-O header flags. The script has Python 2-era APIs, and the original dataset and evaluation are not good enough for a modern experiment. Even after fixing that, an ML score should provide another hint to an analyst. It should not decide whether a process deserves `SIGKILL`.
 
 Network telemetry, process trees, code-signing information, quarantine, host isolation and fleet collection are obvious next steps as well. They would turn this small teaching implementation into a much larger project. For now, the 303-line version is enough to show where an event comes from, how a rule interprets it and why a response needs strong identity and policy checks.
