@@ -274,7 +274,7 @@
 - Preserve the post-ending sections:
   - `SEE ALSO` for previous/next articles and matching topics
   - `FEEDBACK` for the GitHub correction form and prefilled email fallback
-  - `FOLLOW` for the full-content RSS feed and LinkedIn profile
+  - `FOLLOW` for the full-content RSS feed, LinkedIn profile, and X profile
 - Correction links must include enough article context to identify the page.
   GitHub and email activate only after an explicit reader click.
 - Keep the GitHub correction issue form's required article URL and correction

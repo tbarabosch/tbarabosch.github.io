@@ -24,6 +24,13 @@ Use the channels below to explore my work, connect professionally, or get in tou
     <span class="contact-description">Professional profile and networking.</span>
   </li>
   <li class="contact-item">
+    <a class="contact-link" href="https://x.com/tbarabosch">
+      {% include channel-icon.html name="x" %}
+      <span>X (@tbarabosch)</span>
+    </a>
+    <span class="contact-description">Short updates and new posts.</span>
+  </li>
+  <li class="contact-item">
     <a class="contact-link" href="mailto:oss@tbarabosch.com">
       {% include channel-icon.html name="email" %}
       <span>oss@tbarabosch.com</span>

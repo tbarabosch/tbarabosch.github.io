@@ -426,7 +426,10 @@ generated_post_records.each do |post|
     linkedin_url = "https://www.linkedin.com/in/thomas-barabosch-3328b4256/"
     errors << "#{post[:relative]}: FOLLOW must link to LinkedIn" unless follow_links.include?(linkedin_url)
     errors << "#{post[:relative]}: FOLLOW must say Connect on LinkedIn" unless follow_section.include?("Connect on LinkedIn")
-    errors << "#{post[:relative]}: FOLLOW links must include RSS and LinkedIn icons" unless follow_section.scan(/class="contact-icon"/i).length == 2
+    x_url = "https://x.com/tbarabosch"
+    errors << "#{post[:relative]}: FOLLOW must link to X" unless follow_links.include?(x_url)
+    errors << "#{post[:relative]}: FOLLOW must say Follow @tbarabosch on X" unless follow_section.include?("Follow @tbarabosch on X")
+    errors << "#{post[:relative]}: FOLLOW links must include RSS, LinkedIn, and X icons" unless follow_section.scan(/class="contact-icon"/i).length == 3
   else
     errors << "#{post[:relative]}: generated post is missing the FOLLOW section"
   end
@@ -455,12 +458,13 @@ if contact_page.file?
   expected_contact_links = [
     "https://github.com/tbarabosch",
     "https://www.linkedin.com/in/thomas-barabosch-3328b4256/",
+    "https://x.com/tbarabosch",
     "mailto:oss@tbarabosch.com"
   ]
   expected_contact_links.each do |href|
     errors << "contact page is missing #{href}" unless contact_links.include?(href)
   end
-  errors << "contact page must render three channel icons" unless html.scan(/class="contact-icon"/i).length == 3
+  errors << "contact page must render four channel icons" unless html.scan(/class="contact-icon"/i).length == 4
 else
   errors << "contact page is missing"
 end
@@ -477,6 +481,17 @@ if homepage.file?
     errors << "homepage must not include a TOPICS overview"
   end
   errors << "homepage H1 changed unexpectedly" unless html.match?(/<h1[^>]*class="manual-title"[^>]*>Thomas Barabosch<\/h1>/)
+
+  json_ld_text = html.scan(/<script\b[^>]*type\s*=\s*(["'])application\/ld\+json\1[^>]*>(.*?)<\/script>/im).map(&:last).first
+  if json_ld_text
+    begin
+      json_ld = JSON.parse(json_ld_text)
+      same_as = Array(json_ld["sameAs"])
+      errors << "homepage JSON-LD sameAs must include X" unless same_as.include?("https://x.com/tbarabosch")
+    rescue JSON::ParserError
+      # The document-level error above is more useful.
+    end
+  end
 
   recent_section = html[/<section\b[^>]*aria-labelledby\s*=\s*(["'])recent-heading\1[^>]*>.*?<\/section>/im]
   if recent_section
